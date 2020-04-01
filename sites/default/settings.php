@@ -755,14 +755,27 @@ $settings['entity_update_backup'] = TRUE;
 # if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
 #   include $app_root . '/' . $site_path . '/settings.local.php';
 # }
+#$databases['default']['default'] = array (
+#  'database' => 'drupal8_testsde',
+#  'username' => 'root',
+#  'password' => 'root',
+#  'prefix' => '',
+#  'host' => 'localhost',
+#  'port' => '3306',
+#  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+#  'driver' => 'mysql',
+#);
+$settings['config_sync_directory'] = 'sites/default/files/config_1R5EpykbIWn59lX1LVQomPQ9CDX48y7uSsl1KifqeLN8nTon-tZLqMdHVLNsygzhvLJhBbVo5w/sync';
+
 $databases['default']['default'] = array (
-  'database' => 'drupal8_testsde',
-  'username' => 'root',
-  'password' => 'root',
+  'database' => 'dbs341806',
+  'username' => 'dbu112826',
+  'password' => 'Testsde1*',
   'prefix' => '',
-  'host' => 'localhost',
+  'host' => 'db5000351674.hosting-data.io',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
 );
-$settings['config_sync_directory'] = 'sites/default/files/config_1R5EpykbIWn59lX1LVQomPQ9CDX48y7uSsl1KifqeLN8nTon-tZLqMdHVLNsygzhvLJhBbVo5w/sync';
+
+
