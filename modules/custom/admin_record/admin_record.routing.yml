@@ -1,0 +1,8 @@
+
+admin_record.admin_record_controller_hello:
+  path: '/admin_record/hello/{name}'
+  defaults:
+    _controller: '\Drupal\admin_record\Controller\AdminRecordController::hello'
+    _title: 'hello'
+  requirements:
+    _permission: 'access content'

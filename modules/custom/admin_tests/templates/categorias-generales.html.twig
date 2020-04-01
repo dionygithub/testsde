@@ -1,0 +1,37 @@
+<section>
+
+    <!-- Grid row https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2814%29.jpg -->
+    <div class="row col-md-12 mx-1">
+        {% if list|length > 0 %}
+            {% for key, value in list %}
+
+                    <!-- Grid column -->
+                    <div class="col-md-4 mb-4">
+
+                        <!-- Card -->
+                        <div class="card card-image" style="background-image: url({{ value.imagen }});">
+
+                            <!-- Content -->
+                            <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+                                <div>
+                                    <h4 class="card-title pt-2"><i class="fas fa-chart-pie" style="margin-right: 5px"></i><strong>{{ value.name }}</strong></h4>
+                                    <p>{{ value.description | raw }}</p>
+                                    <a class="btn btn-pink waves-effect waves-light" href="{{value.path }}"><i class="fas fa-clone left"></i> Descubre!!!</a>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- Card -->
+
+                    </div>
+                    <!-- Grid column -->
+            {% endfor %}
+        {% endif %}
+
+    </div>
+    <!-- Grid row -->
+
+</section>
+
+
+

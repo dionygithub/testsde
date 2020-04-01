@@ -1,0 +1,14 @@
+
+# Admin record entity menu items definition
+entity.admin_record_entity.collection:
+  title: 'Admin record entity list'
+  route_name: entity.admin_record_entity.collection
+  description: 'List Admin record entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+admin_record_entity.admin.structure.settings:
+  title: 'Admin record entity settings'
+  description: 'Configure Admin record entity entities'
+  route_name: admin_record_entity.settings
+  parent: system.admin_structure

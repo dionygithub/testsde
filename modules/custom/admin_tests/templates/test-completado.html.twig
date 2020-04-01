@@ -1,0 +1,62 @@
+<div class="container-test-completado text-align-center">
+
+    <div id="grin-stars-fas" class="icon-tile emoji" style="color: red;font-size: 48px">
+        <i data-toggle="tooltip" data-placement="top" title="" class="waves-effect mdb-icon-copy far fa-grin-stars"></i>
+    </div>
+
+    {% if info['test_valido'] == false %}
+
+        <h3>No existen resultados para este test</h3>
+
+    {% else %}
+
+        <h2>Test Compleado</h2>
+
+        <div class="row" style="padding: 25px;background-color: #CCC;">
+            <div class="col-lg-6 col-md-6" style="margin-bottom: 25px;">
+                Preguntas correctas <span class="badge badge-light ml-2">{{ info['totalcorrectquestions'] }}/{{ info['totalquestions'] }}</span>
+            </div>
+
+            {% if info['anonimo'] != false %}
+                <br>
+                <div class="col-lg-6 col-md-6">
+                    Puntos ganados <span class="badge badge-default" style="margin-left: 37px;">{{ info['points'] }}</span>
+                </div>
+
+            {% endif %}
+        </div>
+        <hr class="separador">
+
+        <blockquote class="blockquote bq-info mb-4">
+            <p class="bq-title">Recomiendalo en tus <span class="sub-titulo" >Redes Sociales!!!</span></p>
+        </blockquote>
+
+        <div class="col-md-12">
+            <div class="col-lg-12 col-md-12">
+                <button type="button" class="btn btn-fb waves-effect waves-light">
+                    <i class="fab fa-facebook-f left"></i> Facebook</button>
+
+                <button type="button" class="btn btn-tw waves-effect waves-light">
+                    <i class="fab fa-twitter left"></i> Twitter</button>
+
+                <button type="button" class="btn btn-ins waves-effect waves-light">
+                    <i class="fab fa-instagram left"></i> Instagram</button>
+
+                <button type="button" class="btn btn-email waves-effect waves-light">
+                    <i class="fas fa-envelope left"></i> Email</button>
+
+
+            </div>
+        </div>
+        <hr class="separador">
+        {% if info['anonimo'] != false %}
+            {{ info['block_likes_test_user'] }}
+            <hr class="separador">
+        {% endif %}
+
+    {% endif %}
+
+
+</div>
+
+{{ info['tests_relacionados'] }}

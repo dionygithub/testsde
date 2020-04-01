@@ -1,0 +1,11 @@
+admin_tests.utiles_ajax:
+  title: JavaScript Example Information
+  description: Show list weighting through JavaScript.
+  route_name: admin_tests.utiles_ajax
+
+admin_tests.tests_form:
+  title: 'Configuracion Config Form'
+  route_name: admin_tests.tests_form
+  description: 'A description for the menu entry'
+  parent: system.admin_config_system
+  weight: 98

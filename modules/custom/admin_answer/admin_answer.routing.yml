@@ -1,0 +1,8 @@
+
+admin_answer.admin_answer_controller_hello:
+  path: '/admin_answer/hello/{name}'
+  defaults:
+    _controller: '\Drupal\admin_answer\Controller\AdminAnswerController::hello'
+    _title: 'hello'
+  requirements:
+    _permission: 'access content'

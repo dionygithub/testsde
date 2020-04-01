@@ -1,0 +1,112 @@
+<div class="container-referred">
+
+
+    <!-- Main navigation -->
+    <div class="container-fluid mt-3 mb-5">
+
+        <!-- Full Page Intro -->
+        <section style="background-image: url('https://mdbootstrap.com/img/Photos/Others/background2.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+            <!-- Mask & flexbox options-->
+            <div class="mask d-flex justify-content-center align-items-center">
+                <!-- Content -->
+                <div class="container py-5 my-5">
+
+                    <h3 class="font-weight-bold text-center white-text pb-2">Contabilice su conocimiento</h3>
+                    <p class="lead text-center white-text pt-2 mb-5">Date de alta en nuestra Plataforma</p>
+
+                    <!--Grid row-->
+                    <div class="row d-flex align-items-center justify-content-center">
+                        <!--Grid column-->
+                        <div class="col-md-6 col-xl-5">
+                            <!--Form-->
+                            <form class="user-info-from" enctype="multipart/form-data" action="{{ data['urlRegistroReferido'] }}" method="post" id="user-register-form" accept-charset="UTF-8">
+                                <div class="card">
+                                    <div class="card-body z-depth-2 px-4">
+                                        <div class="md-form">
+                                            <i class="fa fa-envelope prefix grey-text"></i>
+                                            <input name="mail" type="text" id="form2" class="form-control">
+                                            <label for="form2">Your email</label>
+                                        </div>
+                                        <div class="md-form">
+                                            <i class="fas fa-key prefix grey-text"></i>
+                                            <input name="pass" type="password" id="form4" class="form-control">
+                                            <label for="form4">Your password</label>
+                                        </div>
+                                        <div class="text-center my-3">
+                                            <input type="hidden" value="{{ data['user'].uid }}" name="iduserreferente">
+                                            <button type="submit" name="registrarReferido" class="btn btn-indigo btn-block">Enviar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                            <!--/.Form-->
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+                </div>
+                <!-- Content -->
+            </div>
+            <!-- Mask & flexbox options-->
+        </section>
+        <!-- Full Page Intro -->
+
+    </div>
+    <!-- Main navigation -->
+
+
+    <div class="container my-5 py-5 z-depth-1">
+
+
+        <!--Section: Content-->
+        <section class="px-md-5 mx-md-5 text-center text-lg-left dark-grey-text">
+
+            <blockquote class="blockquote bq-info mb-4">
+                <p class="bq-title">Verifique la informaci&oacute;n de su amigo </p>
+
+            </blockquote>
+            <!--Grid row-->
+            <div class="row">
+
+
+                <!--Grid column-->
+                <div class="col-md-4 mb-4 mb-md-0">
+
+                    <!--Image-->
+                    <div class="view overlay ">
+                        <img src="{{ data['user'].imagen }}" class="img-fluid" alt="">
+                        <a href="#">
+                            <div class="mask rgba-white-light"></div>
+                        </a>
+                    </div>
+
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-md-8 mb-4 mb-md-0">
+
+                    <h3 class="font-weight-bold">{{ data['user'].name }}</h3>
+
+                    <h6 class="font-weight-bold grey-text mb-3">Correo: {{ data['user'].correo }}</h6>
+                    <a class="btn btn-success btn-md ml-0" role="button">Verificado!!!<i class="fas fa-trophy ml-2"></i></a>
+
+                </div>
+                <!--Grid column-->
+
+            </div>
+            <!--Grid row-->
+
+
+        </section>
+        <!--Section: Content-->
+
+
+    </div>
+
+
+
+</div>
+
+{{ data['tests_destacados'] }}
+

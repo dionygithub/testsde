@@ -1,0 +1,8 @@
+
+admin_likes.admin_likes_controller_hello:
+  path: '/admin_likes/hello/{name}'
+  defaults:
+    _controller: '\Drupal\admin_likes\Controller\AdminLikesController::hello'
+    _title: 'hello'
+  requirements:
+    _permission: 'access content'

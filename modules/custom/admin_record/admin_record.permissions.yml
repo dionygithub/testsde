@@ -1,0 +1,19 @@
+add admin record entity entities:
+  title: 'Create new Admin record entity entities'
+
+administer admin record entity entities:
+  title: 'Administer Admin record entity entities'
+  description: 'Allow to access the administration form to configure Admin record entity entities.'
+  restrict access: true
+
+delete admin record entity entities:
+  title: 'Delete Admin record entity entities'
+
+edit admin record entity entities:
+  title: 'Edit Admin record entity entities'
+
+view published admin record entity entities:
+  title: 'View published Admin record entity entities'
+
+view unpublished admin record entity entities:
+  title: 'View unpublished Admin record entity entities'

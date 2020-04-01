@@ -1,0 +1,44 @@
+{{ data['viewuser'] }}
+
+<blockquote class="blockquote bq-info mb-4">
+    <p class="bq-title">Mis <span class="sub-titulo" >Referidos!!!</span></p>
+
+</blockquote>
+
+<section class="team-section">
+
+    {% if data['viewdata']|length > 0 %}
+        <div class="card1">
+
+            <div class="card-body">
+
+                <div class="row pt-4">
+                    {% for index, referido in data['viewdata'] %}
+
+
+                        <div class="col-lg-3 col-md-4 col-sm-6 pb-4">
+
+                            {% if referido.img |length > 0 %}
+
+                                <div class="avatar white text-center">
+                                    <img width="75%" src="{{ referido.img  }}" class="img-fluid rounded-circle z-depth-1"/>
+                                </div>
+
+                            {% endif %}
+
+                            <div class="text-center mt-2">
+                                <h6 class="font-weight-bold pt-2 mb-0">{{ referido.name }}</h6>
+                                <p class="text-muted mb-0"><small>{{ referido.estado }}</small></p>
+                            </div>
+                        </div>
+
+
+                    {% endfor %}
+                </div>
+
+            </div>
+        </div>
+    {% else %}
+        <h3>No hay informaci&oacute;n que mostrar</h3>
+    {% endif %}
+</section>

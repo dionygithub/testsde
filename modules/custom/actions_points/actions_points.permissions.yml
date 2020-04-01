@@ -1,0 +1,19 @@
+add actions entity entities:
+  title: 'Create new Actions entity entities'
+
+administer actions entity entities:
+  title: 'Administer Actions entity entities'
+  description: 'Allow to access the administration form to configure Actions entity entities.'
+  restrict access: true
+
+delete actions entity entities:
+  title: 'Delete Actions entity entities'
+
+edit actions entity entities:
+  title: 'Edit Actions entity entities'
+
+view published actions entity entities:
+  title: 'View published Actions entity entities'
+
+view unpublished actions entity entities:
+  title: 'View unpublished Actions entity entities'

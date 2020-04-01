@@ -1,0 +1,30 @@
+<div class="container-premiums">
+
+    {% if data['logged'] != false %}
+
+        {{ data['viewuser'] }}
+
+        <blockquote class="blockquote bq-info mb-4">
+            <p class="bq-title">Quieres gastar... <span class="sub-titulo"> Premios Disponibles!!! </span></p>
+
+        </blockquote>
+
+        <div class="row col-lg-12 col-md-12 mb-4">
+
+            {% if data['viewpremium']|length > 0 %}
+                {% for index, premium in data['viewpremium'] %}
+
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        {{ premium }}
+
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+
+    {% else %}
+        <h2>Debes de estar logueado en nuestra plataforma</h2>
+    {% endif %}
+
+</div>
+

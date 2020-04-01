@@ -1,0 +1,13 @@
+{
+    "name": "actions_points",
+    "type": "drupal-module",
+    "description": "My Awesome Module",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/actions_points",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/actions_points",
+        "source": "http://cgit.drupalcode.org/actions_points",
+    },
+}

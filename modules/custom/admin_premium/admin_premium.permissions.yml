@@ -1,0 +1,57 @@
+add premium entity entities:
+  title: 'Create new Premium entity entities'
+
+administer premium entity entities:
+  title: 'Administer Premium entity entities'
+  description: 'Allow to access the administration form to configure Premium entity entities.'
+  restrict access: true
+
+delete premium entity entities:
+  title: 'Delete Premium entity entities'
+
+edit premium entity entities:
+  title: 'Edit Premium entity entities'
+
+view published premium entity entities:
+  title: 'View published Premium entity entities'
+
+view unpublished premium entity entities:
+  title: 'View unpublished Premium entity entities'
+add user premium entity entities:
+  title: 'Create new User premium entity entities'
+
+administer user premium entity entities:
+  title: 'Administer User premium entity entities'
+  description: 'Allow to access the administration form to configure User premium entity entities.'
+  restrict access: true
+
+delete user premium entity entities:
+  title: 'Delete User premium entity entities'
+
+edit user premium entity entities:
+  title: 'Edit User premium entity entities'
+
+view published user premium entity entities:
+  title: 'View published User premium entity entities'
+
+view unpublished user premium entity entities:
+  title: 'View unpublished User premium entity entities'
+add request premium entity entities:
+  title: 'Create new Request premium entity entities'
+
+administer request premium entity entities:
+  title: 'Administer Request premium entity entities'
+  description: 'Allow to access the administration form to configure Request premium entity entities.'
+  restrict access: true
+
+delete request premium entity entities:
+  title: 'Delete Request premium entity entities'
+
+edit request premium entity entities:
+  title: 'Edit Request premium entity entities'
+
+view published request premium entity entities:
+  title: 'View published Request premium entity entities'
+
+view unpublished request premium entity entities:
+  title: 'View unpublished Request premium entity entities'

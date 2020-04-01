@@ -1,0 +1,77 @@
+{{ user_tira }}
+
+<blockquote class="blockquote bq-info mb-4">
+    <p class="bq-title">Mi <span class="sub-titulo" >cuenta</span></p>
+</blockquote>
+<div class="row">
+
+    <!--Grid column-->
+    <div class="col-lg-8 col-md-8 mb-4 text-center">
+
+
+        {#<div class="col-md-12 mb-4">#}
+
+            <!--Card-->
+            <div class="card">
+
+                <!--Bacground color-->
+                <div class="card-up indigo lighten-1">
+                </div>
+
+                <!-- Grid column -->
+                <div class="col-lg-12 col-md-12 mb-5 d-md-flex">
+                    <div class="avatar mb-md-0 mb-4 mx-4">
+                        <img src="{{ imagen }}" class="rounded z-depth-1" alt="avatar">
+                    </div>
+                    <div class="mx-4" style="text-align: left; margin-top: 5%;">
+                        <h4 class="font-weight-bold mb-3">{{ fullname }}</h4>
+                        <h6 class="font-weight-bold grey-text mb-3">Correo: {{ mail }}</h6>
+                        <h6 class="font-weight-bold grey-text mb-3">Usuario: {{ name }}</h6>
+                        <h6 class="font-weight-bold grey-text mb-3">Estado: {{ status }}</h6>
+
+                    </div>
+                </div>
+                <!-- Grid column -->
+
+
+                <div class="card-body">
+
+                    <div class="col-lg-12 col-md-12">
+                        <blockquote class="blockquote bq-info mb-4">
+                            <p class="bq-title">Puede difundir tu enlace a <span class="sub-titulo"> Referidos </span></p>
+                        </blockquote>
+
+                        {% if myurl_referido != false %}
+                            <h6 id="urlcopy" class="font-weight-bold grey-text mb-3">{{ myurl_referido }}</h6>
+                            <button class="btn btn-md btn-outline-default m-0 px-3 py-2 z-depth-0 waves-effect" onclick="CopyToClipboard('urlcopy')">
+                                Copiar
+                            </button>
+
+                        {% else %}
+                            <input type="hidden" value="{{ uid }}" name="uiduser">
+                            <h6 class="font-weight-bold grey-text mb-3"><a class="btn btn-amber btn-md ml-0" id="generarUrlReferido" role="button">Generar URL<i class="fas fa-trophy ml-2"></i></a></h6>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </div>
+
+        {#</div>#}
+
+    </div>
+
+    <div class="col-lg-4 col-md-4 mb-4">
+        <div class="mb-4 sticky-long" style="position: static; top: 90px; z-index: 2;">
+            <a class="btn btn-info btn-block m-inherit waves-effect waves-light" href="{{ url_perfil }}" role="button"
+               id="edit-profile"><i class="fas fa-edit"></i> Perfil </a>
+            <a class="btn btn-green btn-block m-inherit waves-effect waves-light" href="{{ url_premios }}"
+               role="button"><i class="fas fa-thumbs-up"></i> Premios </a>
+            <a class="btn btn-blue btn-block m-inherit waves-effect waves-light" href="{{ url_acciones }}"
+               role="button"><i class="fas fa-thumbs-up"></i> Puntos </a>
+        </div>
+    </div>
+
+</div>
+
+{{ attach_library('admin_tests/admin_tests') }}

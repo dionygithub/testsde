@@ -1,0 +1,5 @@
+entity.admin_record_entity.add_form:
+  route_name: entity.admin_record_entity.add_form
+  title: 'Add Admin record entity'
+  appears_on:
+    - entity.admin_record_entity.collection

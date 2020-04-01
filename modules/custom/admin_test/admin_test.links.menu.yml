@@ -1,0 +1,14 @@
+
+# Admin test entity menu items definition
+entity.admin_test_entity.collection:
+  title: 'Admin test entity list'
+  route_name: entity.admin_test_entity.collection
+  description: 'List Admin test entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+admin_test_entity.admin.structure.settings:
+  title: 'Admin test entity settings'
+  description: 'Configure Admin test entity entities'
+  route_name: admin_test_entity.settings
+  parent: system.admin_structure

@@ -1,0 +1,40 @@
+global-styling:
+  version:
+  css:
+    theme:
+      css/style.css: {}
+      css/tests.css: {}
+  js:
+    js/tests.js: {}
+
+  dependencies:
+      - core/drupalSettings
+
+jquery:
+  js:
+    libraries/jquery/jquery.min.js: {}
+
+bootstrap:
+  js:
+    libraries/bootstrap/js/bootstrap.min.js: {}
+  css:
+    component:
+      libraries/bootstrap/css/bootstrap.min.css: {}
+
+mdb:
+  js:
+    libraries/mdb/js/popper.min.js: {}
+    libraries/mdb/js/mdb.min.js: {}
+    libraries/mdb/js/wow.js: {}
+    libraries/mdb/js/scriptmdb.js: {}
+  css:
+    component:
+      libraries/mdb/css/mdb.min.css: {}
+
+
+jquery-steps:
+  js:
+    libraries/jquery-steps/jquery.steps.js: {}
+  css:
+    component:
+      libraries/jquery-steps/style.css: {}

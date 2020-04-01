@@ -1,0 +1,23 @@
+<!-- Card -->
+<div class="card">
+    {#{{ dump(data) }}#}
+  <!-- Content -->
+  <div class="card-body">
+
+    <!-- Offer -->
+    <h5 class="mb-4">{{ data['name'] }}</h5>
+    <div class="d-flex justify-content-center">
+      <div class="card-circle d-flex justify-content-center align-items-center">
+        <img src="{{ data['imagen'] }}" width="80%" />
+      </div>
+    </div>
+
+    <!-- Price -->
+    <h2 class="font-weight-bold my-4">{{ data['points'] }} Pts</h2>
+    <p class="grey-text">{{ data['description']| raw }}</p>
+
+  </div>
+  <!-- Content -->
+
+</div>
+

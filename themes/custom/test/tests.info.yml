@@ -1,0 +1,25 @@
+name: Tests
+type: theme
+description: 'My Awesome theme1'
+core: 8.x
+libraries:
+   - tests/jquery
+   - tests/bootstrap
+   - tests/mdb
+   - tests/jquery-steps
+   - tests/global-styling
+
+base theme: false
+
+regions:
+  primary_menu: 'Primary menu'
+  header: Header
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+  breadcrumb: Breadcrumb
+  content: Content
+  sidebar_second: 'Sidebar second'
+  publicidad_top: 'Publicidad top'
+  publicidad_bottom: 'Publicidad bottom'
+  footer: 'Footer'
+  footer_top: 'Footer top'

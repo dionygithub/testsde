@@ -1,0 +1,14 @@
+# Show how weights work.
+admin_tests:
+  # Add css file.
+  #css:
+  #  component:
+  #    css/utiles.css: {}
+  # Add js files.
+  js:
+    # weight is used as example attribute, but please avoid it and instead use
+    # dependencies for order loading.
+    js/admin_tests.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupalSettings

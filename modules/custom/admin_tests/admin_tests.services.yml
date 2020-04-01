@@ -1,0 +1,8 @@
+services:
+  admin_tests.render_tests_relacionados:
+    class: Drupal\admin_tests\Twig\TwigExtension
+    tags:
+      - { name: twig.extension }
+
+  service.admin_tests:
+    class: Drupal\admin_tests\Controller\AdminTestsController

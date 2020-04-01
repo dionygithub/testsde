@@ -1,0 +1,63 @@
+# Premium entity routing definition
+premium_entity.settings_tab:
+  route_name: premium_entity.settings
+  title: 'Settings'
+  base_route: premium_entity.settings
+
+entity.premium_entity.canonical:
+  route_name: entity.premium_entity.canonical
+  base_route: entity.premium_entity.canonical
+  title: 'View'
+
+entity.premium_entity.edit_form:
+  route_name: entity.premium_entity.edit_form
+  base_route: entity.premium_entity.canonical
+  title: 'Edit'
+
+entity.premium_entity.delete_form:
+  route_name:  entity.premium_entity.delete_form
+  base_route:  entity.premium_entity.canonical
+  title: Delete
+  weight: 10
+# User premium entity routing definition
+user_premium_entity.settings_tab:
+  route_name: user_premium_entity.settings
+  title: 'Settings'
+  base_route: user_premium_entity.settings
+
+entity.user_premium_entity.canonical:
+  route_name: entity.user_premium_entity.canonical
+  base_route: entity.user_premium_entity.canonical
+  title: 'View'
+
+entity.user_premium_entity.edit_form:
+  route_name: entity.user_premium_entity.edit_form
+  base_route: entity.user_premium_entity.canonical
+  title: 'Edit'
+
+entity.user_premium_entity.delete_form:
+  route_name:  entity.user_premium_entity.delete_form
+  base_route:  entity.user_premium_entity.canonical
+  title: Delete
+  weight: 10
+# Request premium entity routing definition
+request_premium_entity.settings_tab:
+  route_name: request_premium_entity.settings
+  title: 'Settings'
+  base_route: request_premium_entity.settings
+
+entity.request_premium_entity.canonical:
+  route_name: entity.request_premium_entity.canonical
+  base_route: entity.request_premium_entity.canonical
+  title: 'View'
+
+entity.request_premium_entity.edit_form:
+  route_name: entity.request_premium_entity.edit_form
+  base_route: entity.request_premium_entity.canonical
+  title: 'Edit'
+
+entity.request_premium_entity.delete_form:
+  route_name:  entity.request_premium_entity.delete_form
+  base_route:  entity.request_premium_entity.canonical
+  title: Delete
+  weight: 10

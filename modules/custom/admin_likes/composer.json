@@ -1,0 +1,13 @@
+{
+    "name": "admin_likes",
+    "type": "drupal-module",
+    "description": "My Awesome Module",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/admin_likes",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/admin_likes",
+        "source": "http://cgit.drupalcode.org/admin_likes",
+    },
+}

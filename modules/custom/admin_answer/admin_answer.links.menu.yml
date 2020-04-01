@@ -1,0 +1,14 @@
+
+# Admin answer entity menu items definition
+entity.admin_answer_entity.collection:
+  title: 'Admin answer entity list'
+  route_name: entity.admin_answer_entity.collection
+  description: 'List Admin answer entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+admin_answer_entity.admin.structure.settings:
+  title: 'Admin answer entity settings'
+  description: 'Configure Admin answer entity entities'
+  route_name: admin_answer_entity.settings
+  parent: system.admin_structure

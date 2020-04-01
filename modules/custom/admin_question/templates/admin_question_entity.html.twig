@@ -1,0 +1,22 @@
+{#
+/**
+ * @file admin_question_entity.html.twig
+ * Default theme implementation to present Admin question entity data.
+ *
+ * This template is used when viewing Admin question entity pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_admin_question_entity()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('admin_question_entity') }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</div>

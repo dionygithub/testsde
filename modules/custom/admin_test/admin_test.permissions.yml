@@ -1,0 +1,19 @@
+add admin test entity entities:
+  title: 'Create new Admin test entity entities'
+
+administer admin test entity entities:
+  title: 'Administer Admin test entity entities'
+  description: 'Allow to access the administration form to configure Admin test entity entities.'
+  restrict access: true
+
+delete admin test entity entities:
+  title: 'Delete Admin test entity entities'
+
+edit admin test entity entities:
+  title: 'Edit Admin test entity entities'
+
+view published admin test entity entities:
+  title: 'View published Admin test entity entities'
+
+view unpublished admin test entity entities:
+  title: 'View unpublished Admin test entity entities'

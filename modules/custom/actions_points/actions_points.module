@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains actions_points.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function actions_points_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the actions_points module.
+    case 'help.page.actions_points':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My Awesome Module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function actions_points_theme() {
+  return [
+    'actions_points' => [
+      'render element' => 'children',
+    ],
+  ];
+}

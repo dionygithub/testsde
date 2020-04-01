@@ -1,0 +1,14 @@
+
+# News entity menu items definition
+entity.news_entity.collection:
+  title: 'News entity list'
+  route_name: entity.news_entity.collection
+  description: 'List News entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+news_entity.admin.structure.settings:
+  title: 'News entity settings'
+  description: 'Configure News entity entities'
+  route_name: news_entity.settings
+  parent: system.admin_structure

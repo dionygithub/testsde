@@ -1,0 +1,13 @@
+{
+    "name": "admin_question",
+    "type": "drupal-module",
+    "description": "My Awesome Module",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/admin_question",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/admin_question",
+        "source": "http://cgit.drupalcode.org/admin_question",
+    },
+}

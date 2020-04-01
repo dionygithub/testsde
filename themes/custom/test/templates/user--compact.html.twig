@@ -1,0 +1,40 @@
+{#
+/**
+ * @file
+ * Default theme implementation to present all user data.
+ *
+ * This template is used when viewing a registered user's page,
+ * e.g., example.com/user/123. 123 being the user's ID.
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ *   print a subset such as 'content.field_example'. Fields attached to a user
+ *   such as 'user_picture' are available as 'content.user_picture'.
+ * - attributes: HTML attributes for the container element.
+ * - user: A Drupal User entity.
+ *
+ * @see template_preprocess_user()
+ *
+ * @ingroup themeable
+ */
+#}
+
+<div class="card text-center mb-4" title="" data-index="0" gtm-id="Profile Card" data-original-title="Welcome">
+
+    <!--Avatar-->
+    <div class="mt-4">
+        <img src="https://secure.gravatar.com/avatar/59fe665a0c2fb9603eff4de1f71d5cc0?s=96&amp;d=mm&amp;r=g"
+             class="rounded-circle z-depth-1" style="width: 70px;">
+    </div>
+
+
+    <div id="info-user" class="card-body">
+        <!--Name-->
+        <h5 class="card-title font-weight-bold">
+            <a href="">Dionisio Estrada</a>
+        </h5>
+        <hr>
+        <button type="button" class="btn btn-outline-secondary waves-effect">{{ points }} Pts</button>
+    </div>
+
+</div>

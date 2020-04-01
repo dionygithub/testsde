@@ -1,0 +1,393 @@
+<?php
+
+/**
+ * @file
+ * Contains admin_tests.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\file\Entity\File;
+
+define('SOLICITUD_SOLICITADA',9);
+define('ROL_USUARIO','authenticated');
+define('ACTION_MEGUSTA_ID',1);
+define('ACTION_REFERIDO_ID',2);
+define('EMAIL_ADMIN',"dionyuci@gmail.com");
+define('KEY_SECRET_RECAPTCHA',"6LdmS-UUAAAAAKpHyhzwRpD9s-InjI-8iidBNGut");
+
+/**
+ * Implements hook_help().
+ */
+function admin_tests_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the admin_tests module.
+    case 'help.page.admin_tests':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My Awesome Module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function admin_tests_theme() {
+  return [
+    'admin_tests' => [
+      'render element' => 'children',
+    ],
+
+
+    'admin_test_entity' => [// the entity id
+        'path' => drupal_get_path('module', 'admin_tests') . '/templates',// template directory in module or theme
+        'render element' => 'elements',// Theme API call to define the container of the entity in the render array
+    ],
+
+    'premium_entity' => [// the entity id
+        'path' => drupal_get_path('module', 'admin_tests') . '/templates',// template directory in module or theme
+        'render element' => 'elements',// Theme API call to define the container of the entity in the render array
+    ],
+
+    'actions_entity' => [// the entity id
+        'template' => 'action-entity',
+        'path' => drupal_get_path('module', 'admin_tests').'/templates',
+        'variables' => array(
+            'data' => array(),
+        ),
+      ],
+
+    'page_premiums' => [
+        'template' => 'page-premiums',
+        'path' => drupal_get_path('module', 'admin_tests').'/templates',
+        'variables' => array(
+            'data' => array(),
+        ),
+    ],
+
+    'user_tira' => [
+        'template' => 'user-tira',
+        'path' => drupal_get_path('module', 'admin_tests').'/templates',
+        'variables' => array(
+            'data' => array(),
+        ),
+    ],
+
+    'page_actions' => [
+        'template' => 'page-actions',
+        'path' => drupal_get_path('module', 'admin_tests').'/templates',
+        'variables' => array(
+            'data' => array(),
+        ),
+    ],
+
+    'page_referidos' => [
+        'template' => 'page-referidos',
+        'path' => drupal_get_path('module', 'admin_tests').'/templates',
+        'variables' => array(
+            'data' => array(),
+        ),
+    ],
+
+
+      'page_desglose' => [
+          'template' => 'page-desglose',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
+      'page_testsrealizado' => [
+          'template' => 'page-testsrealizado',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
+      'page_misreferidos' => [
+          'template' => 'page-misreferidos',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
+      'page_solicitudes' => [
+          'template' => 'page-solicitudes',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
+
+    'page_gracia_referido' => [
+        'template' => 'page-gracia-referido',
+        'path' => drupal_get_path('module', 'admin_tests').'/templates',
+        'variables' => array(
+            'data' => array(),
+        ),
+    ],
+
+    'page_gracias_sugerencias' => [
+        'template' => 'page-gracias-sugerencias',
+        'path' => drupal_get_path('module', 'admin_tests').'/templates',
+        'variables' => array(
+            'data' => array(),
+        ),
+    ],
+
+    'list_categoria_generales' => [
+        'template' => 'categorias-generales',
+        'path' => drupal_get_path('module', 'admin_tests').'/templates',
+        'variables' => array(
+            'list' => array(),
+            'name' => NULL,
+        ),
+    ],
+
+      'page_test_completado' => [
+          'template' => 'test-completado',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'idTest' => NULL,
+              'info' => array(),
+          ),
+      ],
+
+
+      'test_completado_anonimo' => [
+          'template' => 'test-completado-anonimo',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'info' => array(),
+          ),
+      ],
+
+      'page_test_fallado' => [
+          'template' => 'test-fallado',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'idTest' => NULL,
+              'info' => array(),
+          ),
+      ],
+
+      'block_tests_relacionados' => [
+          'template' => 'test-relacionados',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
+      'block_likes_test_user' => [
+          'template' => 'block-likes-tests',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
+      'block_tests_destacados' => [
+          'template' => 'test-destacados',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
+      'block_sugerencias_contacto' => [
+          'template' => 'block-sugerencias-contacto',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
+      'htmlmail' => [
+          'template' => 'htmlmail',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
+
+  ];
+}
+
+function admin_tests_preprocess_admin_test_entity(&$variables) {
+
+  $variables['content'] = [];
+  foreach (\Drupal\Core\Render\Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+
+  $entity = $variables['elements']['#admin_test_entity'];
+
+  $variables['label'] = $entity->label();
+
+  $testsController = new \Drupal\admin_tests\Controller\AdminTestsController();
+  $datos = $testsController->getTreeTest($entity->id());
+
+  $variables['datos'] = $datos;
+  $variables['mode'] = $variables['elements']['#view_mode'];
+
+  $variables['url'] = $entity->toUrl()->toString();
+}
+
+
+function admin_tests_preprocess_premium_entity(&$variables) {
+  $premium = $variables['elements']['#premium_entity'];
+
+  //echo'<pre>'; print_r($premium); die;
+  $uid = \Drupal::currentUser()->id();
+  $user = \Drupal\user\Entity\User::load($uid);
+
+  $points = $premium->get('points')->value;
+
+  $premiumObj = new \stdClass();
+  $premiumObj->points = $points;
+  $adminPremiumController = \Drupal::service('service.admin_premium');
+  //echo'<pre>'; print_r($premiumObj); die;
+
+
+  $premium_valid = $adminPremiumController->isValidPremiumByidUseridPrem($user,$premiumObj);
+
+  $variables['title'] = $premium->label();
+  $variables['id'] = $premium->id();
+  $variables['premium_valid'] = $premium_valid;
+  $variables['points'] = $points;
+  $variables['description'] = $premium->get('description')->value;
+
+  $variables['url'] = $premium->toUrl()->toString();
+  $variables['mode'] = $variables['elements']['#view_mode'];
+}
+
+
+function admin_tests_preprocess_user(&$variables) {
+
+  \Drupal::entityTypeManager()->getViewBuilder('user')->resetCache();
+
+  $user = $variables['elements']['#user'];
+
+  global $base_url;
+
+  $testsController = new \Drupal\admin_tests\Controller\AdminTestsController();
+  $variables['user_tira'] = $testsController->getUserTira(\Drupal::currentUser()->id(),false);
+
+  $variables['name'] = $user->label();
+  $variables['uid'] = $user->id();
+  $variables['fullname'] = $user->get('field_nombre_completo')->value;
+  $variables['mail'] = $user->get('mail')->value;
+  $variables['status'] = ($user->get('status')->value) ? "Activo": "No Activo";
+
+
+  if (!$user->user_picture->isEmpty()) {
+    $displayImg = file_create_url($user->user_picture->entity->getFileUri());
+  }else{
+    $displayImg = $base_url.'/'.drupal_get_path('module', 'admin_tests').'/img/default-user.png';
+  }
+
+
+  $variables['imagen'] = $displayImg;
+
+  $variables['myurl_referido'] = !empty($user->get('field_token_referidos')->value) ? $base_url.'/referred/'.$user->get('field_token_referidos')->value : false;
+  $variables['url_perfil'] = $base_url.'/user/'.\Drupal::currentUser()->id().'/edit';
+  $variables['url_premios'] = $base_url.'/user/premios';
+  $variables['url_acciones'] = $base_url.'/user/acciones';
+
+  $variables['mode'] = $variables['elements']['#view_mode'];
+
+}
+
+function getUrlImagen($target_id){
+
+  $file = File::load($target_id);
+  $url = null;
+  if(!empty($file)){
+    $url = file_create_url($file->uri->value);
+  }
+  return $url;
+}
+
+function sendMailSugerencias($name,$email,$sugerencia){
+
+  $mailManager = \Drupal::service('plugin.manager.mail');
+  $module = 'admin_tests';
+  $key = 'mail_key_sugerencia';
+  $to = EMAIL_ADMIN;
+
+  $body = '<div style="text-align: left;margin-top: 20px;padding: 20px;background-color: #FFFFFF;border: 3px solid #191e72;">';
+  $body .= '<ul style="padding: 0px;margin: 0px">';
+  $body .= '<li style="list-style-type: none">Nombre: '.$name.'</li><br>';
+  $body .= '<li style="list-style-type: none">Correo: '.$email.'</li><br>';
+  $body .= '<li style="list-style-type: none">Sugerencia: '.$sugerencia.'</li><br>';
+  $body .= '</ul>';
+  $body .= '</div>';
+
+  $params['body'] = $body;
+  $params['title'] = "<strong>Atenci&oacute;n </strong> Nueva Sugerencia";
+
+  $mailManager->mail($module, $key, $to, 'es', $params, NULL, true);
+
+  return true;
+}
+
+
+/**
+ * @param $key
+ * @param $message
+ * @param $params
+ */
+function admin_tests_mail($key, &$message, $params) {
+  $message['body'] = [];
+  $message['subject'] = [];
+  $message['headers'] = array(
+      'content-type' => 'text/html; charset=UTF-8; format=flowed; delsp=yes',
+      'Content-Transfer-Encoding' => '8Bit',
+      'format' => 'flowed',
+      'delsp' => 'yes',
+      'Reply-To' => $params['from'],
+  );
+
+  switch ($key) {
+    case 'mail_key_sugerencia':
+      $message['from'] = EMAIL_ADMIN;
+      $message['subject'] = $params['title'];
+      $message['body'][] = $params['body'];
+      break;
+  }
+
+
+}
+
+/**
+ * Implements hook_mail_alter().
+ */
+function admin_tests_mail_alter(&$message) {
+
+  global $base_url;
+
+  //echo'<pre>'; print_r($message);
+  $message['headers']['Content-Type'] = 'text/html; charset=UTF-8; format=flowed; delsp=yes';
+  $message['headers']['Reply-To'] = $message['from'];
+
+  $content = base64_encode(file_get_contents($base_url.'/'.drupal_get_path('module', 'admin_tests').'/img/mailimg.gif'));
+
+  $src = "";
+
+  $htmlTestRelac = [
+      '#theme' => 'htmlmail',
+      '#data' => array('imagen'=> $src ,'body'=>$message['body'][0]),
+  ];
+
+  $htmlmail = \Drupal::service('renderer')->render($htmlTestRelac);
+
+  $message['body'][0] = $htmlmail;
+}

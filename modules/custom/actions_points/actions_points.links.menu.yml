@@ -1,0 +1,14 @@
+
+# Actions entity menu items definition
+entity.actions_entity.collection:
+  title: 'Actions entity list'
+  route_name: entity.actions_entity.collection
+  description: 'List Actions entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+actions_entity.admin.structure.settings:
+  title: 'Actions entity settings'
+  description: 'Configure Actions entity entities'
+  route_name: actions_entity.settings
+  parent: system.admin_structure

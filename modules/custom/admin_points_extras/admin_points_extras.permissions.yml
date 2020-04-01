@@ -1,0 +1,19 @@
+add points extras entity entities:
+  title: 'Create new Points extras entity entities'
+
+administer points extras entity entities:
+  title: 'Administer Points extras entity entities'
+  description: 'Allow to access the administration form to configure Points extras entity entities.'
+  restrict access: true
+
+delete points extras entity entities:
+  title: 'Delete Points extras entity entities'
+
+edit points extras entity entities:
+  title: 'Edit Points extras entity entities'
+
+view published points extras entity entities:
+  title: 'View published Points extras entity entities'
+
+view unpublished points extras entity entities:
+  title: 'View unpublished Points extras entity entities'

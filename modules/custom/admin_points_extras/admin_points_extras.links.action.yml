@@ -1,0 +1,5 @@
+entity.points_extras_entity.add_form:
+  route_name: entity.points_extras_entity.add_form
+  title: 'Add Points extras entity'
+  appears_on:
+    - entity.points_extras_entity.collection

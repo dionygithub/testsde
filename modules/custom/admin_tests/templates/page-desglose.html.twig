@@ -1,0 +1,46 @@
+{{ data['viewuser'] }}
+
+<blockquote class="blockquote bq-info mb-4">
+    <p class="bq-title">Desglose de <span class="sub-titulo" >puntos!!!</span></p>
+
+</blockquote>
+
+<div class="table-responsive">
+    <!--Table-->
+
+    {% if data['viewdata']|length > 0 %}
+        <table class="table table-hover table-striped">
+
+            <!--Table head-->
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Actividad</th>
+                <th>Puntos</th>
+                <th>Fecha</th>
+            </tr>
+            </thead>
+            <!--Table head-->
+
+            <!--Table body-->
+            <tbody>
+
+                {% for index, desglose in data['viewdata'] %}
+                    <tr>
+                        <th scope="row"><i class="fas fa-info mx-1"></i></th>
+                        <td>{{ desglose.name }}</td>
+                        <td><span style="padding: 5%;font-size: 15px" class="badge {{ desglose.clase }}">{{ desglose.puntos }}</span></td>
+                        <td> <span class="trigger teal lighten-4">{{ desglose.fecha }}</span></td>
+                    </tr>
+                {% endfor %}
+
+
+            </tbody>
+            <!--Table body-->
+        </table>
+        <!--Table-->
+    {% else %}
+        <h3>No hay informaci&oacute;n que mostrar</h3>
+    {% endif %}
+
+</div>

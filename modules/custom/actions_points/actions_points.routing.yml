@@ -1,0 +1,8 @@
+
+actions_points.actions_points_controller_hello:
+  path: '/actions_points/hello/{name}'
+  defaults:
+    _controller: '\Drupal\actions_points\Controller\ActionsPointsController::hello'
+    _title: 'hello'
+  requirements:
+    _permission: 'access content'

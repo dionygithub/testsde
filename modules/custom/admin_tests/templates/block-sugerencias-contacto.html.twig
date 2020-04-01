@@ -1,0 +1,129 @@
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<div class="container mt-5">
+
+    <!--Section: Content-->
+    <section class="contact-section dark-grey-text">
+        <!-- Form with header -->
+        <div class="card">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="col-lg-8">
+
+                    <div class="card-body form">
+
+                        <blockquote class="blockquote bq-info mb-4">
+                            <p class="bq-title">Cual es tu <span class="sub-titulo">impresi&oacute;n </span></p>
+                        </blockquote>
+                        <!-- Grid row -->
+
+                        <span id="info_alert" class="text-info"></span>
+
+                        <form class="sugerencias-form" enctype="multipart/form-data" action="{{ data['urlPageSugerencias'] }}" method="post" id="form-sugerencias" accept-charset="UTF-8">
+                            <div class="row">
+
+                                <!-- Grid column -->
+                                <div class="col-md-6">
+                                    <div class="md-form mb-0">
+                                        <input type="text" name="name" id="form-contact-name" class="form-control">
+                                        <label for="form-contact-name" class="">Nombre completo</label>
+                                        <span id="name_error" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <!-- Grid column -->
+
+                                <!-- Grid column -->
+                                <div class="col-md-6">
+                                    <div class="md-form mb-0">
+                                        <input type="text" name="mail" id="form-contact-email" class="form-control">
+                                        <label for="form-contact-email" class="">Correo Electr&oacute;nico</label>
+                                        <span id="mail_error" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <!-- Grid column -->
+
+                            </div>
+                            <!-- Grid row -->
+
+                            <div class="row">
+
+                                <!-- Grid column -->
+                                <div class="col-md-12">
+                                    <div class="md-form mb-0">
+                                        <textarea id="form-contact-message" name="menssage" class="form-control md-textarea" rows="3"></textarea>
+                                        <label for="form-contact-message">Mensajes</label>
+                                        <span id="message_error" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <!-- Grid column -->
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+
+                                    <div class="g-recaptcha" data-sitekey="6LdmS-UUAAAAAMSUdVw5vRn0_J6jzCNp8BxfIrju">
+                                    </div>
+                                    <span id="captcha_error" class="text-danger"></span>
+
+                                </div>
+                                <div class="col-md-6">
+
+                                    <input name="op" type="hidden" value="validaterobot">
+
+                                    <button  id="enviarsugerencia" type="submit" class="btn btn-outline-primary waves-effect waves-light">
+                                        Enviar <i class="fas fa-paper-plane"></i>
+                                    </button>
+
+                                </div>
+
+                            </div>
+
+                            <!-- Grid row -->
+                        </form>
+                    </div>
+
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-lg-4">
+
+                    <div class="card-body contact text-center h-100 white-text">
+
+                        <h3 class="font-weight-bold my-4 pb-2">Contactenos</h3>
+                        <ul class="text-lg-left list-unstyled ml-4">
+                            <li>
+                                <p><i class="fas fa-map-marker-alt pr-2"></i>Calle la huerta 6 1A Alcorcón, Madrid </p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-phone pr-2"></i><a target="_blank" href="https://api.whatsapp.com/send?phone=34667034669&text=hola">+34 667 03 46 69</a></p>
+                            </li>
+                            <li>
+                                <p><i class="fas fa-envelope pr-2"></i>info@testsde.com</p>
+                            </li>
+                        </ul>
+                        <hr class="hr-light my-4">
+
+                    </div>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </div>
+        <!-- Form with header -->
+
+    </section>
+    <!--Section: Content-->
+
+
+</div>
+
+
+{{ attach_library('admin_tests/admin_tests') }}

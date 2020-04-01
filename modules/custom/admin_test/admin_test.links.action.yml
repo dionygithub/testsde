@@ -1,0 +1,5 @@
+entity.admin_test_entity.add_form:
+  route_name: entity.admin_test_entity.add_form
+  title: 'Add Admin test entity'
+  appears_on:
+    - entity.admin_test_entity.collection

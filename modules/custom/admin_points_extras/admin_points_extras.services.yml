@@ -1,0 +1,3 @@
+services:
+  service.admin_points_extras:
+    class: Drupal\admin_points_extras\Controller\AdminPointsExtrasController

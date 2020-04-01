@@ -1,0 +1,15 @@
+entity.premium_entity.add_form:
+  route_name: entity.premium_entity.add_form
+  title: 'Add Premium entity'
+  appears_on:
+    - entity.premium_entity.collection
+entity.user_premium_entity.add_form:
+  route_name: entity.user_premium_entity.add_form
+  title: 'Add User premium entity'
+  appears_on:
+    - entity.user_premium_entity.collection
+entity.request_premium_entity.add_form:
+  route_name: entity.request_premium_entity.add_form
+  title: 'Add Request premium entity'
+  appears_on:
+    - entity.request_premium_entity.collection

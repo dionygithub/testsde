@@ -1,0 +1,42 @@
+
+# Premium entity menu items definition
+entity.premium_entity.collection:
+  title: 'Premium entity list'
+  route_name: entity.premium_entity.collection
+  description: 'List Premium entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+premium_entity.admin.structure.settings:
+  title: 'Premium entity settings'
+  description: 'Configure Premium entity entities'
+  route_name: premium_entity.settings
+  parent: system.admin_structure
+
+# User premium entity menu items definition
+entity.user_premium_entity.collection:
+  title: 'User premium entity list'
+  route_name: entity.user_premium_entity.collection
+  description: 'List User premium entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+user_premium_entity.admin.structure.settings:
+  title: 'User premium entity settings'
+  description: 'Configure User premium entity entities'
+  route_name: user_premium_entity.settings
+  parent: system.admin_structure
+
+# Request premium entity menu items definition
+entity.request_premium_entity.collection:
+  title: 'Request premium entity list'
+  route_name: entity.request_premium_entity.collection
+  description: 'List Request premium entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+request_premium_entity.admin.structure.settings:
+  title: 'Request premium entity settings'
+  description: 'Configure Request premium entity entities'
+  route_name: request_premium_entity.settings
+  parent: system.admin_structure

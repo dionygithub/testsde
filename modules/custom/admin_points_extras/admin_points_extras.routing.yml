@@ -1,0 +1,8 @@
+
+admin_points_extras.admin_points_extras_controller_hello:
+  path: '/admin_points_extras/hello/{name}'
+  defaults:
+    _controller: '\Drupal\admin_points_extras\Controller\AdminPointsExtrasController::hello'
+    _title: 'hello'
+  requirements:
+    _permission: 'access content'

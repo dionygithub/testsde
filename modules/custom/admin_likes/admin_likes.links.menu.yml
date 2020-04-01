@@ -1,0 +1,14 @@
+
+# Likes entity menu items definition
+entity.likes_entity.collection:
+  title: 'Likes entity list'
+  route_name: entity.likes_entity.collection
+  description: 'List Likes entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+likes_entity.admin.structure.settings:
+  title: 'Likes entity settings'
+  description: 'Configure Likes entity entities'
+  route_name: likes_entity.settings
+  parent: system.admin_structure

@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains admin_points_extras.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function admin_points_extras_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the admin_points_extras module.
+    case 'help.page.admin_points_extras':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My Awesome Module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function admin_points_extras_theme() {
+  return [
+    'admin_points_extras' => [
+      'render element' => 'children',
+    ],
+  ];
+}

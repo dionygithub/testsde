@@ -1,0 +1,8 @@
+
+admin_news.news_controller_hello:
+  path: '/admin_news/hello/{name}'
+  defaults:
+    _controller: '\Drupal\admin_news\Controller\NewsController::hello'
+    _title: 'hello'
+  requirements:
+    _permission: 'access content'

@@ -1,0 +1,14 @@
+
+# Points extras entity menu items definition
+entity.points_extras_entity.collection:
+  title: 'Points extras entity list'
+  route_name: entity.points_extras_entity.collection
+  description: 'List Points extras entity entities'
+  parent: system.admin_structure
+  weight: 100
+
+points_extras_entity.admin.structure.settings:
+  title: 'Points extras entity settings'
+  description: 'Configure Points extras entity entities'
+  route_name: points_extras_entity.settings
+  parent: system.admin_structure

@@ -1,0 +1,5 @@
+entity.likes_entity.add_form:
+  route_name: entity.likes_entity.add_form
+  title: 'Add Likes entity'
+  appears_on:
+    - entity.likes_entity.collection

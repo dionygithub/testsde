@@ -1,0 +1,19 @@
+add admin question entity entities:
+  title: 'Create new Admin question entity entities'
+
+administer admin question entity entities:
+  title: 'Administer Admin question entity entities'
+  description: 'Allow to access the administration form to configure Admin question entity entities.'
+  restrict access: true
+
+delete admin question entity entities:
+  title: 'Delete Admin question entity entities'
+
+edit admin question entity entities:
+  title: 'Edit Admin question entity entities'
+
+view published admin question entity entities:
+  title: 'View published Admin question entity entities'
+
+view unpublished admin question entity entities:
+  title: 'View unpublished Admin question entity entities'

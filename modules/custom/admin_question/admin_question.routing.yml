@@ -1,0 +1,8 @@
+
+admin_question.admin_question_controller_hello:
+  path: '/admin_question/hello/{name}'
+  defaults:
+    _controller: '\Drupal\admin_question\Controller\AdminQuestionController::hello'
+    _title: 'hello'
+  requirements:
+    _permission: 'access content'

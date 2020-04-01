@@ -1,0 +1,120 @@
+admin_tests.tests_form:
+  path: '/admin/config/testsConfigForm'
+  defaults:
+    _form: '\Drupal\admin_tests\Form\TestsConfigForm'
+    _title: 'Tests Config'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+
+admin_tests.utiles_ajax:
+  path: '/utiles_ajax'
+  defaults:
+    _title: ''
+    _controller: 'Drupal\admin_tests\Controller\AdminTestsController::utilesajax'
+  requirements:
+    _permission: 'access content'
+
+admin_tests.admin_tests_controller_hello:
+  path: '/admin_tests/hello/{name}'
+  defaults:
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::hello'
+    _title: 'prueba'
+  requirements:
+    _permission: 'access content'
+
+
+admin_tests.list_categorias_generales:
+  path: '/sobre/{categoria}'
+  defaults:
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::list_categorias_generales'
+  requirements:
+    _permission: 'access content'
+
+
+admin_tests.test_completado:
+  path: '/test-completado/{test}'
+  defaults:
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::page_test_completado'
+  requirements:
+    _permission: 'access content'
+
+
+admin_tests.acciones:
+  path: '/user/acciones'
+  defaults:
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::getAcciones'
+  requirements:
+    _permission: 'access content'
+
+admin_tests.premios:
+  path: '/user/premios'
+  defaults:
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::getPremios'
+  requirements:
+    _permission: 'access content'
+
+
+admin_tests.pagedesglose:
+  path: '/user/desglose'
+  defaults:
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::getPageDesglose'
+  requirements:
+    _permission: 'access content'
+
+
+admin_tests.pageTestRealizado:
+  path: '/user/tests-realizados'
+  defaults:
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::getPageTestRealizado'
+  requirements:
+    _permission: 'access content'
+
+admin_tests.pageSolicitudes:
+  path: '/user/solicitudes'
+  defaults:
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::getPageSolicitudes'
+  requirements:
+    _permission: 'access content'
+
+
+#admin_tests.pageGraciasSugerencias:
+#  path: '/gracias/sugerencias'
+#  defaults:
+#    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::getPageGraciasSugerencias'
+#  methods: [POST]
+#  requirements:
+#    _permission: 'access content'
+
+
+admin_tests.pageReferidos:
+  path: '/user/mis-referidos'
+  defaults:
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::getPageMisReferidos'
+  requirements:
+    _permission: 'access content'
+
+admin_tests.referred:
+  path: '/referred/{token}'
+  defaults:
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::pageReferidos'
+  requirements:
+    _permission: 'access content'
+
+
+admin_tests.registrarReferido:
+  path: '/registrar/referido'
+  defaults:
+    _title: ''
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::registrarReferido'
+  methods: [POST]
+  requirements:
+     _permission: 'access content'
+
+admin_tests.test_fallado:
+  path: '/test-fallado/{test}'
+  defaults:
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::page_test_fallado'
+  requirements:
+    _permission: 'access content'

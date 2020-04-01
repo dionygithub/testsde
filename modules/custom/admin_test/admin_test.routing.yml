@@ -1,0 +1,8 @@
+
+admin_test.admin_test_controller_hello:
+  path: '/admin_test/hello/{name}'
+  defaults:
+    _controller: '\Drupal\admin_test\Controller\AdminTestController::hello'
+    _title: 'hello'
+  requirements:
+    _permission: 'access content'

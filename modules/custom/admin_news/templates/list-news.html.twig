@@ -1,0 +1,12 @@
+{% if info['formatSimple'] %}
+    <div class="card bg-light mb-3" style="max-width: 20rem;">
+        <div class="card-header">Curiosidades</div>
+        <div class="card-body">
+            <h5 class="card-title">{{ info['news'].name }}</h5>
+            <p class="card-text">{{ info['news'].description }}</p>
+        </div>
+    </div>
+
+{% else %}
+    <h2>Lista de Curiosidades</h2>
+{% endif %}

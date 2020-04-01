@@ -1,0 +1,17 @@
+{% if data['testsDestacados']|length > 0 %}
+
+    <div class="container-tests-destacados">
+        <h2>Test destacados</h2>
+
+        <div class="row col-md-12 mb-4">
+            {% for index, test in data['testsDestacados'] %}
+
+                {{ test }}
+
+            {% endfor %}
+        </div>
+    </div>
+
+{% endif %}
+
+

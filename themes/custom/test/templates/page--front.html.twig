@@ -1,0 +1,757 @@
+{#
+/**
+ * @file
+ * Bootstrap Barrio's theme implementation to display a single page.
+ *
+ * The doctype, html, head and body tags are not in this template. Instead they
+ * can be found in the html.html.twig template normally located in the
+ * core/modules/system directory.
+ *
+ * Available variables:
+ *
+ * General utility variables:
+ * - base_path: The base URL path of the Drupal installation. Will usually be
+ *   "/" unless you have installed Drupal in a sub-directory.
+ * - is_front: A flag indicating if the current page is the front page.
+ * - logged_in: A flag indicating if the user is registered and signed in.
+ * - is_admin: A flag indicating if the user has permission to access
+ *   administration pages.
+ *
+ * Site identity:
+ * - front_page: The URL of the front page. Use this instead of base_path when
+ *   linking to the front page. This includes the language domain or prefix.
+ * - logo: The url of the logo image, as defined in theme settings.
+ * - site_name: The name of the site. This is empty when displaying the site
+ *   name has been disabled in the theme settings.
+ * - site_slogan: The slogan of the site. This is empty when displaying the site
+ *   slogan has been disabled in theme settings.
+
+ * Page content (in order of occurrence in the default page.html.twig):
+ * - node: Fully loaded node, if there is an automatically-loaded node
+ *   associated with the page and the node ID is the second argument in the
+ *   page's path (e.g. node/12345 and node/12345/revisions, but not
+ *   comment/reply/12345).
+ *
+ * Regions:
+ * - page.top_header: Items for the top header region.
+ * - page.top_header_form: Items for the top header form region.
+ * - page.header: Items for the header region.
+ * - page.header_form: Items for the header form region.
+ * - page.highlighted: Items for the highlighted region.
+ * - page.primary_menu: Items for the primary menu region.
+ * - page.secondary_menu: Items for the secondary menu region.
+ * - page.featured_top: Items for the featured top region.
+ * - page.content: The main content of the current page.
+ * - page.sidebar_first: Items for the first sidebar.
+ * - page.sidebar_second: Items for the second sidebar.
+ * - page.featured_bottom_first: Items for the first featured bottom region.
+ * - page.featured_bottom_second: Items for the second featured bottom region.
+ * - page.featured_bottom_third: Items for the third featured bottom region.
+ * - page.footer_first: Items for the first footer column.
+ * - page.footer_second: Items for the second footer column.
+ * - page.footer_third: Items for the third footer column.
+ * - page.footer_fourth: Items for the fourth footer column.
+ * - page.footer_fifth: Items for the fifth footer column.
+ * - page.breadcrumb: Items for the breadcrumb region.
+ *
+ * Theme variables:
+ * - navbar_top_attributes: Items for the header region.
+ * - navbar_attributes: Items for the header region.
+ * - content_attributes: Items for the header region.
+ * - sidebar_first_attributes: Items for the highlighted region.
+ * - sidebar_second_attributes: Items for the primary menu region.
+ * - sidebar_collapse: If the sidebar_first will collapse.
+ *
+ * @see template_preprocess_page()
+ * @see bootstrap_barrio_preprocess_page()
+ * @see html.html.twig
+ */
+#}
+
+<header>
+
+  <!-- Navbar -->
+  <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+
+    <div class="container">
+
+      <!-- Brand -->
+      <a class="navbar-brand" href="{{ base_path }}" target="_self">
+        <strong><i class="fas fa-infinity" style="font-size: 45px;color: #DE1B65"></i></strong>
+      </a>
+
+      <!-- Collapse -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Links -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+        {{ page.primary_menu }}
+
+
+        <!-- Right -->
+        <ul class="navbar-nav nav-flex-icons">
+          {% if logged_in == 0 %}
+            <li class="nav-item">
+              <a href="/user" class="nav-link">
+                <i class="fas fa-users"></i>
+                <span>Registro</span>
+              </a>
+            </li>
+
+            <li class="nav-item">
+              <a href="/user/login" class="nav-link">
+                <i class="fas fa-user"></i>
+                Iniciar Sesión
+              </a>
+            </li>
+          {% endif %}
+
+          {% if logged_in %}
+            <li class="nav-item">
+              <a href="/user/login" class="nav-link">
+                <i class="far fa-user-circle"></i>
+                Cuenta
+              </a>
+            </li>
+
+          {% endif %}
+
+        </ul>
+      </div>
+
+    </div>
+  </nav>
+  <!-- Navbar -->
+
+  <!--Carousel Wrapper-->
+  <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
+
+    <!--Indicators-->
+    <ol class="carousel-indicators">
+      <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+      <li data-target="#carousel-example-1z" data-slide-to="1"></li>
+    </ol>
+    <!--/.Indicators-->
+
+    <!--Slides-->
+    <div class="carousel-inner" role="listbox">
+
+      <!--First slide-->
+      <div class="carousel-item active">
+
+        <div class="view" style="background: url('themes/custom/test/images/img-slider3.png') no-repeat;background-size: cover;background-position: bottom">
+
+          <!-- Mask & flexbox options-->
+          <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+            <!-- Content -->
+            <div class="text-center white-text mx-5 wow fadeIn">
+              <h1 class="mb-4">
+                <strong>Divi&eacute;rtete, Aprende y Gana</strong>
+              </h1>
+
+              <p class="mb-5" style="font-size: 25px">
+                <strong>"El conflicto no es entre el Bien y el Mal sino entre el <b>CONOCIMIENTO</b> y la <b>IGNORANCIA</b>"</strong>
+              </p>
+
+              <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-primary btn-lg">COMIENZA
+                <i class="fas fa-graduation-cap ml-2"></i>
+              </a>
+            </div>
+            <!-- Content -->
+
+          </div>
+          <!-- Mask & flexbox options-->
+
+        </div>
+      </div>
+      <!--/First slide-->
+
+      <!--Second slide-->
+      <div class="carousel-item">
+        <div class="view" style="background: url('themes/custom/test/images/img-slider4.jpg') no-repeat;background-size: cover;">
+
+          <!-- Mask & flexbox options-->
+          <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+            <!-- Content -->
+            <div class="text-center white-text mx-5 wow fadeIn">
+              <h1 class="mb-4">
+                <strong>Obten beneficios por tus conicimientos</strong>
+              </h1>
+
+              <p class="mb-5" style="font-size: 25px">
+                <strong>TestsDe brinda un <b>sistema de puntos</b> a los usuarios de la plataforma según sus <b>conocimientos</b></strong>
+              </p>
+
+              <a target="_blank" href="https://mdbootstrap.com/education/bootstrap/" class="btn btn-primary btn-lg">ÚNETE AHORA
+                <i class="fas fa-graduation-cap ml-2"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <!--/Second slide-->
+
+    </div>
+    <!--/.Slides-->
+
+    <!--Controls-->
+    <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+    <!--/.Controls-->
+
+  </div>
+  <!--/.Carousel Wrapper-->
+
+</header>
+
+<!--Main layout-->
+<main>
+  <div class="container">
+
+
+    {% if page.page_top %}
+      <div class="container-page_top">
+        {{ page.page_top }}
+      </div>
+    {% endif %}
+
+
+    <section class="mt-5 wow fadeIn">
+          <div class="row">
+              <blockquote class="blockquote bq-info mb-4">
+                <p class="bq-title">Destacados</p>
+              </blockquote>
+              {{ tests_destacados }}
+
+          </div>
+    </section>
+
+    <hr class="my-5">
+
+      <!-- Section -->
+      <section>
+
+        {#<h6 class="font-weight-bold text-center grey-text text-uppercase small mb-4">Services</h6>#}
+        <h3 class="font-weight-bold text-center dark-grey-text pb-2">Categorias más relevantes</h3>
+        <hr class="w-header my-4">
+        <p class="lead text-center text-muted pt-2 mb-5">Join thousands of satisfied customers using our template
+          globally.</p>
+
+        <div class="row">
+
+          <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card text-center bg-success text-white">
+              <div class="card-body">
+                <p class="mt-4 pt-2"><i class="far fa-object-ungroup fa-4x"></i></p>
+                <h5 class="font-weight-normal my-4 py-2"><a class="text-white" href="#">Web Design</a></h5>
+                <p class="mb-4">He polite be object change. Consider no overcame yourself sociable children.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card text-center">
+              <div class="card-body">
+                <p class="mt-4 pt-2"><i class="fas fa-mobile-alt fa-4x grey-text"></i></p>
+                <h5 class="font-weight-normal my-4 py-2"><a class="dark-grey-text" href="#">Mobile App</a></h5>
+                <p class="text-muted mb-4">He polite be object change. Consider no overcame yourself sociable children.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-3 mb-4">
+            <div class="card text-center deep-purple lighten-1 text-white">
+              <div class="card-body">
+                <p class="mt-4 pt-2"><i class="fas fa-chart-line fa-4x"></i></p>
+                <h5 class="font-weight-normal my-4 py-2"><a class="text-white" href="#">Digital Marketing</a></h5>
+                <p class="mb-4">He polite be object change. Consider no overcame yourself sociable children.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-xl-3">
+            <div class="card text-center">
+              <div class="card-body">
+                <p class="mt-4 pt-2"><i class="fas fa-bullhorn fa-4x grey-text"></i></p>
+                <h5 class="font-weight-normal my-4 py-2"><a class="dark-grey-text" href="#">Branding Package</a></h5>
+                <p class="text-muted mb-4">He polite be object change. Consider no overcame yourself sociable children.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+    <hr class="my-5">
+
+    <!--Section: Not enough-->
+    <section>
+
+      <h2 class="my-5 h3 text-center">Pensando en ti</h2>
+
+      <!--First row-->
+      <div class="row features-small mb-5 mt-3 wow fadeIn">
+
+        <!--First column-->
+        <div class="col-md-4">
+          <!--First row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-check-circle fa-2x indigo-text"></i>
+            </div>
+            <div class="col-10">
+              <h6 class="feature-title">Free for personal and commercial use</h6>
+              <p class="grey-text">Our license is user-friendly. Feel free to use MDB for both private as well as
+                commercial projects.
+              </p>
+              <div style="height:15px"></div>
+            </div>
+          </div>
+          <!--/First row-->
+
+          <!--Second row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-check-circle fa-2x indigo-text"></i>
+            </div>
+            <div class="col-10">
+              <h6 class="feature-title">400+ UI elements</h6>
+              <p class="grey-text">An impressive collection of flexible components allows you to develop any project.
+              </p>
+              <div style="height:15px"></div>
+            </div>
+          </div>
+          <!--/Second row-->
+
+          <!--Third row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-check-circle fa-2x indigo-text"></i>
+            </div>
+            <div class="col-10">
+              <h6 class="feature-title">600+ icons</h6>
+              <p class="grey-text">Hundreds of useful, scalable, vector icons at your disposal.</p>
+              <div style="height:15px"></div>
+            </div>
+          </div>
+          <!--/Third row-->
+
+          <!--Fourth row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-check-circle fa-2x indigo-text"></i>
+            </div>
+            <div class="col-10">
+              <h6 class="feature-title">Fully responsive</h6>
+              <p class="grey-text">It doesn't matter whether your project will be displayed on desktop, laptop,
+                tablet or mobile phone. MDB
+                looks great on each screen.</p>
+              <div style="height:15px"></div>
+            </div>
+          </div>
+          <!--/Fourth row-->
+        </div>
+        <!--/First column-->
+
+        <!--Second column-->
+        <div class="col-md-4 flex-center">
+          <img src="https://mdbootstrap.com/img/Others/screens.png" alt="MDB Magazine Template displayed on iPhone"
+               class="z-depth-0 img-fluid">
+        </div>
+        <!--/Second column-->
+
+        <!--Third column-->
+        <div class="col-md-4 mt-2">
+          <!--First row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-check-circle fa-2x indigo-text"></i>
+            </div>
+            <div class="col-10">
+              <h6 class="feature-title">70+ CSS animations</h6>
+              <p class="grey-text">Neat and easy to use animations, which will increase the interactivity of your
+                project and delight your visitors.
+              </p>
+              <div style="height:15px"></div>
+            </div>
+          </div>
+          <!--/First row-->
+
+          <!--Second row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-check-circle fa-2x indigo-text"></i>
+            </div>
+            <div class="col-10">
+              <h6 class="feature-title">Plenty of useful templates</h6>
+              <p class="grey-text">Need inspiration? Use one of our predefined templates for free.</p>
+              <div style="height:15px"></div>
+            </div>
+          </div>
+          <!--/Second row-->
+
+          <!--Third row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-check-circle fa-2x indigo-text"></i>
+            </div>
+            <div class="col-10">
+              <h6 class="feature-title">Easy installation</h6>
+              <p class="grey-text">5 minutes, a few clicks and... done. You will be surprised at how easy it is.
+              </p>
+              <div style="height:15px"></div>
+            </div>
+          </div>
+          <!--/Third row-->
+
+          <!--Fourth row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-check-circle fa-2x indigo-text"></i>
+            </div>
+            <div class="col-10">
+              <h6 class="feature-title">Easy to use and customize</h6>
+              <p class="grey-text">Using MDB is straightforward and pleasant. Components flexibility allows you deep
+                customization. You will
+                easily adjust each component to suit your needs.</p>
+              <div style="height:15px"></div>
+            </div>
+          </div>
+          <!--/Fourth row-->
+        </div>
+        <!--/Third column-->
+
+      </div>
+      <!--/First row-->
+
+    </section>
+    <!--Section: Not enough-->
+
+    <hr class="mb-5">
+
+    <section class="mt-5 wow fadeIn">
+      <div class="row">
+        <blockquote class="blockquote bq-info mb-4">
+          <p class="bq-title">Mas votados</p>
+        </blockquote>
+        {{ tests_destacados }}
+
+      </div>
+    </section>
+
+    <hr class="mb-5">
+    <!--Section: More-->
+    <section>
+
+      <h2 class="my-5 h3 text-center">Curiosidades</h2>
+
+      <!--First row-->
+      <div class="row features-small mt-5 wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-xl-3 col-lg-6">
+          <!--Grid row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fab fa-firefox fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+            </div>
+            <div class="col-10 mb-2 pl-3">
+              <h5 class="feature-title font-bold mb-1">Cross-browser compatibility</h5>
+              <p class="grey-text mt-2">Chrome, Firefox, IE, Safari, Opera, Microsoft Edge - MDB loves all browsers;
+                all browsers love MDB.
+              </p>
+            </div>
+          </div>
+          <!--/Grid row-->
+        </div>
+        <!--/Grid column-->
+
+        <!--Grid column-->
+        <div class="col-xl-3 col-lg-6">
+          <!--Grid row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-level-up-alt fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+            </div>
+            <div class="col-10 mb-2">
+              <h5 class="feature-title font-bold mb-1">Frequent updates</h5>
+              <p class="grey-text mt-2">MDB becomes better every month. We love the project and enhance as much as
+                possible.
+              </p>
+            </div>
+          </div>
+          <!--/Grid row-->
+        </div>
+        <!--/Grid column-->
+
+        <!--Grid column-->
+        <div class="col-xl-3 col-lg-6">
+          <!--Grid row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-comments fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+            </div>
+            <div class="col-10 mb-2">
+              <h5 class="feature-title font-bold mb-1">Active community</h5>
+              <p class="grey-text mt-2">Our society grows day by day. Visit our forum and check how it is to be a
+                part of our family.
+              </p>
+            </div>
+          </div>
+          <!--/Grid row-->
+        </div>
+        <!--/Grid column-->
+
+        <!--Grid column-->
+        <div class="col-xl-3 col-lg-6">
+          <!--Grid row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-code fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+            </div>
+            <div class="col-10 mb-2">
+              <h5 class="feature-title font-bold mb-1">jQuery 3.x</h5>
+              <p class="grey-text mt-2">MDB is integrated with newest jQuery. Therefore you can use all the latest
+                features which come along with
+                it.
+              </p>
+            </div>
+          </div>
+          <!--/Grid row-->
+        </div>
+        <!--/Grid column-->
+
+      </div>
+      <!--/First row-->
+
+      <!--Second row-->
+      <div class="row features-small mt-4 wow fadeIn">
+
+        <!--Grid column-->
+        <div class="col-xl-3 col-lg-6">
+          <!--Grid row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-cubes fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+            </div>
+            <div class="col-10 mb-2">
+              <h5 class="feature-title font-bold mb-1">Modularity</h5>
+              <p class="grey-text mt-2">Material Design for Bootstrap comes with both, compiled, ready to use
+                libraries including all features as
+                well as modules for CSS (SASS files) and JS.</p>
+            </div>
+          </div>
+          <!--/Grid row-->
+        </div>
+        <!--/Grid column-->
+
+        <!--Grid column-->
+        <div class="col-xl-3 col-lg-6">
+          <!--Grid row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-question fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+            </div>
+            <div class="col-10 mb-2">
+              <h5 class="feature-title font-bold mb-1">Technical support</h5>
+              <p class="grey-text mt-2">We care about reliability. If you have any questions - do not hesitate to
+                contact us.
+              </p>
+            </div>
+          </div>
+          <!--/Grid row-->
+        </div>
+        <!--/Grid column-->
+
+        <!--Grid column-->
+        <div class="col-xl-3 col-lg-6">
+          <!--Grid row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="fas fa-th fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+            </div>
+            <div class="col-10 mb-2">
+              <h5 class="feature-title font-bold mb-1">Flexbox</h5>
+              <p class="grey-text mt-2">MDB fully supports Flex Box. You can forget about alignment issues.</p>
+            </div>
+          </div>
+          <!--/Grid row-->
+        </div>
+        <!--/Grid column-->
+
+        <!--Grid column-->
+        <div class="col-xl-3 col-lg-6">
+          <!--Grid row-->
+          <div class="row">
+            <div class="col-2">
+              <i class="far fa-file-code fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+            </div>
+            <div class="col-10 mb-2">
+              <h5 class="feature-title font-bold mb-1">SASS files</h5>
+              <p class="grey-text mt-2">Arranged and well documented .scss files can't wait until you compile them.</p>
+            </div>
+          </div>
+          <!--/Grid row-->
+        </div>
+        <!--/Grid column-->
+
+      </div>
+      <!--/Second row-->
+
+    </section>
+    <!--Section: More-->
+
+    <hr class="mb-5">
+
+    <section class="mt-5 wow fadeIn">
+      <div class="row">
+        <blockquote class="blockquote bq-info mb-4">
+          <p class="bq-title">Buscador</p>
+        </blockquote>
+
+      </div>
+    </section>
+
+
+  </div>
+</main>
+
+{% if page.footer_top %}
+  <div class="container-form-sugerencias text-center mb-5 wow fadeIn">
+    {{ page.footer_top }}
+  </div>
+{% endif %}
+
+<!--Footer-->
+<footer class="page-footer text-center font-small wow fadeIn">
+
+  <div class="container text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-4 mx-auto text-center">
+
+        <!-- Links -->
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!">Very long link 1</a>
+          </li>
+          <li>
+            <a href="#!">Very long link 2</a>
+          </li>
+          <li>
+            <a href="#!">Very long link 3</a>
+          </li>
+          <li>
+            <a href="#!">Very long link 4</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-4 mx-auto text-center">
+
+        <!-- Links -->
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!">Link 1</a>
+          </li>
+          <li>
+            <a href="#!">Link 2</a>
+          </li>
+          <li>
+            <a href="#!">Link 3</a>
+          </li>
+          <li>
+            <a href="#!">Link 4</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <hr class="clearfix w-100 d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-4 mx-auto text-center">
+
+        <!-- Links -->
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="#!">Link 1</a>
+          </li>
+          <li>
+            <a href="#!">Link 2</a>
+          </li>
+          <li>
+            <a href="#!">Link 3</a>
+          </li>
+          <li>
+            <a href="#!">Link 4</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+    </div>
+    <!-- Grid row -->
+
+  </div>
+
+  <hr class="my-4">
+
+  <!-- Social icons -->
+  <div class="pb-4">
+    <a class="btn-floating btn-lg btn-fb waves-effect waves-light icon-footer"  href="https://www.facebook.com/mdbootstrap" target="_blank">
+      <i class="fab fa-facebook-f mr-3"></i>
+    </a>
+
+    <a class="btn-floating btn-lg btn-tw waves-effect waves-light icon-footer" target="_blank" type="button" role="button">
+      <i class="fab fa-twitter"></i>
+    </a>
+
+    <a class="btn-floating btn-lg btn-ins waves-effect waves-light icon-footer" href="https://www.youtube.com/watch?v=7MUISDJ5ZZ4" target="_blank">
+      <i class="fab fa-instagram mr-3"></i>
+    </a>
+
+    <a class="btn-floating btn-lg btn-whatsapp waves-effect waves-light" type="button" role="button">
+      <i class="fab fa-whatsapp"></i>
+    </a>
+
+  </div>
+  <!-- Social icons -->
+
+  <!--Copyright-->
+  <div class="footer-copyright py-3">
+    <a href="https://www.testsde.com" target="_blank"> TestsDe </a> © 2020 Copyright
+  </div>
+  <!--/.Copyright-->
+
+</footer>

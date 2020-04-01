@@ -1,0 +1,19 @@
+add admin answer entity entities:
+  title: 'Create new Admin answer entity entities'
+
+administer admin answer entity entities:
+  title: 'Administer Admin answer entity entities'
+  description: 'Allow to access the administration form to configure Admin answer entity entities.'
+  restrict access: true
+
+delete admin answer entity entities:
+  title: 'Delete Admin answer entity entities'
+
+edit admin answer entity entities:
+  title: 'Edit Admin answer entity entities'
+
+view published admin answer entity entities:
+  title: 'View published Admin answer entity entities'
+
+view unpublished admin answer entity entities:
+  title: 'View unpublished Admin answer entity entities'

@@ -1,0 +1,15 @@
+<blockquote class="blockquote bq-info mb-4">
+    <input name="testId" type="hidden" value="{{ data['testid'] }}">
+    <p class="bq-title"><span class="sub-titulo-black">{{ data['name'] }}</span> Nos importa tu <span class="sub-titulo">Opinion!!!</span></p>
+    <a type="button" class="btn btn-outline-dark-green btn-sm px-2 waves-effect vote-button upvote-button {{ data['class'] }}" data-action="upvote">
+        <span class="value">{{ data['cantLike'] }}</span>
+        <i class="far fa-thumbs-up ml-1"></i>
+    </a>
+    <a type="button" class="btn btn-outline-danger btn-sm px-2 waves-effect vote-button downvote-button {{ data['class'] }}" data-action="downvote">
+        <span class="value">{{ data['cantNoLike'] }}</span>
+        <i class="far fa-thumbs-down ml-1"></i>
+    </a>
+</blockquote>
+
+
+{{ attach_library('admin_tests/admin_tests') }}

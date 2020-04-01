@@ -1,0 +1,19 @@
+
+main{
+    padding-top: 8%;
+}
+
+.path-frontpage main{
+    padding-top: 0%;
+}
+
+.blockquote .sub-titulo{
+    background-color: #33b5e5 !important;
+    color:#FFF;
+    font-weight: bold
+}
+
+.tira-activa{
+    background-color: #CCC!important;
+}
+

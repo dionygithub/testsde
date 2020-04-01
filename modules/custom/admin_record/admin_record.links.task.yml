@@ -1,0 +1,21 @@
+# Admin record entity routing definition
+admin_record_entity.settings_tab:
+  route_name: admin_record_entity.settings
+  title: 'Settings'
+  base_route: admin_record_entity.settings
+
+entity.admin_record_entity.canonical:
+  route_name: entity.admin_record_entity.canonical
+  base_route: entity.admin_record_entity.canonical
+  title: 'View'
+
+entity.admin_record_entity.edit_form:
+  route_name: entity.admin_record_entity.edit_form
+  base_route: entity.admin_record_entity.canonical
+  title: 'Edit'
+
+entity.admin_record_entity.delete_form:
+  route_name:  entity.admin_record_entity.delete_form
+  base_route:  entity.admin_record_entity.canonical
+  title: Delete
+  weight: 10

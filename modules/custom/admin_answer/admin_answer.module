@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains admin_answer.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function admin_answer_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the admin_answer module.
+    case 'help.page.admin_answer':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My Awesome Module') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function admin_answer_theme() {
+  return [
+    'admin_answer' => [
+      'render element' => 'children',
+    ],
+  ];
+}

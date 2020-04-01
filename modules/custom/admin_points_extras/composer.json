@@ -1,0 +1,13 @@
+{
+    "name": "admin_points_extras",
+    "type": "drupal-module",
+    "description": "My Awesome Module",
+    "keywords": [
+    ],
+    "homepage": "https://www.drupal.org/project/admin_points_extras",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://www.drupal.org/project/issues/admin_points_extras",
+        "source": "http://cgit.drupalcode.org/admin_points_extras",
+    },
+}

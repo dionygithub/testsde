@@ -1,0 +1,8 @@
+
+admin_premium.admin_premium_controller_hello:
+  path: '/admin_premium/hello/{name}'
+  defaults:
+    _controller: '\Drupal\admin_premium\Controller\AdminPremiumController::hello'
+    _title: 'hello'
+  requirements:
+    _permission: 'access content'

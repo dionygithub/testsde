@@ -1,0 +1,20 @@
+{% if data['testsRelacionados']|length > 0 %}
+
+    <div class="container-tests-relacionados">
+
+        <blockquote class="blockquote bq-info mb-4">
+            <p class="bq-title">Tests relacionados!!!</p>
+        </blockquote>
+
+        <div class="row col-md-12 mb-4">
+            {% for index, test in data['testsRelacionados'] %}
+
+                {{ test }}
+
+            {% endfor %}
+        </div>
+    </div>
+
+{% endif %}
+
+

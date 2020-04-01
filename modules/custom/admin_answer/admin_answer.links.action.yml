@@ -1,0 +1,5 @@
+entity.admin_answer_entity.add_form:
+  route_name: entity.admin_answer_entity.add_form
+  title: 'Add Admin answer entity'
+  appears_on:
+    - entity.admin_answer_entity.collection

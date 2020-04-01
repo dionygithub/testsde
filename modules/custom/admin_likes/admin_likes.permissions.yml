@@ -1,0 +1,19 @@
+add likes entity entities:
+  title: 'Create new Likes entity entities'
+
+administer likes entity entities:
+  title: 'Administer Likes entity entities'
+  description: 'Allow to access the administration form to configure Likes entity entities.'
+  restrict access: true
+
+delete likes entity entities:
+  title: 'Delete Likes entity entities'
+
+edit likes entity entities:
+  title: 'Edit Likes entity entities'
+
+view published likes entity entities:
+  title: 'View published Likes entity entities'
+
+view unpublished likes entity entities:
+  title: 'View unpublished Likes entity entities'

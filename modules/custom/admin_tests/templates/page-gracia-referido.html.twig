@@ -1,0 +1,16 @@
+<div class="container-gracia-referred">
+
+    {% if data['error'] != true %}
+        {% set texto = "Gracia por darse de ALTA en nuestra Plataforma" %}
+    {% else %}
+        {% set texto = 'Ohh lo sentimos, pero ha ocurrido un error!!!' %}
+    {% endif %}
+
+    <blockquote class="blockquote bq-info mb-4">
+        <p class="bq-title">{{ texto }} </p>
+    </blockquote>
+
+</div>
+
+{{ data['tests_destacados'] }}
+
