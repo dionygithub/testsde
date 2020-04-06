@@ -80,15 +80,24 @@
       </a>
 
       <!-- Collapse -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      <button class="navbar-toggler first-button" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+        <div class="animated-icon1"><span></span><span></span><span></span></div>
       </button>
 
       <!-- Links -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        {{ page.primary_menu }}
+
+        <ul class="navbar-nav mr-auto">
+          {% for index, cat in list_categorias %}
+
+            <li class="nav-item">
+              <a href="{{ cat.path }}" class="nav-link">{{ cat.name }}</a>
+            </li>
+
+          {% endfor %}
+        </ul>
 
         <!-- Right -->
         <ul class="navbar-nav nav-flex-icons">

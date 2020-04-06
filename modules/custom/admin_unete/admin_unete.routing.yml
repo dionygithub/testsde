@@ -1,0 +1,24 @@
+
+admin_unete.admin_unete_controller_hello:
+  path: '/admin_unete/hello/{name}'
+  defaults:
+    _controller: '\Drupal\admin_unete\Controller\AdminUneteController::hello'
+    _title: 'hello'
+  requirements:
+    _permission: 'access content'
+
+admin_unete.unete:
+  path: '/user/unete'
+  defaults:
+    _controller: '\Drupal\admin_unete\Controller\AdminUneteController::page_unete'
+  requirements:
+    _permission: 'access content'
+
+admin_unete.unete_registro:
+  path: '/user/unete/registro'
+  defaults:
+    _title: ''
+    _controller: '\Drupal\admin_unete\Controller\AdminUneteController::registrarUser'
+  methods: [POST]
+  requirements:
+     _permission: 'access content'

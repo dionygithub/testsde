@@ -55,7 +55,9 @@ function tests_page_attachments_alter(array &$page) {
  */
 function tests_preprocess_page(array &$variables) {
 
-    $variables['tests_destacados'] = "aaaa";
+   $adminController = \Drupal::service('service.admin_tests');
+   $list_categorias = $adminController->list_categorias();
+   $variables['list_categorias'] = $list_categorias;
 }
 
 /**

@@ -1,6 +1,25 @@
 <form>
     <div id="wizard" style="display: none">
         <!-- SECTION 1 -->
+
+        <div class="container-cant-preguntas">
+
+            <nav aria-label="Page navigation example">
+                <ul class="pagination pagination-circle pg-blue">
+
+                    {% for index, question in datos.questions %}
+                            {% if index == 0 %}
+                                <li class="page-item active" data-value="{{ index }}"><a class="page-link">{{ index + 1}}</a></li>
+                            {% else %}
+                                <li class="page-item" data-value="{{ index }}"><a class="page-link">{{ index + 1}}</a></li>
+                            {% endif %}
+                    {% endfor %}
+
+                </ul>
+            </nav>
+
+        </div>
+
         <input type="hidden" name="testId" value="{{ datos.id }}">
 
         {% for index, question in datos.questions %}
@@ -8,7 +27,7 @@
              <h4></h4>
              <section>
          <!--Grid row-->
-                <div class="row">
+                <div class="row" style="width: 100%">
 
                     <!--Grid column-->
                     <div class="col-md-12 mb-4">
@@ -19,7 +38,7 @@
                             <div class="card-image">
 
                                 <!-- Content -->
-                                <div class="text-white d-flex h-100 mask blue-gradient-rgba">
+                                <div class="text-white d-flex h-100 mask btn-mdb-color">
                                     <div class="first-content text-center p-3" style="width: 100%">
                                         <h3 class="card-title">{{ question.name }}</h3>
                                     </div>

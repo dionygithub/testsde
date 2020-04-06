@@ -15,29 +15,53 @@
  * @ingroup themeable
  */
 #}
-<div class="col-md-4 mb-4">
+<div class="col-md-6 col-xl-3 mb-4">
         <!-- Card -->
         <div class="card">
 
             <!--Card image-->
             <div class="view overlay">
-                <img class="card-img-top" src="https://mdbootstrap.com/img/Photos/Others/images/16.jpg"
+                <img class="card-img-top" src="{{ imagen }}"
                      alt="Card image cap">
                 <a href="{{ url }}">
-                    <div class="mask rgba-white-slight"></div>
+                    <div class="mask rgba-white-slight">
+                        <div class="col-md-12 container-info-like" >
+                            <i class="far fa-grin icon-info-like"></i> {{ likes }}
+                            <i class="far fa-frown icon-info-nolike"></i> {{ nolikes }}
+                        </div>
+                    </div>
                 </a>
             </div>
 
             <!--Card content-->
             <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12 col-xl-12 text-align-right container-info-extra" >
+                        <i class="fab fa-creative-commons-nd icon-puntos"></i> {{ puntos }} pts
+                        <i class="far fa-clock icon-reloj"></i> {{ time }} min
+                    </div>
+                </div>
 
-                <!--Title-->
-                <h4 class="card-title">{{ label }}</h4>
-                <!--Text-->
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the
-                    card's content.</p>
-                <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-                <a href="{{ url }}" type="button" class="btn btn-light-blue btn-md">Read more</a>
+                <h4 class="card-title title-test-teaser"> {{primera_pregunta.titulo.name }}</h4>
+
+                <a href="{{ url }}">
+
+                    <div class="card-text question-test-teaser">
+                        {% for index, resp in primera_pregunta.respuestas %}
+
+                        <div class="custom-control custom-radio">
+                            <input type="radio" class="custom-control-input" disabled="disabled" id="default" name="questionsRadios1">
+                            <label class="custom-control-label" for="default11">{{ resp.name }}</label>
+                        </div>
+
+                        {% endfor %}
+                    </div>
+
+                </a>
+
+                <div class="text-align-center">
+                     <a href="{{ url }}" type="button" class="btn btn-light-blue btn-md">Accede</a>
+                </div>
 
             </div>
 

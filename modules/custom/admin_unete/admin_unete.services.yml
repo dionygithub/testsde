@@ -1,0 +1,8 @@
+services:
+  service.admin_unete:
+   class: Drupal\admin_unete\Controller\AdminUneteController
+
+  admin_unete.event_subscriber:
+    class: Drupal\admin_unete\EventSubscriber\MyModuleSubscriber
+    tags:
+     - {name: event_subscriber}

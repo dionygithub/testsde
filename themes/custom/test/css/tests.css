@@ -1,14 +1,17 @@
 
 main{
-    padding-top: 8%;
+    padding-top: 120px;
 }
 
 .path-frontpage main{
     padding-top: 0%;
 }
 
+.path-frontpage blockquote{
+    margin-left: 5%;
+}
 .blockquote .sub-titulo{
-    background-color: #33b5e5 !important;
+    background-color: #303f9f !important;
     color:#FFF;
     font-weight: bold
 }
@@ -17,3 +20,70 @@ main{
     background-color: #CCC!important;
 }
 
+.dark-fucsia-text{
+    color: #DE1B65 !important;
+}
+
+.dark-azul-fuerte-text{
+    color: #303f9f !important;
+}
+
+.rgba-black-strong, .rgba-black-strong:after{
+    background-color: rgba(0,0,0,0.4)!important;
+}
+
+strong{
+    font-weight: bold!important;
+}
+
+
+.container-info-like{
+    text-align: right;
+    margin-top: 2%;
+    background-color: #FFF;
+    width: auto;
+    float: right;
+    border-radius: 5px 5px 25px 5px;
+}
+.icon-info-like{
+    color: #3f51b5;
+}
+.icon-info-nolike{
+    color: #82b1ff;
+    margin-left: 15px;
+}
+
+
+.container-info-extra{
+    font-size: 15px;
+}
+.icon-reloj{
+    color: #8bc34a;
+    margin-left: 20px;
+}
+
+.icon-puntos{
+    color: #388e3c;
+}
+
+.title-test-teaser{
+    font-size: 16px;
+    margin-top: 20px;
+    text-align: left;
+    font-weight: bold!important;
+}
+
+.question-test-teaser{
+    margin: 0px;
+    padding: 0px;
+    font-size: 14px;
+}
+
+
+#wizard .actions ul li a.btn-info {
+    background-color: #59698d !important;
+}
+
+.text-info-cat{
+    font-size: 1rem!important;
+}
