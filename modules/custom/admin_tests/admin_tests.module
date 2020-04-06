@@ -7,6 +7,7 @@
 
 use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\file\Entity\File;
+use Drupal\views\ViewExecutable;
 
 define('SOLICITUD_SOLICITADA',9);
 define('ROL_USUARIO','authenticated');
@@ -194,12 +195,47 @@ function admin_tests_theme() {
       ],
 
       'block_tests_destacados' => [
-          'template' => 'test-destacados',
+          'template' => 'block-tests-destacados',
           'path' => drupal_get_path('module', 'admin_tests').'/templates',
           'variables' => array(
               'data' => array(),
           ),
       ],
+
+      'block_tests_valorados' => [
+          'template' => 'block-tests-valorados',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
+
+      'block_cats_destacadas' => [
+          'template' => 'block-categorias-destacadas',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
+      'block_beneficios_usuarios' => [
+          'template' => 'block-beneficios-usuarios',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
+
+      'block_curiosidades' => [
+          'template' => 'block-curiosidades',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
 
       'block_sugerencias_contacto' => [
           'template' => 'block-sugerencias-contacto',
@@ -208,6 +244,23 @@ function admin_tests_theme() {
               'data' => array(),
           ),
       ],
+
+      'block_header_list_categoria' => [
+          'template' => 'block-header-list-categorias',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
+      'block_unete' => [
+          'template' => 'block-unete',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'data' => array(),
+          ),
+      ],
+
 
       'htmlmail' => [
           'template' => 'htmlmail',
@@ -223,6 +276,8 @@ function admin_tests_theme() {
 
 function admin_tests_preprocess_admin_test_entity(&$variables) {
 
+  \Drupal::entityTypeManager()->getViewBuilder('admin_test_entity')->resetCache();
+
   $variables['content'] = [];
   foreach (\Drupal\Core\Render\Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
@@ -236,7 +291,35 @@ function admin_tests_preprocess_admin_test_entity(&$variables) {
   $datos = $testsController->getTreeTest($entity->id());
 
   $variables['datos'] = $datos;
+
+  $primraPregunta = $testsController->getFirstQuestionByIdTest($entity->id());
+  $variables['primera_pregunta'] = $primraPregunta;
+
+
+
   $variables['mode'] = $variables['elements']['#view_mode'];
+
+  //echo'<pre>'; print_r($entity->get('imagen')->target_id); die;
+
+  if (!empty($entity->get('imagen')->target_id)) {
+    $displayImg = getUrlImagen($entity->get('imagen')->target_id);
+  }else{
+    $displayImg = "";
+  }
+
+  $variables['imagen'] = $displayImg;
+  //$variables['description'] = $entity->get('description')->value;
+  $variables['time'] = $entity->get('time')->value;
+
+
+  $adminLikesController = \Drupal::service('service.admin_likes');
+  $result = $adminLikesController->getCantLikesByTest($entity->id());
+
+  $variables['likes'] = $result['like'] + $entity->get('likes')->value;
+  $variables['nolikes'] = $result['nolike'] + $entity->get('nolikes')->value;
+
+  $variables['destacado'] = $entity->get('destacado')->value;
+  $variables['puntos'] = $testsController->getCantPointsDisponibleByTest($entity->id());
 
   $variables['url'] = $entity->toUrl()->toString();
 }
@@ -390,4 +473,34 @@ function admin_tests_mail_alter(&$message) {
   $htmlmail = \Drupal::service('renderer')->render($htmlTestRelac);
 
   $message['body'][0] = $htmlmail;
+}
+
+
+
+
+function admin_tests_views_pre_view(ViewExecutable $view, $display_id, array &$args) {
+  if ($view->id() == 'list_tests' && $display_id === 'page_1') {
+
+    $testsController = new \Drupal\admin_tests\Controller\AdminTestsController();
+    $output = $testsController->getInfoCatgoria($args[0]);
+    $htmlTestRelac = [
+        '#theme' => 'block_header_list_categoria',
+        '#data' => array('catName'=>$output),
+    ];
+    $htmlInfoCategorias = \Drupal::service('renderer')->render($htmlTestRelac);
+
+    $options = array(
+        'id' => 'area_text_custom',
+        'table' => 'views',
+        'field' => 'area_text_custom',
+        'relationship' => 'none',
+        'group_type' => 'none',
+        'admin_label' => '',
+        'empty' => TRUE,
+        'tokenize' => FALSE,
+        'content' => $htmlInfoCategorias,
+      'plugin_id' => 'text_custom',
+    );
+    $view->setHandler('page_1', 'header', 'area_text_custom', $options);
+  }
 }

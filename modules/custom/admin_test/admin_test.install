@@ -1,0 +1,40 @@
+<?php
+/**
+ * @file
+ * Installation file for Housing Import
+ */
+
+use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\Core\Entity\EntityChangedTrait;
+use Drupal\Core\Entity\EntityPublishedTrait;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\user\UserInterface;
+
+/**
+ * Update 8002 - Create field destacado to admin_tests entity.
+ */
+function admin_test_update_8002() {
+  //check if the table exists first.  If not, then create the entity.
+   //drupal_set_installed_schema_version('admin_test', 8000);
+
+    $storage_definition = BaseFieldDefinition::create('boolean')
+        ->setLabel('Destacado')
+        ->setDescription('Destacado')
+        ->setDisplayOptions('form', array(
+            'type' => 'boolean_checkbox',
+            'settings' => array(
+                'display_label' => TRUE,
+            ),
+            'weight' => 0,
+        ))
+        ->setDisplayConfigurable('form', TRUE)
+        ->setDisplayConfigurable('view', TRUE);
+
+
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('destacado', 'admin_test_entity', 'admin_test', $storage_definition);
+
+}

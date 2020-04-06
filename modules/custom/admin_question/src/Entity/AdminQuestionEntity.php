@@ -171,7 +171,7 @@ class AdminQuestionEntity extends ContentEntityBase implements AdminQuestionEnti
       ->setLabel(t('Name'))
       ->setDescription(t('The name of the Admin question entity entity.'))
       ->setSettings([
-        'max_length' => 50,
+        'max_length' => 500,
         'text_processing' => 0,
       ])
       ->setDefaultValue('')

@@ -1,0 +1,21 @@
+{% if data['testsValorados']|length > 0 %}
+
+    <section class="mt-5 wow fadeIn">
+
+            <blockquote class="blockquote bq-info mb-4">
+                <p class="bq-title">Tests que también te pueden interesar!!!</p>
+            </blockquote>
+
+        <div class="row">
+            {% for index, test in data['testsValorados'] %}
+
+                {{ test }}
+
+            {% endfor %}
+
+        </div>
+    </section>
+
+    <hr class="my-5">
+
+{% endif %}

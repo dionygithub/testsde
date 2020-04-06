@@ -1,0 +1,47 @@
+{% if data['catsDestacadas']|length > 0 %}
+
+    <section>
+
+        {#<h6 class="font-weight-bold text-center grey-text text-uppercase small mb-4">Services</h6>#}
+        <h3 class="font-weight-bold text-center dark-azul-fuerte-text pb-2">Categorias más relevantes</h3>
+        <hr class="w-header hr-fucsia my-4">
+        <p class="lead text-center text-muted pt-2 mb-5">Join thousands of satisfied customers using our template
+            globally.</p>
+
+        <div class="row">
+
+            {% for index, cat in data['catsDestacadas'] %}
+
+                <div class="col-md-6 col-xl-4 mb-4">
+
+                    <div class="card card-image mb-3" style="background-image: url({{ cat.imagen }});background-position: center;background-size: cover">
+
+                        <!-- Content -->
+                        <div class="text-white text-center d-flex align-items-center rgba-black-strong py-5 px-4">
+                            <div>
+
+                                {#<h5 class="pink-text">#}{#<i class="fas fa-chart-pie"></i> Marketing</h5>#}
+
+                                <h3 class="card-title pt-2">
+                                    <strong>{{ cat.name }}</strong>
+                                </h3>
+                                <p>{{ cat.description | raw }}</p>
+                                <a href="{{ cat.path }}" class="btn btn-pink waves-effect waves-light">
+                                    <i class="fas fa-clone left"></i> DESCUBRELO!!!</a>
+                            </div>
+                        </div>
+                        <!-- Content -->
+                    </div>
+
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    </section>
+
+
+    <hr class="my-5">
+
+{% endif %}

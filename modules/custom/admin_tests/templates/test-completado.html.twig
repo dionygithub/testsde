@@ -10,17 +10,17 @@
 
     {% else %}
 
-        <h2>Test Compleado</h2>
+        <h2>Test Completado</h2>
 
         <div class="row" style="padding: 25px;background-color: #CCC;">
             <div class="col-lg-6 col-md-6" style="margin-bottom: 25px;">
-                Preguntas correctas <span class="badge badge-light ml-2">{{ info['totalcorrectquestions'] }}/{{ info['totalquestions'] }}</span>
+                Preguntas correctas <span class="badge badge-light ml-2">{{ info['totalcorrectquestions'] }} / {{ info['totalquestions'] }}</span>
             </div>
 
             {% if info['anonimo'] != false %}
                 <br>
                 <div class="col-lg-6 col-md-6">
-                    Puntos ganados <span class="badge badge-default" style="margin-left: 37px;">{{ info['points'] }}</span>
+                    Puntos ganados <span class="badge badge-default" style="margin-left: 37px;">{{ info['points'] }} / {{ info['pointsDesponibles'] }}</span>
                 </div>
 
             {% endif %}

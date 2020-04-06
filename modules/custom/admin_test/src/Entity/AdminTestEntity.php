@@ -171,7 +171,7 @@ class AdminTestEntity extends ContentEntityBase implements AdminTestEntityInterf
       ->setLabel(t('Name'))
       ->setDescription(t('The name of the Admin test entity entity.'))
       ->setSettings([
-        'max_length' => 50,
+        'max_length' => 500,
         'text_processing' => 0,
       ])
       ->setDefaultValue('')
@@ -264,30 +264,30 @@ class AdminTestEntity extends ContentEntityBase implements AdminTestEntityInterf
         ->setDisplayConfigurable('form', TRUE)
         ->setComputed(TRUE);
 
-    $fields['question_reference_entity'] = BaseFieldDefinition::create('entity_reference')
-        ->setLabel('Question Reference Entity')
-        ->setDescription('Question Reference Entity')
-        ->setSetting('target_type', 'admin_question_entity')
-        ->setSetting('handler', 'default')
-        ->setTranslatable(TRUE)
-        ->setDisplayOptions('view', [
-            'label' => 'hidden',
-            'type' => 'author',
-            'weight' => 0,
-        ])
-        ->setDisplayOptions('form', [
-            'type' => 'entity_reference_autocomplete',
-            'weight' => 0,
-            'settings' => [
-                'match_operator' => 'CONTAINS',
-                'size' => '60',
-                'autocomplete_type' => 'tags',
-                'placeholder' => '',
-            ],
-        ])
-        ->setDisplayConfigurable('form', TRUE)
-        ->setDisplayConfigurable('view', TRUE)
-        ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
+//    $fields['question_reference_entity'] = BaseFieldDefinition::create('entity_reference')
+//        ->setLabel('Question Reference Entity')
+//        ->setDescription('Question Reference Entity')
+//        ->setSetting('target_type', 'admin_question_entity')
+//        ->setSetting('handler', 'default')
+//        ->setTranslatable(TRUE)
+//        ->setDisplayOptions('view', [
+//            'label' => 'hidden',
+//            'type' => 'author',
+//            'weight' => 0,
+//        ])
+//        ->setDisplayOptions('form', [
+//            'type' => 'entity_reference_autocomplete',
+//            'weight' => 0,
+//            'settings' => [
+//                'match_operator' => 'CONTAINS',
+//                'size' => '60',
+//                'autocomplete_type' => 'tags',
+//                'placeholder' => '',
+//            ],
+//        ])
+//        ->setDisplayConfigurable('form', TRUE)
+//        ->setDisplayConfigurable('view', TRUE)
+//        ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
 
     //Integer
     $fields['likes'] = BaseFieldDefinition::create('integer')
@@ -339,6 +339,20 @@ class AdminTestEntity extends ContentEntityBase implements AdminTestEntityInterf
         ->setSetting('size', 'big')
         ->setDisplayConfigurable('form', TRUE)
         ->setDisplayConfigurable('view', TRUE);
+
+      $fields['destacado'] = BaseFieldDefinition::create('boolean')
+          ->setLabel('Destacado')
+          ->setDescription('Destacado')
+          ->setDisplayOptions('form', array(
+              'type' => 'boolean_checkbox',
+              'settings' => array(
+                  'display_label' => TRUE,
+              ),
+              'weight' => 0,
+          ))
+
+         ->setDisplayConfigurable('form', TRUE)
+         ->setDisplayConfigurable('view', TRUE);
 
     return $fields;
   }

@@ -383,6 +383,13 @@ class AdminTestsController extends ControllerBase {
 
   }
 
+  public function getInfoCatgoria($idCat){
+
+    $termObj = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($idCat);
+
+    return !empty($termObj) ? $termObj->get('name')->value : "";
+  }
+
   public function getUserTira($uid,$show_perfil){
 
     global $base_url;
@@ -497,6 +504,7 @@ class AdminTestsController extends ControllerBase {
       $info['totalquestions'] = $record->totalquestions;
       $info['totalcorrectquestions'] = $record->totalcorrectquestions;
       $info['points'] = $record->points;
+      $info['pointsDesponibles'] = $this->getCantPointsDisponibleByTest($test);
 
     }else{
       $info['test_valido'] = 0;
@@ -595,6 +603,49 @@ class AdminTestsController extends ControllerBase {
     return $output;
   }
 
+  public function getHtmlTestsValorados(){
+
+    $arrayTests = $this->getTestsDestacados();
+
+    $output = array();
+    if(!empty($arrayTests)) {
+
+      foreach ($arrayTests as $arrayTest) {
+
+        $nid = $arrayTest->id;
+        $entity_type = 'admin_test_entity';
+        $view_mode = 'teaser';
+
+        $node = \Drupal::entityTypeManager()->getStorage($entity_type)->load($nid);
+        $output[] = render(\Drupal::entityTypeManager()->getViewBuilder($entity_type)->view($node, $view_mode));
+      }
+
+
+    }
+    return $output;
+  }
+
+  public function getHtmlCuriosidades(){
+
+    $arrayTests = $this->getCuriosidades();
+
+    $output = array("aaa");
+//    if(!empty($arrayTests)) {
+//
+//      foreach ($arrayTests as $arrayTest) {
+//
+//        $nid = $arrayTest->id;
+//        $entity_type = 'admin_test_entity';
+//        $view_mode = 'teaser';
+//
+//        $node = \Drupal::entityTypeManager()->getStorage($entity_type)->load($nid);
+//        $output[] = render(\Drupal::entityTypeManager()->getViewBuilder($entity_type)->view($node, $view_mode));
+//      }
+//
+//
+//    }
+    return $output;
+  }
 
   public function page_test_fallado($test){
 
@@ -610,22 +661,16 @@ class AdminTestsController extends ControllerBase {
 
   }
 
-  public function list_categorias_generales($categoria){
+
+  public function list_categorias(){
 
     global $base_url;
 
-    $mapsPathsCategorias = array('2'=>'cultura-general','1'=>'culturales');
-    $tid = array_search($categoria,$mapsPathsCategorias);
-
-    if(!is_int($tid)){
-      throw new NotFoundHttpException();
-    }
-
     $treeNames = array();
-    try{
+
 
       $vid = 'categorias';
-      $parent_tid = $tid;
+      $parent_tid = 0;
       $depth = 2; //depth upto which level you want
       $load_entities = FALSE;
       $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, $parent_tid, $depth, $load_entities);
@@ -641,25 +686,64 @@ class AdminTestsController extends ControllerBase {
             'name' => $termObj->get('name')->value,
             'id' => $termObj->get('tid')->value,
             'description' => $termObj->get('description')->value,
-            'path' => $base_url.$alias,
+            'path' => $base_url . $alias,
             'imagen' => getUrlImagen($termObj->field_imagen->target_id),
         );
       }
 
-      //echo'<pre>'; print_r($base_url); die;
-
-      $build['list-categorias'] = array(
-          '#theme' => 'list_categoria_generales',
-          '#list' => $treeNames,
-          '#name' => $categoria,
-      );
-
-      return $build;
-
-    }catch(Exception $e){
-      throw new NotFoundHttpException();
-    }
+    return $treeNames;
   }
+
+//  public function list_categorias_generales($categoria){
+//
+//    global $base_url;
+//
+//    $mapsPathsCategorias = array('2'=>'cultura-general','1'=>'culturales');
+//    $tid = array_search($categoria,$mapsPathsCategorias);
+//
+//    if(!is_int($tid)){
+//      throw new NotFoundHttpException();
+//    }
+//
+//    $treeNames = array();
+//    try{
+//
+//      $vid = 'categorias';
+//      $parent_tid = $tid;
+//      $depth = 2; //depth upto which level you want
+//      $load_entities = FALSE;
+//      $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, $parent_tid, $depth, $load_entities);
+//
+//      foreach ($tree as $term) {
+//
+//        $termObj = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term->tid);
+//
+//        $aliasManager = \Drupal::service('path.alias_manager');
+//        $alias = $aliasManager->getAliasByPath('/taxonomy/term/' . $termObj->get('tid')->value);
+//
+//        $treeNames[] = array(
+//            'name' => $termObj->get('name')->value,
+//            'id' => $termObj->get('tid')->value,
+//            'description' => $termObj->get('description')->value,
+//            'path' => $base_url.$alias,
+//            'imagen' => getUrlImagen($termObj->field_imagen->target_id),
+//        );
+//      }
+//
+//      //echo'<pre>'; print_r($base_url); die;
+//
+//      $build['list-categorias'] = array(
+//          '#theme' => 'list_categoria_generales',
+//          '#list' => $treeNames,
+//          '#name' => $categoria,
+//      );
+//
+//      return $build;
+//
+//    }catch(Exception $e){
+//      throw new NotFoundHttpException();
+//    }
+//  }
 
   public function pageReferidos($token){
 
@@ -685,7 +769,7 @@ class AdminTestsController extends ControllerBase {
     $userObj->imagen = $displayImg;
     //echo'<pre>'; print_r($userObj); die;
 
-    //Tests Relacionados
+    //Tests Destacados
     $output = $this->getHtmlTestsDestacados();
     $htmlTestRelac = [
         '#theme' => 'block_tests_destacados',
@@ -1013,11 +1097,24 @@ class AdminTestsController extends ControllerBase {
     return  !empty($user->get('field_nombre_completo')->value) ? $user->get('field_nombre_completo')->value : $user->label();
   }
 
+
  /*****************************************************************************************************************************
  ******************************************************************************************************************************
  ******************************************** Funciones Privadas Solo devuelven codigo ****************************************
  ******************************************************************************************************************************
  *****************************************************************************************************************************/
+
+
+  public function getCuriosidades(){
+
+    $connection = \Drupal::database();
+    $sql = "SELECT * FROM admin_test_entity_field_data WHERE status = :id LIMIT 4";
+    $result = $connection->query($sql, [':id' => 1]);
+    $objs = $result->fetchAll();
+
+    return true;
+  }
+
 
   private function getCantReferredByUser($uid){
 
@@ -1177,7 +1274,7 @@ class AdminTestsController extends ControllerBase {
     $tests = array();
     $idCategoria = $this->getCategoriaByIdTest($idTest);
     if($idCategoria != null ){
-      $tests = $this->getTestsbyIdTaxonomy($idCategoria);
+      $tests = $this->getTestsbyIdTaxonomy($idCategoria,$idTest);
     }
 
     return $tests;
@@ -1346,11 +1443,11 @@ class AdminTestsController extends ControllerBase {
     return $objs;
   }
 
-  public function getTestsbyIdTaxonomy($idTax){
+  public function getTestsbyIdTaxonomy($idTax,$idTest){
 
     $connection = \Drupal::database();
-    $sql = "SELECT * FROM admin_test_entity_field_data WHERE entity_reference_tax = :id";
-    $result = $connection->query($sql, [':id' => $idTax]);
+    $sql = "SELECT * FROM admin_test_entity_field_data WHERE id <> :idtest AND entity_reference_tax = :id LIMIT 4";
+    $result = $connection->query($sql, [':id' => $idTax, ':idtest' => $idTest]);
     $objs = $result->fetchAll();
 
     return $objs;
@@ -1359,8 +1456,8 @@ class AdminTestsController extends ControllerBase {
   public function getTestsDestacados(){
 
     $connection = \Drupal::database();
-    $sql = "SELECT * FROM admin_test_entity_field_data WHERE status = :id LIMIT 4";
-    $result = $connection->query($sql, [':id' => 1]);
+    $sql = "SELECT * FROM admin_test_entity_field_data WHERE status = :id AND destacado = :destacado LIMIT 4";
+    $result = $connection->query($sql, [':id' => 1,':destacado' => 1]);
     $objs = $result->fetchAll();
 
     return $objs;
@@ -1412,6 +1509,25 @@ class AdminTestsController extends ControllerBase {
     return $list;
   }
 
+  public function getFirstQuestionByIdTest($idTest){
+
+    $list = array();
+    $connection = \Drupal::database();
+    $sql = "SELECT question_reference_entity_target_id FROM admin_test_entity__question_reference_entity WHERE entity_id = :id ORDER BY delta ASC LIMIT 1";
+    $result = $connection->query($sql, [':id' => $idTest]);
+    $obj = $result->fetchObject();
+
+    if(!empty($obj->question_reference_entity_target_id)){
+      $list['titulo'] = $this->getQuestionbyId($obj->question_reference_entity_target_id);
+      $list['respuestas'] = $this->getListAnswerByIdQuestion($obj->question_reference_entity_target_id);
+    }
+
+    //echo'<pre>'; print_r($list); die;
+
+    return $list;
+  }
+
+
   public function getListAnswerByIdQuestion($idQuestion){
 
     $list = array();
@@ -1444,5 +1560,16 @@ class AdminTestsController extends ControllerBase {
     return $test;
   }
 
+  public function getCantPointsDisponibleByTest($id){
+
+    $points = 0;
+    $questions = $this->getListQuestionsByIdTest($id);
+    if(!empty($questions)){
+       foreach($questions as $question){
+         $points += (FLOAT) $question->points;
+       }
+    }
+    return $points;
+  }
 
 }

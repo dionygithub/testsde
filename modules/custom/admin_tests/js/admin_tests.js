@@ -25,6 +25,7 @@ function CopyToClipboard(containerid) {
         jQuery(document).ready(function($){
 
             $('#wizard').show();
+
             var url = Drupal.url('utiles_ajax');
 
 
