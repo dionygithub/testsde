@@ -325,7 +325,9 @@ a.disabled{
 .carousel-item .btn-pink{
     opacity: 0.9;
 }
-
+.text-curiosidad{
+    font-size: 22px;
+}
 .carousel-multi-item .carousel-inner.v-2 .carousel-item.active, .carousel-multi-item .carousel-inner.v-2 .carousel-item-next, .carousel-multi-item .carousel-inner.v-2 .carousel-item-prev {
     display: -webkit-box;
     display: -ms-flexbox;
