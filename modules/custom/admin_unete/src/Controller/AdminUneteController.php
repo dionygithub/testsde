@@ -3,6 +3,7 @@
 namespace Drupal\admin_unete\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Class AdminUneteController.
@@ -46,7 +47,53 @@ class AdminUneteController extends ControllerBase {
 
     $datos = \Drupal::request()->request->all();
 
-    //echo'<pre>'; print_r($datos); die;
+    $user = $user = \Drupal\user\Entity\User::load(1);
+    _user_mail_notify('register_no_approval_required', $user);
+    echo'<pre>'; print_r($datos); die;
+
+  }
+
+
+  public function loginUser(){
+
+    $datos = \Drupal::request()->request->all();
+
+    $servicepass = \Drupal::service('password');
+
+    $mail = $datos['mail'];
+    $pass = $datos['pass'];
+
+    $users = \Drupal::entityTypeManager()->getStorage('user')
+        ->loadByProperties(['mail' => $mail]);
+
+      $user_get = reset($users);
+
+      if($user_get != null){
+
+        if ($servicepass->check($pass, $user_get->pass->value)) {
+
+            user_login_finalize($user_get);
+
+          $user_destination = \Drupal::destination()->get();
+          $response = new RedirectResponse($user_destination);
+          $response->send();
+
+
+        }else{
+
+          \Drupal::messenger()->addMessage('Ohh, Perdona: su contraseña es incorrecta', 'error');
+
+          $this->redirect('admin_unete.unete');
+
+        }
+
+      }else{
+
+        \Drupal::messenger()->addMessage('Ohh, Perdona: Pero este correo  @mai no se encuentra en nuestra plataforma',['@mail'=>$mail], 'error');
+
+        $this->redirect('admin_unete.unete');
+
+      }
 
   }
 
