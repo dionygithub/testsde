@@ -13,7 +13,7 @@ define('SOLICITUD_SOLICITADA',9);
 define('ROL_USUARIO','authenticated');
 define('ACTION_MEGUSTA_ID',1);
 define('ACTION_REFERIDO_ID',2);
-define('EMAIL_ADMIN',"dionyuci@gmail.com");
+define('EMAIL_ADMIN',"admin@conocerde.com");
 define('KEY_SECRET_RECAPTCHA',"6LdmS-UUAAAAAKpHyhzwRpD9s-InjI-8iidBNGut");
 
 /**
@@ -414,7 +414,7 @@ function sendMailSugerencias($name,$email,$sugerencia){
   $body .= '</ul>';
   $body .= '</div>';
 
-  $params['body'] = $body;
+  $params['body'] = render($body);
   $params['title'] = "<strong>Atenci&oacute;n </strong> Nueva Sugerencia";
 
   $mailManager->mail($module, $key, $to, 'es', $params, NULL, true);
@@ -467,7 +467,7 @@ function admin_tests_mail_alter(&$message) {
 
   $htmlTestRelac = [
       '#theme' => 'htmlmail',
-      '#data' => array('imagen'=> $src ,'body'=>$message['body'][0]),
+      '#data' => array('imagen'=> $src ,'body'=> $message['body'][0]),
   ];
 
   $htmlmail = \Drupal::service('renderer')->render($htmlTestRelac);

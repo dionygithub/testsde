@@ -209,6 +209,15 @@ function CopyToClipboard(containerid) {
             });
 
 
+            $('#enviarsugerenciawhasap').on('click', function(event){
+                event.preventDefault();
+
+                var mensaje = $("textarea[name=menssage]").val();
+                window.open('https://api.whatsapp.com/send?phone=34667034669&text=Hola ' + mensaje, '_blank'); //window.location.href = 'https://api.whatsapp.com/send?phone=34667034669&text=Hola ' + mensaje;
+
+            });
+
+
            $('#form-sugerencias').on('submit', function(event){
                event.preventDefault();
 

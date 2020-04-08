@@ -33,7 +33,7 @@ class UneteBlock extends BlockBase {
 
         $htmlunete = [
             '#theme' => 'block_unete',
-            '#data' => array('url'=>$base_url.'/unete'),
+            '#data' => array('url'=>$base_url.'/user/unete'),
         ];
         $htmluneteBlock = \Drupal::service('renderer')->render($htmlunete);
 
