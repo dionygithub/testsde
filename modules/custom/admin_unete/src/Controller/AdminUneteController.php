@@ -36,7 +36,7 @@ class AdminUneteController extends ControllerBase {
 
     $build['page-unete'] = array(
         '#theme' => 'page_unete',
-        '#data' => array('urlRegistroUser' => $base_url.'/user/unete/registro'),
+        '#data' => array('urlRegistroUser' => $base_url.'/user/unete/registro','urlLoginUser' => $base_url.'/user/unete/login'),
     );
 
     return $build;

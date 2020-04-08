@@ -22,3 +22,13 @@ admin_unete.unete_registro:
   methods: [POST]
   requirements:
      _permission: 'access content'
+
+
+admin_unete.unete_login:
+  path: '/user/unete/login'
+  defaults:
+    _title: ''
+    _controller: '\Drupal\admin_unete\Controller\AdminUneteController::loginUser'
+  methods: [POST]
+  requirements:
+     _permission: 'access content'
