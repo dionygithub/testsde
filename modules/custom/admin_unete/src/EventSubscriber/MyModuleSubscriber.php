@@ -9,14 +9,10 @@
 namespace Drupal\admin_unete\EventSubscriber;
 
 use Drupal\Core\Routing\RouteMatch;
-use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Drupal\views\Views;
-use Drupal\views\ViewExecutable;
-use Drupal\user\Entity\User;
 use Drupal\Core\Url;
 
 class MyModuleSubscriber implements EventSubscriberInterface {
@@ -42,7 +38,7 @@ class MyModuleSubscriber implements EventSubscriberInterface {
                     $redirect_url = Url::fromRoute('admin_unete.unete', [], ['absolute' => TRUE]);
                     break;
             }
-
+               //echo'<pre>'; print_r("aaa"); die;
             if ($redirect_url) {
                 $event->setResponse(new RedirectResponse($redirect_url->toString(),301));
             }

@@ -17,13 +17,13 @@
                     <!--Body-->
                     <div class="md-form">
                         <i class="fas fa-envelope prefix grey-text"></i>
-                        <input type="text" id="defaultForm-email" class="form-control">
+                        <input type="text" name="mail" id="defaultForm-email" class="form-control">
                         <label for="defaultForm-email">Your email</label>
                     </div>
 
                     <div class="md-form">
                         <i class="fas fa-lock prefix grey-text"></i>
-                        <input type="password" id="defaultForm-pass" class="form-control">
+                        <input type="password" name="pass" id="defaultForm-pass" class="form-control">
                         <label for="defaultForm-pass">Your password</label>
                     </div>
 
@@ -38,7 +38,7 @@
             <div class="modal-footer">
                 <div class="options">
                     <p>
-                        <a href="/user/password">¿Olvidaste la contraseña?</a>
+                        <a href="{{ data['urlPassUser'] }}">¿Olvidaste la contraseña?</a>
                     </p>
                 </div>
             </div>
@@ -57,25 +57,25 @@
                 <!--Header-->
                 <div class="form-header peach-gradient">
                     <h3>
-                        <i class="fas fa-user"></i> Register:</h3>
+                        <i class="fas fa-user"></i> Registrate:</h3>
                 </div>
                 <form class="unete-register-from" enctype="multipart/form-data" action="{{ data['urlRegistroUser'] }}" method="post" id="user-register-form" accept-charset="UTF-8">
                     <!--Body-->
                     <div class="md-form">
                         <i class="fas fa-user prefix grey-text"></i>
-                        <input type="text" name="name" id="orangeForm-name" class="form-control">
-                        <label for="orangeForm-name">Your name</label>
+                        <input type="text" name="fullname" id="orangeForm-name" class="form-control">
+                        <label for="orangeForm-name">Nombre completo</label>
                     </div>
                     <div class="md-form">
                         <i class="fas fa-envelope prefix grey-text"></i>
-                        <input type="text" name="email" id="orangeForm-email" class="form-control">
-                        <label for="orangeForm-email">Your email</label>
+                        <input type="text" required name="email" id="orangeForm-email" class="form-control">
+                        <label for="orangeForm-email">Correo electrónico</label>
                     </div>
 
                     <div class="md-form">
                         <i class="fas fa-lock prefix grey-text"></i>
-                        <input type="password" name="pass" id="orangeForm-pass" class="form-control">
-                        <label for="orangeForm-pass">Your password</label>
+                        <input type="password" required name="pass" id="orangeForm-pass" class="form-control">
+                        <label for="orangeForm-pass">Contraseña</label>
                     </div>
 
                     <div class="md-form">
@@ -85,7 +85,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button  class="btn btn-deep-orange waves-effect waves-light">Sign up</button>
+                        <button  class="btn btn-deep-orange waves-effect waves-light">Unete</button>
                     </div>
                 </form>
             </div>

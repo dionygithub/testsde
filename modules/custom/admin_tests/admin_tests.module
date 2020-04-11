@@ -13,6 +13,7 @@ define('SOLICITUD_SOLICITADA',9);
 define('ROL_USUARIO','authenticated');
 define('ACTION_MEGUSTA_ID',1);
 define('ACTION_REFERIDO_ID',2);
+define('ACTION_REGISTRARSE_ID',3);
 define('EMAIL_ADMIN',"admin@conocerde.com");
 define('KEY_SECRET_RECAPTCHA',"6LdmS-UUAAAAAKpHyhzwRpD9s-InjI-8iidBNGut");
 
@@ -315,8 +316,11 @@ function admin_tests_preprocess_admin_test_entity(&$variables) {
   $adminLikesController = \Drupal::service('service.admin_likes');
   $result = $adminLikesController->getCantLikesByTest($entity->id());
 
-  $variables['likes'] = $result['like'] + $entity->get('likes')->value;
-  $variables['nolikes'] = $result['nolike'] + $entity->get('nolikes')->value;
+  $cantLikes = (isset($result['like']) && !empty($result['like'])) ? $result['like'] : 0;
+  $cantNoLikes = (isset($result['nolike']) && !empty($result['nolike'])) ? $result['nolike'] : 0;
+
+  $variables['likes'] = $cantLikes + $entity->get('likes')->value;
+  $variables['nolikes'] = $cantNoLikes + $entity->get('nolikes')->value;
 
   $variables['destacado'] = $entity->get('destacado')->value;
   $variables['puntos'] = $testsController->getCantPointsDisponibleByTest($entity->id());

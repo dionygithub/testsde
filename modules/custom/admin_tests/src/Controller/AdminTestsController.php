@@ -1552,9 +1552,11 @@ class AdminTestsController extends ControllerBase {
     if(!empty($questions)){
       foreach($questions as $question){
 
-        $answer = $this->getListAnswerByIdQuestion($question->id);
-        $question->answers = $answer;
-        $test->questions[] = $question;
+        if(!empty($question) && isset($question->id)){
+          $answer = $this->getListAnswerByIdQuestion($question->id);
+          $question->answers = $answer;
+          $test->questions[] = $question;
+        }
       }
     }
     return $test;
@@ -1566,7 +1568,8 @@ class AdminTestsController extends ControllerBase {
     $questions = $this->getListQuestionsByIdTest($id);
     if(!empty($questions)){
        foreach($questions as $question){
-         $points += (FLOAT) $question->points;
+         $puntos = ($question != null && empty($question->points)) ? $question->points :0;
+         $points += (FLOAT) $puntos;
        }
     }
     return $points;
