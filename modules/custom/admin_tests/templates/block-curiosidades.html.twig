@@ -6,10 +6,10 @@
         <!--Controls-->
         <div class="row">
 
-            <div class="col-md-6 col-xl-12">
+            <div class="col-md-6 col-xs-12">
                 <h2 class="font-weight-bold text-left dark-azul-fuerte-text pb-2">Sabias que...</h2>
             </div>
-            <div class="col-md-6 col-xl-12 hidden-phone">
+            <div class="col-md-6 col-xs-12 hidden-phone">
                 <div class="controls-top">
                     <a class="btn-floating" href="#carousel-example-multi" data-slide="prev"><i
                                 class="fas fa-chevron-left"></i></a>
@@ -19,20 +19,6 @@
             </div>
 
         </div>
-
-
-        <!--/.Controls-->
-
-        {#<!-- Indicators -->#}
-        {#<ol class="carousel-indicators">#}
-            {#<li data-target="#carousel-example-multi" data-slide-to="0" class="active"></li>#}
-            {#<li data-target="#carousel-example-multi" data-slide-to="1"></li>#}
-            {#<li data-target="#carousel-example-multi" data-slide-to="2"></li>#}
-            {#<li data-target="#carousel-example-multi" data-slide-to="3"></li>#}
-            {#<li data-target="#carousel-example-multi" data-slide-to="4"></li>#}
-            {#<li data-target="#carousel-example-multi" data-slide-to="5"></li>#}
-        {#</ol>#}
-        {#<!--/.Indicators-->#}
 
         <div class="carousel-inner v-2" role="listbox">
 
@@ -61,37 +47,5 @@
         </div>
 
     </div>
-
-    {#<!--Section: More-->#}
-    {#<section>#}
-
-        {#<h2 class="font-weight-bold text-center dark-azul-fuerte-text pb-2">Curiosidades</h2>#}
-        {#<hr class="w-header hr-fucsia my-4">#}
-        {#<!--First row-->#}
-        {#<div class="row features-small mt-5 wow fadeIn">#}
-
-            {#{% for index, curio in data['curiosidades'] %}#}
-
-                    {#<!--Grid column-->#}
-                    {#<div class="col-xl-3 col-lg-6">#}
-                        {#<!--Grid row-->#}
-                        {#<div class="row">#}
-                            {#<div class="col-2">#}
-                                {#<i class="fas fa-{{ curio.icono }} fa-2x mb-1 indigo-text" aria-hidden="true"></i>#}
-                            {#</div>#}
-                            {#<div class="col-10 mb-2 pl-3">#}
-                                {#<h5 class="feature-title font-bold mb-1">{{ curio.decrip }}</h5>#}
-                                {#&#123;&#35;<p class="grey-text mt-2">{{ curio.decrip }}&#35;&#125;#}
-                                {#&#123;&#35;</p>&#35;&#125;#}
-                            {#</div>#}
-                        {#</div>#}
-                        {#<!--/Grid row-->#}
-                    {#</div>#}
-                    {#<!--/Grid column-->#}
-            {#{% endfor %}#}
-        {#</div>#}
-    {#</section>#}
-
-    <!--Section: More-->
 
 {% endif %}
