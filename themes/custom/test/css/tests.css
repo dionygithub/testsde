@@ -79,11 +79,14 @@ strong{
     font-size: 14px;
 }
 
-
 #wizard .actions ul li a.btn-info {
     background-color: #59698d !important;
 }
 
 .text-info-cat{
     font-size: 1rem!important;
+}
+
+.container-tests-respuestas .custom-control{
+    margin-bottom: 20px;
 }

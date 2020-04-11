@@ -26,18 +26,15 @@
 
              <h4></h4>
              <section>
-         <!--Grid row-->
-                <div class="row" style="width: 100%">
 
-                    <!--Grid column-->
+                <div class="row container-preguntas" style="width: 100%">
+
                     <div class="col-md-12 mb-4">
 
-                        <!-- Card -->
                         <div class="card gradient-card">
 
                             <div class="card-image">
 
-                                <!-- Content -->
                                 <div class="text-white d-flex h-100 mask btn-mdb-color">
                                     <div class="first-content text-center p-3" style="width: 100%">
                                         <h3 class="card-title">{{ question.name }}</h3>
@@ -48,34 +45,23 @@
                             </div>
                             <!-- Content -->
                             <div class="card-body white">
-                                <!-- Default unchecked -->
 
                                 {% for indexA, answer in question.answers %}
 
-                                    <div class="custom-control custom-radio">
+                                    <div class="custom-control custom-radio container-tests-respuestas">
                                         <input type="radio" class="custom-control-input" data-question="{{ question.id }}" value="{{ answer.id }}" id="default{{ question.id }}{{ answer.id }}" name="questionsRadios{{ question.id }}">
                                         <label class="custom-control-label" for="default{{ question.id }}{{ answer.id }}">{{ answer.name }}</label>
                                     </div>
 
                                 {% endfor %}
 
-                                {#<!-- Default checked -->#}
-                                {#<div class="custom-control custom-radio">#}
-                                    {#<input type="radio" class="custom-control-input" id="defaultChecked" name="defaultExampleRadios{{ index }}">#}
-                                    {#<label class="custom-control-label" for="defaultChecked">Default checked</label>#}
-                                {#</div>#}
-
-
                             </div>
 
                         </div>
-                        <!-- Card -->
 
                     </div>
-                    <!--Grid column-->
 
                 </div>
-                <!--Grid row-->
 
             </section>
 
