@@ -32,13 +32,17 @@ class AdminUneteController extends ControllerBase {
 
     $logged_in = \Drupal::currentUser()->isAuthenticated();
 
+    $ActionsPointsController = \Drupal::service('service.actions_points');
+    $action = $ActionsPointsController->getActionbyId(ACTION_REGISTRARSE_ID);
+    $puntos_registrarse = (!empty($action)) ? $action->points : 0;
+
     if($logged_in){
       return $this->redirect('user.page');
     }
 
     $build['page-unete'] = array(
         '#theme' => 'page_unete',
-        '#data' => array('urlRegistroUser' => $base_url.'/user/unete/registro','urlLoginUser' => $base_url.'/user/unete/login','urlPassUser'=>$base_url.'/user/password'),
+        '#data' => array('points'=>$puntos_registrarse,'urlRegistroUser' => $base_url.'/user/unete/registro','urlLoginUser' => $base_url.'/user/unete/login','urlPassUser'=>$base_url.'/user/password'),
     );
 
     return $build;
@@ -50,6 +54,9 @@ class AdminUneteController extends ControllerBase {
     global $base_url;
     $datos = \Drupal::request()->request->all();
 
+    $ActionsPointsController = \Drupal::service('service.actions_points');
+    $action = $ActionsPointsController->getActionbyId(ACTION_REGISTRARSE_ID);
+    $puntos_registrarse = (!empty($action)) ? $action->points : 0;
 
     $mail = $datos['email'];
     $fullname = $datos['fullname'];
@@ -108,7 +115,7 @@ class AdminUneteController extends ControllerBase {
       \Drupal::messenger()->addMessage(render($output), 'error', TRUE);
       $build['page-unete'] = array(
           '#theme' => 'page_unete',
-          '#data' => array('urlRegistroUser' => $base_url . '/user/unete/registro', 'urlLoginUser' => $base_url . '/user/unete/login', 'urlPassUser' => $base_url . '/user/password'),
+          '#data' => array('points'=>$puntos_registrarse,'urlRegistroUser' => $base_url . '/user/unete/registro', 'urlLoginUser' => $base_url . '/user/unete/login', 'urlPassUser' => $base_url . '/user/password'),
       );
 
       return $build;

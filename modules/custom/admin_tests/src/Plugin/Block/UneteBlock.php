@@ -31,9 +31,13 @@ class UneteBlock extends BlockBase {
 
         global $base_url;
 
+        $ActionsPointsController = \Drupal::service('service.actions_points');
+        $action = $ActionsPointsController->getActionbyId(ACTION_REGISTRARSE_ID);
+        $puntos_registrarse = (!empty($action)) ? $action->points : 0;
+
         $htmlunete = [
             '#theme' => 'block_unete',
-            '#data' => array('url'=>$base_url.'/user/unete'),
+            '#data' => array('points' => $puntos_registrarse,'url'=>$base_url.'/user/unete'),
         ];
         $htmluneteBlock = \Drupal::service('renderer')->render($htmlunete);
 
