@@ -30,7 +30,7 @@ class MyModuleSubscriber implements EventSubscriberInterface {
             switch ($route_name) {
                 case 'user.login';
                     // Redirect an authenticated user to the profile page.
-                    //$redirect_url = Url::fromRoute('admin_unete.unete', [], ['absolute' => TRUE]);
+                    $redirect_url = Url::fromRoute('admin_unete.unete', [], ['absolute' => TRUE]);
                     break;
 
                 case 'user.register';
