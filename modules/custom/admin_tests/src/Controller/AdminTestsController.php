@@ -1566,10 +1566,10 @@ class AdminTestsController extends ControllerBase {
 
     $points = 0;
     $questions = $this->getListQuestionsByIdTest($id);
-    echo'<pre>'; print_r($questions); die;
+    //echo'<pre>'; print_r($questions); die;
     if(!empty($questions)){
        foreach($questions as $question){
-         $puntos = ($question != null && empty($question->points)) ? $question->points :0;
+         $puntos = ($question != null && !empty($question->points)) ? $question->points :0;
          $points += (FLOAT) $puntos;
        }
     }
