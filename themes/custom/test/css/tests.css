@@ -99,3 +99,10 @@ strong{
     font-size: 25px!important;
     color: #FFF!important;
 }
+
+@media (max-width: 1199px) {
+    form {
+        padding-left: 0px !important;
+        padding-right: 0px !important;
+    }
+}
