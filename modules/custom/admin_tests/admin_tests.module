@@ -9,7 +9,7 @@ use Drupal\Core\Routing\RouteMatchInterface;
 use Drupal\file\Entity\File;
 use Drupal\views\ViewExecutable;
 
-define('SOLICITUD_SOLICITADA',9);
+define('SOLICITUD_SOLICITADA',7);
 define('ROL_USUARIO','authenticated');
 define('ACTION_MEGUSTA_ID',1);
 define('ACTION_REFERIDO_ID',2);
