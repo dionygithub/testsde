@@ -43,9 +43,13 @@
 
                         {% if myurl_referido != false %}
                             <h6 id="urlcopy" class="font-weight-bold grey-text mb-3">{{ myurl_referido }}</h6>
-                            <button class="btn btn-md btn-outline-default m-0 px-3 py-2 z-depth-0 waves-effect" onclick="CopyToClipboard('urlcopy')">
-                                Copiar
+                            <button class="btn btn-md btn-outline-default m-0 px-3 py-2 waves-effect waves-light" onclick="CopyToClipboard('urlcopy')">
+                                Copiar <i class="fas fa-at"></i>
                             </button>
+
+                            <a  id="enviarurlreferidowhasap" type="button" target="_blank" href="https://api.whatsapp.com/send?phone={{ phone_admin }}&text={{ myurl_referido }}" class="btn btn-md btn-outline-success waves-effect waves-light">
+                                Enviar <i class="fab fa-whatsapp"></i>
+                            </a>
 
                         {% else %}
                             <input type="hidden" value="{{ uid }}" name="uiduser">
