@@ -387,7 +387,7 @@ class AdminTestsController extends ControllerBase {
 
     $termObj = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($idCat);
 
-    return !empty($termObj) ? $termObj->get('name')->value : "";
+    return !empty($termObj) ? $termObj : "";
   }
 
   public function getUserTira($uid,$show_perfil){

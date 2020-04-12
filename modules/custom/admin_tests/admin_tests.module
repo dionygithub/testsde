@@ -487,9 +487,11 @@ function admin_tests_views_pre_view(ViewExecutable $view, $display_id, array &$a
 
     $testsController = new \Drupal\admin_tests\Controller\AdminTestsController();
     $output = $testsController->getInfoCatgoria($args[0]);
+    $subtitulo = !empty($output) ? $output->get('field_subtitulo')->value : "";
+    $subdescription = !empty($output) ? $output->get('field_subdescription')->value : "";
     $htmlTestRelac = [
         '#theme' => 'block_header_list_categoria',
-        '#data' => array('catName'=>$output),
+        '#data' => array('subtitulo'=>$subtitulo, 'subdescription' => $subdescription),
     ];
     $htmlInfoCategorias = \Drupal::service('renderer')->render($htmlTestRelac);
 
