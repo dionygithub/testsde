@@ -771,10 +771,9 @@ class AdminTestsController extends ControllerBase {
     if (!$user->user_picture->isEmpty()) {
       $displayImg = file_create_url($user->user_picture->entity->getFileUri());
     }else{
-      $displayImg = $base_url.'';
+      $displayImg = $base_url.'/'.drupal_get_path('module', 'admin_tests').'/img/default-user.png';
     }
     $userObj->imagen = $displayImg;
-    //echo'<pre>'; print_r($userObj); die;
 
     //Tests Destacados
     $output = $this->getHtmlTestsDestacados();
@@ -786,9 +785,14 @@ class AdminTestsController extends ControllerBase {
 
     $urlRegistroReferido = $base_url.'/registrar/referido';
 
+    $ActionsPointsController = \Drupal::service('service.actions_points');
+    $action = $ActionsPointsController->getActionbyId(ACTION_REGISTRARSE_ID);
+    $puntos_registrarse = (!empty($action)) ? $action->points : 0;
+
+
     $build['page-referidos'] = array(
         '#theme' => 'page_referidos',
-        '#data' => array('user'=>$userObj,'tests_destacados'=>$htmlTestDestacados,'urlRegistroReferido'=>$urlRegistroReferido),
+        '#data' => array('points' => $puntos_registrarse ,'user'=>$userObj,'tests_destacados'=>$htmlTestDestacados,'urlRegistroReferido'=>$urlRegistroReferido),
     );
 
     return $build;
@@ -798,6 +802,7 @@ class AdminTestsController extends ControllerBase {
   public function registrarReferido(){
 
     $datos = \Drupal::request()->request->all();
+    global $base_url;
 
     //Tests Relacionados
     $output = $this->getHtmlTestsDestacados();
@@ -814,7 +819,7 @@ class AdminTestsController extends ControllerBase {
 
       return  $build['page-gracias-referido'] = array(
           '#theme' => 'page_gracia_referido',
-          '#data' => array('tests_destacados'=>$htmlTestDestacados,'error'=>true),
+          '#data' => array('base_url'=>$base_url,'tests_destacados'=>$htmlTestDestacados,'error'=>true),
       );
     }
 
@@ -825,7 +830,7 @@ class AdminTestsController extends ControllerBase {
 
       return  $build['page-gracias-referido'] = array(
           '#theme' => 'page_gracia_referido',
-          '#data' => array('tests_destacados'=>$htmlTestDestacados,'error'=>true),
+          '#data' => array('base_url'=>$base_url,'tests_destacados'=>$htmlTestDestacados,'error'=>true),
       );
     }
 
@@ -838,7 +843,7 @@ class AdminTestsController extends ControllerBase {
 
       return  $build['page-gracias-referido'] = array(
           '#theme' => 'page_gracia_referido',
-          '#data' => array('tests_destacados'=>$htmlTestDestacados,'error'=>true),
+          '#data' => array('base_url'=>$base_url,'tests_destacados'=>$htmlTestDestacados,'error'=>true),
       );
     }
 
@@ -851,22 +856,22 @@ class AdminTestsController extends ControllerBase {
 
       return  $build['page-gracias-referido'] = array(
           '#theme' => 'page_gracia_referido',
-          '#data' => array('tests_destacados'=>$htmlTestDestacados,'error'=>true),
+          '#data' => array('base_url'=>$base_url,'tests_destacados'=>$htmlTestDestacados,'error'=>true),
       );
     }
 
 
-      $user = \Drupal\user\Entity\User::create();
+      $userObj = \Drupal\user\Entity\User::create();
 
-      $user->setPassword($datos['pass']);
-      $user->enforceIsNew();
-      $user->setEmail($datos['mail']);
-      $user->setUsername($datos['mail']);
-      $user->set("status", 1);
+      $userObj->setPassword($datos['pass']);
+      $userObj->enforceIsNew();
+      $userObj->setEmail($datos['mail']);
+      $userObj->setUsername($datos['mail']);
+      $userObj->set("status", 1);
 
-      $user->save();
+      $userObj->save();
 
-      $referidoId = $user->uid->value;
+      $referidoId = $userObj->uid->value;
       $arrayreferidoId = array('target_id' => $referidoId);
       $userReferente->field_referidos[] = $arrayreferidoId;
       $isUpdate = $userReferente->save();
@@ -878,15 +883,27 @@ class AdminTestsController extends ControllerBase {
 
     $adminPointsExController = \Drupal::service('service.admin_points_extras');
     $ActionsPointsController = \Drupal::service('service.actions_points');
-    $action = $ActionsPointsController->getActionbyId(ACTION_REFERIDO_ID);
 
-    $this->addPointsUser($userReferente,$action->points);
-    $adminPointsExController->savePointsExtra($userReferente->id(),$action->id,$action->points);
 
+    //Puntos por referidos
+    $actionReferido = $ActionsPointsController->getActionbyId(ACTION_REFERIDO_ID);
+    $this->addPointsUser($userReferente,$actionReferido->points);
+    $adminPointsExController->savePointsExtra($userReferente->id(),$actionReferido->id,$actionReferido->points);
+
+    //Puntos por Registrarse
+    $actionRegistrarse = $ActionsPointsController->getActionbyId(ACTION_REGISTRARSE_ID);
+    $user = \Drupal::entityTypeManager()->getStorage('user')->load($userObj->uid->value);
+    $this->addPointsUser($user,$actionRegistrarse->points);
+    $adminPointsExController->savePointsExtra($user->id(),$actionRegistrarse->id,$actionRegistrarse->points);
+    \Drupal::messenger()->addMessage('Enhorabuena tus primeros '.$actionRegistrarse->points.' Pts','info',TRUE);
+
+    user_login_finalize($user);
+
+    $texto_success = "<h1>Gracias por unirte a nuestra plataforma puedes revisar tu desglose <span class='badge badge-primary'><a href='".$base_url."/user/desglose'>AQUI</a></span></h1>";
 
     $build['page-gracias-referido'] = array(
         '#theme' => 'page_gracia_referido',
-        '#data' => array('tests_destacados'=>$htmlTestDestacados),
+        '#data' => array( 'texto_success' =>$texto_success,'base_url'=>$base_url,'tests_destacados'=>$htmlTestDestacados),
     );
 
     return $build;
@@ -1263,9 +1280,9 @@ class AdminTestsController extends ControllerBase {
 
   public function addPointsUser($user,$points){
 
-    $pointsActual = ($user->field_points->value == null ? 0 : $user->field_points->value );
+    $pointsActual = ($user->field_points != null && !empty($user->field_points->value)) ? $user->field_points->value : 0;
     $pointsResult = (FLOAT) $pointsActual + (FLOAT)$points;
-
+    //echo'<pre>'; print_r($pointsResult); print_r($user->id()); die;
     $result = false;
     if($pointsResult >= 0){
       $user->set("field_points",$pointsResult);

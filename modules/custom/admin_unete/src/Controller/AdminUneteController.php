@@ -139,8 +139,7 @@ class AdminUneteController extends ControllerBase {
     //Puntos por registrarse
     $adminPointsExController = \Drupal::service('service.admin_points_extras');
     $adminTestsController = \Drupal::service('service.admin_tests');
-    $ActionsPointsController = \Drupal::service('service.actions_points');
-    $action = $ActionsPointsController->getActionbyId(ACTION_REGISTRARSE_ID);
+
 
     $adminTestsController->addPointsUser($user,$action->points);
     $adminPointsExController->savePointsExtra($user->id(),$action->id,$action->points);

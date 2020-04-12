@@ -5,14 +5,14 @@
     <div class="container-fluid mt-3 mb-5">
 
         <!-- Full Page Intro -->
-        <section style="background-image: url('https://mdbootstrap.com/img/Photos/Others/background2.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+        <section style="background-position: center center;background-color: #7986cb !important">
             <!-- Mask & flexbox options-->
             <div class="mask d-flex justify-content-center align-items-center">
                 <!-- Content -->
                 <div class="container py-5 my-5">
 
-                    <h3 class="font-weight-bold text-center white-text pb-2">Contabilice su conocimiento</h3>
-                    <p class="lead text-center white-text pt-2 mb-5">Date de alta en nuestra Plataforma</p>
+                    <h3 class="text-center white-text pb-2">Has sido invitado por un amigo para formar parte de <strong>TESTS</strong></h3>
+                    <p class="lead text-center white-text pt-2 mb-5">Regístrate <strong>AHORA</strong> y ganas <strong>{{ data['points'] }}</strong> Pts</p>
 
                     <!--Grid row-->
                     <div class="row d-flex align-items-center justify-content-center">
@@ -70,14 +70,14 @@
 
 
                 <!--Grid column-->
-                <div class="col-md-4 mb-4 mb-md-0">
+                <div class="col-md-2 mb-2 mb-md-0">
 
                     <!--Image-->
                     <div class="view overlay ">
-                        <img src="{{ data['user'].imagen }}" class="img-fluid" alt="">
-                        <a href="#">
-                            <div class="mask rgba-white-light"></div>
-                        </a>
+                        <img src="{{ data['user'].imagen }}" class="img-fluid" alt="Imagen del referido" style="display: inline-block">
+                        {#<a href="#">#}
+                            {#<div class="mask rgba-white-light"></div>#}
+                        {#</a>#}
                     </div>
 
                 </div>

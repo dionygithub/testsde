@@ -100,7 +100,7 @@ admin_tests.referred:
   defaults:
     _controller: '\Drupal\admin_tests\Controller\AdminTestsController::pageReferidos'
   requirements:
-    _permission: 'access content'
+    _user_is_logged_in: 'FALSE'
 
 
 admin_tests.registrarReferido:
