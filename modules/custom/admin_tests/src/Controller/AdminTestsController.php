@@ -399,7 +399,7 @@ class AdminTestsController extends ControllerBase {
 
     $user = \Drupal::entityTypeManager()->getStorage('user')->load($uid);
 
-    \Drupal::messenger()->addMessage("id usuario despues de cargar " . $user, 'info');
+    \Drupal::messenger()->addMessage("id usuario despues de cargar " . $user->id(), 'info');
 
 
     $current_path = \Drupal::service('path.current')->getPath();
