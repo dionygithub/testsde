@@ -1,7 +1,7 @@
 {{ user_tira }}
 
 <blockquote class="blockquote bq-info mb-4">
-    <p class="bq-title">Mi <span class="sub-titulo" >cuenta</span></p>
+    <h1 class="bq-title">Mi <span class="sub-titulo" >cuenta</span></h1>
 </blockquote>
 <div class="row">
 
@@ -38,10 +38,19 @@
 
                     <div class="col-lg-12 col-md-12">
                         <blockquote class="blockquote bq-info mb-4">
-                            <p class="bq-title">Puede difundir tu enlace a <span class="sub-titulo"> Referidos </span></p>
+                            <p id="infoUrlReferido" class="bq-title">Puede difundir tu enlace a <span class="sub-titulo"> Referidos </span></p>
                         </blockquote>
 
                         {% if myurl_referido != false %}
+                            {% set classUrlGenerada = "block" %}
+                            {% set classUrlSinGenerar = "none" %}
+                        {% else %}
+                            {% set classUrlGenerada = "none" %}
+                            {% set classUrlSinGenerar = "block" %}
+                        {% endif %}
+
+                        <div class="container-url-generada" style="display: {{ classUrlGenerada }}">
+
                             <h6 id="urlcopy" class="font-weight-bold grey-text mb-3">{{ myurl_referido }}</h6>
                             <button class="btn btn-md btn-outline-default m-0 px-3 py-2 waves-effect waves-light" onclick="CopyToClipboard('urlcopy')">
                                 Copiar <i class="fas fa-at"></i>
@@ -50,11 +59,14 @@
                             <a  id="enviarurlreferidowhasap" type="button" target="_blank" href="https://api.whatsapp.com/send?text={{ myurl_referido }}" class="btn btn-md btn-outline-success waves-effect waves-light">
                                 Enviar <i class="fab fa-whatsapp"></i>
                             </a>
+                        </div>
 
-                        {% else %}
+                        <div class="container-url-sin-generada" style="display: {{ classUrlSinGenerar }}">
                             <input type="hidden" value="{{ uid }}" name="uiduser">
                             <h6 class="font-weight-bold grey-text mb-3"><a class="btn btn-amber btn-md ml-0" id="generarUrlReferido" role="button">Generar URL<i class="fas fa-trophy ml-2"></i></a></h6>
-                        {% endif %}
+                        </div>
+
+
                     </div>
 
                 </div>
