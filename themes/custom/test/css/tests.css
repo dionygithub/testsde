@@ -94,3 +94,8 @@ strong{
 .overlay .mask{
     opacity: 1!important;
 }
+
+.title-gracias-referido h1 .badge a{
+    font-size: 25px!important;
+    color: #FFF!important;
+}
