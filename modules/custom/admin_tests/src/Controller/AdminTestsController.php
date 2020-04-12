@@ -393,7 +393,14 @@ class AdminTestsController extends ControllerBase {
   public function getUserTira($uid,$show_perfil){
 
     global $base_url;
+
+    \Drupal::messenger()->addMessage("id usuario " . $uid, 'info');
+
+
     $user = \Drupal::entityTypeManager()->getStorage('user')->load($uid);
+
+    \Drupal::messenger()->addMessage("id usuario despues de cargar " . $user, 'info');
+
 
     $current_path = \Drupal::service('path.current')->getPath();
     $routing = Url::fromUserInput($current_path)->getRouteName();
