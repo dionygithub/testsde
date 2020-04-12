@@ -262,6 +262,32 @@ function CopyToClipboard(containerid) {
                 })
             });
 
+            if($("#infoDesglose").length){
+                $('html, body').animate({
+                    scrollTop: $("#infoDesglose").offset().top - 100
+                }, 1000);
+            }
+
+            if($("#infotests").length){
+                $('html, body').animate({
+                    scrollTop: $("#infotests").offset().top - 100
+                }, 1000);
+            }
+
+            if($("#infomisreferidos").length){
+                $('html, body').animate({
+                    scrollTop: $("#infomisreferidos").offset().top - 100
+                }, 1000);
+            }
+
+            if($("#infosolicitudes").length){
+                $('html, body').animate({
+                    scrollTop: $("#infosolicitudes").offset().top - 100
+                }, 1000);
+            }
+
+
+
 
         });
     });

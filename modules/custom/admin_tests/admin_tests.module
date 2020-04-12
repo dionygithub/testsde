@@ -385,7 +385,6 @@ function admin_tests_preprocess_user(&$variables) {
 
   $variables['imagen'] = $displayImg;
 
-  $variables['phone_admin'] = PHONE_ADMIN;
   $variables['myurl_referido'] = !empty($user->get('field_token_referidos')->value) ? $base_url.'/referred/'.$user->get('field_token_referidos')->value : false;
   $variables['url_perfil'] = $base_url.'/user/'.\Drupal::currentUser()->id().'/edit';
   $variables['url_premios'] = $base_url.'/user/premios';

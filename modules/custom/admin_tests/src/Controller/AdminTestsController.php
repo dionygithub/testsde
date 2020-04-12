@@ -755,6 +755,7 @@ class AdminTestsController extends ControllerBase {
   public function pageReferidos($token){
 
     global $base_url;
+    $logged_in = \Drupal::currentUser()->isAuthenticated();
 
 
     $user = $this->getUserByTokenReferidos($token);
@@ -792,7 +793,7 @@ class AdminTestsController extends ControllerBase {
 
     $build['page-referidos'] = array(
         '#theme' => 'page_referidos',
-        '#data' => array('points' => $puntos_registrarse ,'user'=>$userObj,'tests_destacados'=>$htmlTestDestacados,'urlRegistroReferido'=>$urlRegistroReferido),
+        '#data' => array('logged_in'=>$logged_in,'points' => $puntos_registrarse ,'user'=>$userObj,'tests_destacados'=>$htmlTestDestacados,'urlRegistroReferido'=>$urlRegistroReferido),
     );
 
     return $build;
