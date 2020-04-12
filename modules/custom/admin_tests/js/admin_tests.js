@@ -125,7 +125,21 @@ function CopyToClipboard(containerid) {
                     dataType: "json",
                     data: {op:"generateToken",uiduser:uiduser},
                     success: function(msg){
-                        window.location.href = Drupal.url('user') +"/"+ uiduser;
+                        //window.location.href = Drupal.url('user') +"/"+ uiduser;
+
+                        var urlReferido = drupalSettings.admin_tests.base_url + "referred/" + msg.token;
+                        var urlWhasap = "https://api.whatsapp.com/send?text=" + urlReferido;
+
+                        $("#urlcopy").text(urlReferido);
+                        $("#enviarurlreferidowhasap").attr("href",urlWhasap);
+
+                        $(".container-url-generada").show();
+                        $(".container-url-sin-generada").hide();
+
+                        $('html, body').animate({
+                            scrollTop: $("#infoUrlReferido").offset().top - 100
+                        }, 1000);
+
                     },
                     error: function(msg){
                         console.log(msg);
@@ -135,15 +149,16 @@ function CopyToClipboard(containerid) {
 
             });
 
-            $("a#generarUrlReferido").click( function(){
-
-                var $temp = $("<input>");
-                $("body").append($temp);
-                $temp.val($(element).text()).select();
-                document.execCommand("copy");
-                $temp.remove();
-
-            });
+            //$("a#generarUrlReferido").click( function(){
+            //
+            //    var $temp = $("<input>");
+            //    $("body").append($temp);
+            //    $temp.val($(element).text()).select();
+            //    document.execCommand("copy");
+            //    $temp.remove();
+            //
+            //
+            //});
 
             $("a.actionprevious").click( function(){
 
@@ -285,6 +300,18 @@ function CopyToClipboard(containerid) {
                     scrollTop: $("#infosolicitudes").offset().top - 100
                 }, 1000);
             }
+
+            //if($("#infourlcopy").length){
+
+            //
+            //    $()
+            //}
+            //$("a.generarUrlReferido").click( function() {
+            //$('#generarUrlReferido').on('click', function(event){
+            //    alert("ssss");
+            //
+            //});
+
 
 
 

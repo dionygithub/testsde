@@ -212,10 +212,10 @@ class AdminTestsController extends ControllerBase {
     if($op == 'generateToken'){
 
         $uid = \Drupal::request()->request->get('uiduser');
-        $this->addTokenReferred($uid);
+        $uuid = $this->addTokenReferred($uid);
 
         $response = new Response(
-            json_encode(array("success" => true)),
+            json_encode(array("success" => true,'token' => $uuid)),
             Response::HTTP_OK,
             array('content-type' => 'text/x-json')
         );
@@ -1231,7 +1231,7 @@ class AdminTestsController extends ControllerBase {
     $user->field_token_referidos = $uuid;
     $user->save();
 
-    return true;
+    return $uuid;
   }
 
   private function _getuserbymail($mail){

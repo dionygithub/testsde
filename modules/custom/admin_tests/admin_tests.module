@@ -511,3 +511,11 @@ function admin_tests_views_pre_view(ViewExecutable $view, $display_id, array &$a
     $view->setHandler('page_1', 'header', 'area_text_custom', $options);
   }
 }
+
+
+
+function admin_tests_page_attachments(array &$page) {
+  $page['#attached']['library'][] = 'admin_tests/admin_tests';
+  $page['#attached']['drupalSettings']['admin_tests']['base_url'] = \Drupal\Core\Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
+}
+
