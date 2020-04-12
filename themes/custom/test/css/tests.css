@@ -90,3 +90,7 @@ strong{
 .container-tests-respuestas{
     margin-bottom: 20px;
 }
+
+.overlay .mask{
+    opacity: 1!important;
+}
