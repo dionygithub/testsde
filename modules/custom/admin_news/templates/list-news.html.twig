@@ -1,12 +1,18 @@
 {% if info['formatSimple'] %}
-    <div class="card bg-light mb-3" style="max-width: 20rem;">
-        <div class="card-header">Curiosidades</div>
+    {#<div class="card bg-light mb-3" style="max-width: 20rem;">#}
+        {#<div class="card-header">Sabias que...</div>#}
+        {#<div class="card-body">#}
+            {#&#123;&#35;<h5 class="card-title">{{ info['news'].name }}</h5>&#35;&#125;#}
+            {#<p class="card-text">{{ info['news'].description }}</p>#}
+        {#</div>#}
+    {#</div>#}
+
+    <div class="card text-center btn-pink lighten-1 text-white">
         <div class="card-body">
-            <h5 class="card-title">{{ info['news'].name }}</h5>
-            <p class="card-text">{{ info['news'].description }}</p>
+            <p class="pt-2"><i class="fas fa-question fa-2x"></i></p>
+            {#<h5 class="font-weight-normal my-4 py-2"><a class="text-white" href="#">Digital Marketing</a></h5>#}
+            <p class="mb-4 text-curiosidad">{{ info['news'].description }}</p>
         </div>
     </div>
 
-{% else %}
-    <h2>Lista de Curiosidades</h2>
 {% endif %}

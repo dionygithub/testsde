@@ -290,6 +290,7 @@ function admin_tests_preprocess_admin_test_entity(&$variables) {
   $variables['label'] = $entity->label();
 
   $testsController = new \Drupal\admin_tests\Controller\AdminTestsController();
+
   $datos = $testsController->getTreeTest($entity->id());
 
   $variables['datos'] = $datos;
@@ -298,10 +299,8 @@ function admin_tests_preprocess_admin_test_entity(&$variables) {
   $variables['primera_pregunta'] = $primraPregunta;
 
 
-
   $variables['mode'] = $variables['elements']['#view_mode'];
 
-  //echo'<pre>'; print_r($entity->get('imagen')->target_id); die;
 
   if (!empty($entity->get('imagen')->target_id)) {
     $displayImg = getUrlImagen($entity->get('imagen')->target_id);
@@ -310,7 +309,8 @@ function admin_tests_preprocess_admin_test_entity(&$variables) {
   }
 
   $variables['imagen'] = $displayImg;
-  //$variables['description'] = $entity->get('description')->value;
+
+
   $variables['time'] = $entity->get('time')->value;
 
 
@@ -327,6 +327,19 @@ function admin_tests_preprocess_admin_test_entity(&$variables) {
   $variables['puntos'] = $testsController->getCantPointsDisponibleByTest($entity->id());
 
   $variables['url'] = $entity->toUrl()->toString();
+
+  $newsController = \Drupal::service('service.admin_news');
+
+  $idCategoria = $testsController->getCategoriaByIdTest($entity->id());
+  $news = $newsController->getNewsbyIdTax($idCategoria);
+  $htmlNews = [
+      '#theme' => 'list_news',
+      '#info' => array('news'=>$news,'formatSimple' => true),
+  ];
+  $newsRender = \Drupal::service('renderer')->render($htmlNews);
+  $variables['newsRender'] = $newsRender;
+
+
 }
 
 
