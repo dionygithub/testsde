@@ -1,73 +1,90 @@
-<form>
-    <div id="wizard" style="display: none">
-        <!-- SECTION 1 -->
 
-        <div class="container-cant-preguntas">
+<div class="row">
 
-            <nav aria-label="Page navigation example">
-                <ul class="pagination pagination-circle pg-blue">
 
-                    {% for index, question in datos.questions %}
-                            {% if index == 0 %}
-                                <li class="page-item active" data-value="{{ index }}"><a class="page-link">{{ index + 1}}</a></li>
-                            {% else %}
-                                <li class="page-item" data-value="{{ index }}"><a class="page-link">{{ index + 1}}</a></li>
-                            {% endif %}
-                    {% endfor %}
+    <div class="col-lg-9 col-md-9 col-xs-12">
+        <form>
+            <div id="wizard" style="display: none">
+                <!-- SECTION 1 -->
 
-                </ul>
-            </nav>
+                <div class="container-cant-preguntas">
 
-        </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination pagination-circle pg-blue">
 
-        <input type="hidden" name="testId" value="{{ datos.id }}">
+                            {% for index, question in datos.questions %}
+                                {% if index == 0 %}
+                                    <li class="page-item active" data-value="{{ index }}"><a class="page-link">{{ index + 1}}</a></li>
+                                {% else %}
+                                    <li class="page-item" data-value="{{ index }}"><a class="page-link">{{ index + 1}}</a></li>
+                                {% endif %}
+                            {% endfor %}
 
-        {% for index, question in datos.questions %}
+                        </ul>
+                    </nav>
 
-             <h4></h4>
-             <section>
+                </div>
 
-                <div class="row container-preguntas" style="width: 100%">
+                <input type="hidden" name="testId" value="{{ datos.id }}">
 
-                    <div class="col-md-12 mb-4">
+                {% for index, question in datos.questions %}
 
-                        <div class="card gradient-card">
+                    <h4></h4>
+                    <section>
 
-                            <div class="card-image">
+                        <div class="row container-preguntas" style="width: 100%">
 
-                                <div class="text-white d-flex h-100 mask btn-mdb-color">
-                                    <div class="first-content text-center p-3" style="width: 100%">
-                                        <h3 class="card-title">{{ question.name }}</h3>
+                            <div class="col-md-12 mb-4">
+
+                                <div class="card gradient-card">
+
+                                    <div class="card-image">
+
+                                        <div class="text-white d-flex h-100 mask btn-mdb-color">
+                                            <div class="first-content text-center p-3" style="width: 100%">
+                                                <h3 class="card-title">{{ question.name }}</h3>
+                                            </div>
+                                        </div>
+
+
                                     </div>
+                                    <!-- Content -->
+                                    <div class="card-body white">
+
+                                        {% for indexA, answer in question.answers %}
+
+                                            <div class="custom-control custom-radio container-tests-respuestas">
+                                                <input type="radio" class="custom-control-input" data-question="{{ question.id }}" value="{{ answer.id }}" id="default{{ question.id }}{{ answer.id }}" name="questionsRadios{{ question.id }}">
+                                                <label class="custom-control-label" for="default{{ question.id }}{{ answer.id }}">{{ answer.name }}</label>
+                                            </div>
+
+                                        {% endfor %}
+
+                                    </div>
+
                                 </div>
-
-
-                            </div>
-                            <!-- Content -->
-                            <div class="card-body white">
-
-                                {% for indexA, answer in question.answers %}
-
-                                    <div class="custom-control custom-radio container-tests-respuestas">
-                                        <input type="radio" class="custom-control-input" data-question="{{ question.id }}" value="{{ answer.id }}" id="default{{ question.id }}{{ answer.id }}" name="questionsRadios{{ question.id }}">
-                                        <label class="custom-control-label" for="default{{ question.id }}{{ answer.id }}">{{ answer.name }}</label>
-                                    </div>
-
-                                {% endfor %}
 
                             </div>
 
                         </div>
 
-                    </div>
+                    </section>
 
-                </div>
+                {% endfor %}
 
-            </section>
 
-        {% endfor %}
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-3 col-md-3 col-xs-12">
 
+        <div id="block-newsblock">
+            Aqui
+        </div>
 
     </div>
-</form>
+
+</div>
+
+
 {{ attach_library('admin_tests/admin_tests') }}
