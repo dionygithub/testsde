@@ -25,12 +25,12 @@ admin_tests.admin_tests_controller_hello:
     _permission: 'access content'
 
 
-#admin_tests.list_categorias_generales:
-#  path: '/sobre/{categoria}'
-#  defaults:
-#    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::list_categorias_generales'
-#  requirements:
-#    _permission: 'access content'
+admin_tests.list_categorias_generales:
+  path: '/categorias'
+  defaults:
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::list_categorias_generales'
+  requirements:
+    _permission: 'access content'
 
 
 admin_tests.test_completado:

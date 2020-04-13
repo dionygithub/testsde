@@ -675,7 +675,6 @@ class AdminTestsController extends ControllerBase {
 
     $treeNames = array();
 
-
       $vid = 'categorias';
       $parent_tid = 0;
       $depth = 2; //depth upto which level you want
@@ -701,56 +700,46 @@ class AdminTestsController extends ControllerBase {
     return $treeNames;
   }
 
-//  public function list_categorias_generales($categoria){
-//
-//    global $base_url;
-//
-//    $mapsPathsCategorias = array('2'=>'cultura-general','1'=>'culturales');
-//    $tid = array_search($categoria,$mapsPathsCategorias);
-//
-//    if(!is_int($tid)){
-//      throw new NotFoundHttpException();
-//    }
-//
-//    $treeNames = array();
-//    try{
-//
-//      $vid = 'categorias';
-//      $parent_tid = $tid;
-//      $depth = 2; //depth upto which level you want
-//      $load_entities = FALSE;
-//      $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, $parent_tid, $depth, $load_entities);
-//
-//      foreach ($tree as $term) {
-//
-//        $termObj = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term->tid);
-//
-//        $aliasManager = \Drupal::service('path.alias_manager');
-//        $alias = $aliasManager->getAliasByPath('/taxonomy/term/' . $termObj->get('tid')->value);
-//
-//        $treeNames[] = array(
-//            'name' => $termObj->get('name')->value,
-//            'id' => $termObj->get('tid')->value,
-//            'description' => $termObj->get('description')->value,
-//            'path' => $base_url.$alias,
-//            'imagen' => getUrlImagen($termObj->field_imagen->target_id),
-//        );
-//      }
-//
-//      //echo'<pre>'; print_r($base_url); die;
-//
-//      $build['list-categorias'] = array(
-//          '#theme' => 'list_categoria_generales',
-//          '#list' => $treeNames,
-//          '#name' => $categoria,
-//      );
-//
-//      return $build;
-//
-//    }catch(Exception $e){
-//      throw new NotFoundHttpException();
-//    }
-//  }
+  public function list_categorias_generales($categoria){
+
+    global $base_url;
+
+    $treeNames = array();
+
+    $vid = 'categorias';
+    $parent_tid = 0;
+    $depth = 2; //depth upto which level you want
+    $load_entities = FALSE;
+    $tree = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->loadTree($vid, $parent_tid, $depth, $load_entities);
+
+      foreach ($tree as $term) {
+
+        $termObj = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term->tid);
+
+        $aliasManager = \Drupal::service('path.alias_manager');
+        $alias = $aliasManager->getAliasByPath('/taxonomy/term/' . $termObj->get('tid')->value);
+
+        $treeNames[] = array(
+            'name' => $termObj->get('name')->value,
+            'id' => $termObj->get('tid')->value,
+            'description' => $termObj->get('description')->value,
+            'path' => $base_url.$alias,
+            'imagen' => getUrlImagen($termObj->field_imagen->target_id),
+        );
+      }
+
+      //echo'<pre>'; print_r($base_url); die;
+
+      $build['list-categorias'] = array(
+          '#theme' => 'list_categoria_generales',
+          '#list' => $treeNames,
+          '#name' => $categoria,
+      );
+
+      return $build;
+
+
+  }
 
   public function pageReferidos($token){
 
