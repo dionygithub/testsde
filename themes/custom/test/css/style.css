@@ -98,9 +98,6 @@ ul li{
     }
 }
 
-.bq-info .bq-title{
-    text-align: left!important;
-}
 .sub-titulo-black{
     color: #000000!important;
 }
@@ -197,6 +194,9 @@ a.disabled{
 
 .bq-info .bq-title{
     color: #303f9f !important;
+    font-size: 2rem;
+    margin-bottom: 3%;
+    font-weight: bold;
 }
 
 
