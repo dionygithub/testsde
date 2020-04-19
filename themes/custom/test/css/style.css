@@ -408,4 +408,10 @@ a.disabled{
     margin-top: -10px;
 }
 
+.list-footer li{
+    margin-bottom: 1rem;
+}
 
+.item-footer .nav-link{
+    padding: 0px 0px!important;
+}

@@ -191,7 +191,6 @@
 {#</div>#}
 {#{% endif %}#}
 
-<!--Footer-->
 <footer class="page-footer text-center font-small wow fadeIn">
 
   <div class="container text-center text-md-left">
@@ -203,22 +202,25 @@
       <div class="col-md-4 mx-auto text-center">
 
         <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Informaciones</h5>
 
-        <ul class="list-unstyled">
+        <ul class="list-unstyled list-footer">
           <li>
-            <a href="#!">Very long link 1</a>
+            <a href="#!">Politica de privacidad</a>
           </li>
           <li>
-            <a href="#!">Very long link 2</a>
+            <a href="#!">Avisos de Cookies</a>
           </li>
           <li>
-            <a href="#!">Very long link 3</a>
+            <a href="#!">Aviso Legal</a>
           </li>
-          <li>
-            <a href="#!">Very long link 4</a>
-          </li>
+
         </ul>
+        <br>
+        <br>
+        <a href="{{ base_url }}/contacto" class="btn btn-email waves-effect waves-light">
+          <i class="fas fa-at"></i> Sugerencias
+        </a>
 
       </div>
       <!-- Grid column -->
@@ -229,75 +231,59 @@
       <div class="col-md-4 mx-auto text-center">
 
         <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Tests por categorías</h5>
 
-        <ul class="list-unstyled">
-          <li>
-            <a href="#!">Link 1</a>
-          </li>
-          <li>
-            <a href="#!">Link 2</a>
-          </li>
-          <li>
-            <a href="#!">Link 3</a>
-          </li>
-          <li>
-            <a href="#!">Link 4</a>
-          </li>
+        <ul class="list-unstyled list-footer">
+          {% for index, cat in list_categorias %}
+
+            <li class="item-footer">
+              <a href="{{ cat.path }}" class="nav-link">{{ cat.name }}</a>
+            </li>
+
+          {% endfor %}
         </ul>
 
       </div>
       <!-- Grid column -->
-
       <hr class="clearfix w-100 d-md-none">
-
       <!-- Grid column -->
       <div class="col-md-4 mx-auto text-center">
 
         <!-- Links -->
-        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Contactenos</h5>
 
-        <ul class="list-unstyled">
+        <ul class="text-lg-left list-unstyled ml-4">
           <li>
-            <a href="#!">Link 1</a>
+            <p><i class="fas fa-map-marker-alt pr-2"></i>Calle la huerta 6 1A Alcorcón, Madrid </p>
           </li>
           <li>
-            <a href="#!">Link 2</a>
+            <p><i class="fas fa-phone pr-2"></i><a target="_blank" href="https://api.whatsapp.com/send?phone=34667034669&text=hola">+34 667 03 46 69</a></p>
           </li>
           <li>
-            <a href="#!">Link 3</a>
-          </li>
-          <li>
-            <a href="#!">Link 4</a>
+            <p><i class="fas fa-envelope pr-2"></i>testde@conocerde.com</p>
           </li>
         </ul>
+        <hr class="hr-light my-4">
+        <div class="pb-4">
+          <a class="btn-floating btn-lg btn-fb waves-effect waves-light icon-footer"  href="https://www.facebook.com/Testsde-100266814990010/" target="_blank">
+            <i class="fab fa-facebook-f mr-3"></i>
+          </a>
 
+          <a class="btn-floating btn-lg btn-ins waves-effect waves-light icon-footer" href="https://www.instagram.com/Tests_DE/" target="_blank">
+            <i class="fab fa-instagram mr-3"></i>
+          </a>
+
+          <a class="btn-floating btn-lg btn-whatsapp waves-effect waves-light"  target="_blank" href="https://api.whatsapp.com/send?phone=34667034669&text=hola" type="button" role="button">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+
+        </div>
       </div>
       <!-- Grid column -->
     </div>
     <!-- Grid row -->
 
   </div>
-
-  <hr class="my-4">
-
-  <!-- Social icons -->
-  <div class="pb-4">
-    <a class="btn-floating btn-lg btn-fb waves-effect waves-light icon-footer"  href="https://www.facebook.com/Testsde-100266814990010/" target="_blank">
-      <i class="fab fa-facebook-f mr-3"></i>
-    </a>
-
-    <a class="btn-floating btn-lg btn-ins waves-effect waves-light icon-footer" href="https://www.instagram.com/Tests_DE/" target="_blank">
-      <i class="fab fa-instagram mr-3"></i>
-    </a>
-
-    <a class="btn-floating btn-lg btn-whatsapp waves-effect waves-light"  target="_blank" href="https://api.whatsapp.com/send?phone=34667034669&text=hola" type="button" role="button">
-      <i class="fab fa-whatsapp"></i>
-    </a>
-
-  </div>
-  <!-- Social icons -->
-
   <!--Copyright-->
   <div class="footer-copyright py-3">
     <a href="https://www.conocerde.com" target="_blank"> TestsDe </a> © 2020 Copyright
