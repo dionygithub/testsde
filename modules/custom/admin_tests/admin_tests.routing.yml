@@ -26,9 +26,16 @@ admin_tests.admin_tests_controller_hello:
 
 
 admin_tests.list_categorias_generales:
-  path: '/categorias'
+  path: '/tests-por-categorias'
   defaults:
     _controller: '\Drupal\admin_tests\Controller\AdminTestsController::list_categorias_generales'
+  requirements:
+    _permission: 'access content'
+
+admin_tests.contacto:
+  path: '/contacto'
+  defaults:
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::get_page_contacto'
   requirements:
     _permission: 'access content'
 

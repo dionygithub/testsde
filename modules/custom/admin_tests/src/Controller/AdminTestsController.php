@@ -700,7 +700,7 @@ class AdminTestsController extends ControllerBase {
     return $treeNames;
   }
 
-  public function list_categorias_generales($categoria){
+  public function list_categorias_generales(){
 
     global $base_url;
 
@@ -733,11 +733,27 @@ class AdminTestsController extends ControllerBase {
       $build['list-categorias'] = array(
           '#theme' => 'list_categoria_generales',
           '#list' => $treeNames,
-          '#name' => $categoria,
-      );
+       );
 
       return $build;
 
+
+  }
+
+  public function get_page_contacto(){
+
+
+    global $base_url;
+
+    $urlPageSugerencias = $base_url."/gracias/sugerencias";
+
+
+    $build['contacto'] = array(
+        '#theme' => 'block_sugerencias_contacto',
+        '#data' => array('urlPageSugerencias'=>$urlPageSugerencias),
+    );
+
+    return $build;
 
   }
 
