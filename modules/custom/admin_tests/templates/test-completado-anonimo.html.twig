@@ -1,6 +1,6 @@
 <div class="container-test-completado text-align-center">
 
-    <div id="grin-stars-fas" class="icon-tile emoji" style="color: red;font-size: 48px">
+    <div id="grin-stars-fas" class="icon-tile emoji" style="color: #DE1B65;font-size: 48px">
         <i data-toggle="tooltip" data-placement="top" title="" class="waves-effect mdb-icon-copy far fa-grin-stars"></i>
     </div>
     <h2>Test Completado</h2>
@@ -21,17 +21,17 @@
 
     <div class="col-md-12">
         <div class="col-lg-12 col-md-12">
-            <button type="button" class="btn btn-fb waves-effect waves-light">
-                <i class="fab fa-facebook-f left"></i> Facebook</button>
 
-            <button type="button" class="btn btn-tw waves-effect waves-light">
-                <i class="fab fa-twitter left"></i> Twitter</button>
+            <a target="_blank" href="" type="button" class="btn btn-fb waves-effect waves-light">
+                <i class="fab fa-facebook-f left"></i> Facebook</a>
 
-            <button type="button" class="btn btn-ins waves-effect waves-light">
-                <i class="fab fa-instagram left"></i> Instagram</button>
+            <a target="_blank" href="" type="button" class="btn btn-ins waves-effect waves-light">
+                <i class="fab fa-instagram left"></i> Instagram</a>
 
-            <button type="button" class="btn btn-email waves-effect waves-light">
-                <i class="fas fa-envelope left"></i> Email</button>
+
+            <a class="btn btn-whatsapp waves-effect waves-light"  target="_blank" href="https://api.whatsapp.com/send?text=hola" type="button" role="button">
+                <i class="fab fa-whatsapp">Whatsapp</i>
+            </a>
 
 
         </div>
@@ -39,7 +39,11 @@
 
     <hr class="separador">
         <blockquote class="blockquote bq-info mb-4">
+
             <p class="bq-title">Nos importa tu <span class="sub-titulo">Opinion!!!</span></p>
+
+            <h4>Debes de <span class="badge badge-primary">Iniciar Sesión</span></h4>
+
             <a type="button" class="btn btn-outline-dark-green btn-sm px-2 waves-effect vote-button upvote-button disabled" data-action="upvote">
                 <span class="value">{{ info['cantLike'] }}</span>
                 <i class="far fa-thumbs-up ml-1"></i>
@@ -49,12 +53,7 @@
                 <i class="far fa-thumbs-down ml-1"></i>
             </a>
         </blockquote>
-    <hr class="separador">
-    <blockquote class="blockquote bq-info mb-4">
-        <p class="bq-title">Forma parte de nuestra <span class="sub-titulo">Plataforma!!!</span></p>
-        <a class="btn btn-success btn-md ml-0" role="button">ÚNETE<i class="fas fa-trophy ml-2"></i></a>
-        <a class="btn btn-amber btn-md ml-0" role="button">Beneficios<i class="fas fa-trophy ml-2"></i></a>
-    </blockquote>
+
     <hr class="separador">
 
 </div>

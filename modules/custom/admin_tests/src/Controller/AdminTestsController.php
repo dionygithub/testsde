@@ -73,10 +73,12 @@ class AdminTestsController extends ControllerBase {
         $cantLike = (!empty($result['like'])) ? count($result['like']) : 0;
         $cantNoLike = (!empty($result['nolike'])) ? count($result['nolike']) : 0;
 
+        $aliasManager = \Drupal::service('path.alias_manager');
+        $alias = $aliasManager->getAliasByPath('/test/'.$testId);
 
         $renderable = [
             '#theme' => 'test_completado_anonimo',
-            '#info' => array('tests_relacionados'=>$htmlTestRelacionados,'totalcorrectquestions' => $totalcorrectquestions, 'totalquestions'=>$totalquestions,'cantLike'=>$cantLike,'cantNoLike'=>$cantNoLike),
+            '#info' => array('urlTest'=>$alias,'tests_relacionados'=>$htmlTestRelacionados,'totalcorrectquestions' => $totalcorrectquestions, 'totalquestions'=>$totalquestions,'cantLike'=>$cantLike,'cantNoLike'=>$cantNoLike),
         ];
         $rendered = \Drupal::service('renderer')->render($renderable);
 

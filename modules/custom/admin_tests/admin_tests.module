@@ -339,7 +339,6 @@ function admin_tests_preprocess_admin_test_entity(&$variables) {
   $newsRender = \Drupal::service('renderer')->render($htmlNews);
   $variables['newsRender'] = $newsRender;
 
-
 }
 
 
