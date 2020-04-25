@@ -213,6 +213,65 @@ class AdminAnswerEntity extends ContentEntityBase implements AdminAnswerEntityIn
         ))
         ->setDisplayConfigurable('form', TRUE);
 
+
+    // Campo de imagen
+    $fields['imagen'] = BaseFieldDefinition::create('image')
+        ->setLabel('Imagen')
+        ->setDescription('Imagen')
+        ->setSettings(
+            [
+                'file_directory' => 'test',
+                'alt_field_required' => FALSE,
+                'file_extensions' => 'png jpg jpeg',
+            ]
+        )
+        ->setDisplayOptions('view', [
+            'label' => 'hidden',
+            'type' => 'image',
+            'weight' => 0,
+        ])
+        ->setDisplayOptions('form', [
+            'type' => 'image_image',
+            'weight' => 5,
+        ])
+        ->setDisplayConfigurable('form', TRUE)
+        ->setDisplayConfigurable('view', TRUE);
+
+
+    $fields['description'] = BaseFieldDefinition::create('text_long')
+        ->setLabel('Description')
+        ->setDescription('Description')
+        ->setTranslatable(TRUE)
+        ->setDisplayOptions('view', array(
+            'label' => 'hidden',
+            'type' => 'text_default',
+            'weight' => 4,
+        ))
+        ->setDisplayConfigurable('view', TRUE)
+        ->setDisplayOptions('form', array(
+            'type' => 'text_textfield',
+            'weight' => 4,
+        ))
+        ->setDisplayConfigurable('form', TRUE);
+
+
+    $fields['puntuacion'] = BaseFieldDefinition::create('integer')
+        ->setLabel('Puntuacion')
+        ->setDescription('Puntuacion')
+        ->setDisplayOptions('view', array(
+            'label' => 'above',
+            'type' => 'integer',
+            'weight' => 0,
+        ))
+        ->setDisplayOptions('form', array(
+            'type' => 'number',
+            'weight' => 0,
+        ))
+        ->setSetting('size', 'big')
+        ->setDisplayConfigurable('form', TRUE)
+        ->setDisplayConfigurable('view', TRUE);
+
+
     return $fields;
   }
 

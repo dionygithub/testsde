@@ -1,0 +1,108 @@
+<?php
+/**
+ * @file
+ * Installation file for Housing Import
+ */
+
+use Drupal\Core\Entity\EntityStorageInterface;
+use Drupal\Core\Field\BaseFieldDefinition;
+use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\Core\Entity\EntityChangedTrait;
+use Drupal\Core\Entity\EntityPublishedTrait;
+use Drupal\Core\Entity\EntityTypeInterface;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
+use Drupal\user\UserInterface;
+
+/**
+ * Update 8001 - Create fields to admin_answer_entity.
+ */
+function admin_answer_update_8001() {
+  //check if the table exists first.  If not, then create the entity.
+   //drupal_set_installed_schema_version('admin_test', 8000);
+
+
+     $storage_definition = BaseFieldDefinition::create('image')
+        ->setLabel('Imagen')
+        ->setDescription('Imagen')
+        ->setSettings(
+            [
+                'file_directory' => 'test',
+                'alt_field_required' => FALSE,
+                'file_extensions' => 'png jpg jpeg',
+            ]
+        )
+        ->setDisplayOptions('view', [
+            'label' => 'hidden',
+            'type' => 'image',
+            'weight' => 0,
+        ])
+        ->setDisplayOptions('form', [
+            'type' => 'image_image',
+            'weight' => 5,
+        ])
+        ->setDisplayConfigurable('form', TRUE)
+        ->setDisplayConfigurable('view', TRUE);
+
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('imagen', 'admin_answer_entity', 'admin_answer', $storage_definition);
+
+}
+
+
+/**
+ * Update 8002 - Create fields to admin_answer_entity.
+ */
+function admin_answer_update_8002() {
+  //check if the table exists first.  If not, then create the entity.
+   //drupal_set_installed_schema_version('admin_test', 8000);
+
+
+    $storage_definition = BaseFieldDefinition::create('text_long')
+        ->setLabel('Description')
+        ->setDescription('Description')
+        ->setTranslatable(TRUE)
+        ->setDisplayOptions('view', array(
+            'label' => 'hidden',
+            'type' => 'text_default',
+            'weight' => 4,
+        ))
+        ->setDisplayConfigurable('view', TRUE)
+        ->setDisplayOptions('form', array(
+            'type' => 'text_textfield',
+            'weight' => 4,
+        ))
+        ->setDisplayConfigurable('form', TRUE);
+
+
+ \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('description', 'admin_answer_entity', 'admin_answer', $storage_definition);
+}
+
+
+/**
+ * Update 8003 - Create fields to admin_answer_entity.
+ */
+function admin_answer_update_8003() {
+  //check if the table exists first.  If not, then create the entity.
+   //drupal_set_installed_schema_version('admin_test', 8000);
+
+    $storage_definition = BaseFieldDefinition::create('integer')
+        ->setLabel('Puntuacion')
+        ->setDescription('Puntuacion')
+        ->setDisplayOptions('view', array(
+            'label' => 'above',
+            'type' => 'integer',
+            'weight' => 0,
+        ))
+        ->setDisplayOptions('form', array(
+            'type' => 'number',
+            'weight' => 0,
+        ))
+        ->setSetting('size', 'big')
+        ->setDisplayConfigurable('form', TRUE)
+        ->setDisplayConfigurable('view', TRUE);
+
+
+ \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('puntuacion', 'admin_answer_entity', 'admin_answer', $storage_definition);
+}

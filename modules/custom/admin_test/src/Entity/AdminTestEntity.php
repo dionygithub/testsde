@@ -324,7 +324,7 @@ class AdminTestEntity extends ContentEntityBase implements AdminTestEntityInterf
         ->setDisplayConfigurable('view', TRUE);
 
     //Integer
-    $fields['time'] = BaseFieldDefinition::create('integer')
+      $fields['time'] = BaseFieldDefinition::create('integer')
         ->setLabel('time')
         ->setDescription('time (min)')
         ->setDisplayOptions('view', array(
@@ -353,6 +353,81 @@ class AdminTestEntity extends ContentEntityBase implements AdminTestEntityInterf
 
          ->setDisplayConfigurable('form', TRUE)
          ->setDisplayConfigurable('view', TRUE);
+
+      $fields['description'] = BaseFieldDefinition::create('text_long')
+          ->setLabel('Description')
+          ->setDescription('Description')
+          ->setTranslatable(TRUE)
+          ->setDisplayOptions('view', array(
+              'label' => 'hidden',
+              'type' => 'text_default',
+              'weight' => 4,
+          ))
+          ->setDisplayConfigurable('view', TRUE)
+          ->setDisplayOptions('form', array(
+              'type' => 'text_textfield',
+              'weight' => 4,
+          ))
+          ->setDisplayConfigurable('form', TRUE);
+
+
+      $fields['tipo'] = BaseFieldDefinition::create('entity_reference')
+          ->setLabel('Tipo')
+          ->setDescription('Tipo Test')
+          ->setSetting('target_type', 'taxonomy_term')
+          ->setSetting('handler', 'default:taxonomy_term')
+          ->setSetting('handler_settings',
+              array(
+                  'target_bundles' => array(
+                      'vocabulary_name' => 'tipo_tests'
+                  )))
+          ->setDisplayOptions('view', array(
+              'label' => 'hidden',
+              'type' => 'author',
+              'weight' => 0,
+          ))
+          ->setDisplayOptions('form', array(
+              'type' => 'entity_reference_autocomplete',
+              'weight' => 3,
+              'settings' => array(
+                  'match_operator' => 'CONTAINS',
+                  'size' => '10',
+                  'autocomplete_type' => 'tipo_tests',
+                  'placeholder' => '',
+              ),
+          ))
+          ->setDisplayConfigurable('form', TRUE)
+          ->setDisplayConfigurable('view', TRUE);
+
+
+      $fields['resultados'] = BaseFieldDefinition::create('entity_reference')
+          ->setLabel('Resultados')
+          ->setDescription('Resultados Test')
+          ->setSetting('target_type', 'taxonomy_term')
+          ->setSetting('handler', 'default:taxonomy_term')
+          ->setSetting('handler_settings',
+              array(
+                  'target_bundles' => array(
+                      'vocabulary_name' => 'resultados'
+                  )))
+          ->setDisplayOptions('view', array(
+              'label' => 'hidden',
+              'type' => 'author',
+              'weight' => 0,
+          ))
+          ->setDisplayOptions('form', array(
+              'type' => 'entity_reference_autocomplete',
+              'weight' => 3,
+              'settings' => array(
+                  'match_operator' => 'CONTAINS',
+                  'size' => '10',
+                  'autocomplete_type' => 'resultados',
+                  'placeholder' => '',
+              ),
+          ))
+          ->setDisplayConfigurable('form', TRUE)
+          ->setDisplayConfigurable('view', TRUE)
+          ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
 
     return $fields;
   }

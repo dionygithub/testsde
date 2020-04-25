@@ -17,6 +17,9 @@ define('ACTION_REGISTRARSE_ID',3);
 define('EMAIL_ADMIN',"tests@conocerde.com");
 define('PHONE_ADMIN',"+34667034669");
 define('KEY_SECRET_RECAPTCHA',"6LdmS-UUAAAAAKpHyhzwRpD9s-InjI-8iidBNGut");
+define('TEST_TIPO_AFIRMATIVO',10);
+define('TEST_TIPO_RANGO',11);
+define('TEST_TIPO_IMAGENES',12);
 
 /**
  * Implements hook_help().

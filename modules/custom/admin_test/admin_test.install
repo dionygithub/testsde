@@ -38,3 +38,120 @@ function admin_test_update_8002() {
     ->installFieldStorageDefinition('destacado', 'admin_test_entity', 'admin_test', $storage_definition);
 
 }
+
+/**
+ * Update 8003 - Create field description to admin_tests entity.
+ */
+function admin_test_update_8003() {
+  //check if the table exists first.  If not, then create the entity.
+   //drupal_set_installed_schema_version('admin_test', 8000);
+
+    $storage_definition = BaseFieldDefinition::create('text_long')
+        ->setLabel('Description')
+        ->setDescription('Description')
+        ->setTranslatable(TRUE)
+        ->setDisplayOptions('view', array(
+            'label' => 'hidden',
+            'type' => 'text_default',
+            'weight' => 4,
+        ))
+        ->setDisplayConfigurable('view', TRUE)
+        ->setDisplayOptions('form', array(
+            'type' => 'text_textfield',
+            'weight' => 4,
+        ))
+        ->setDisplayConfigurable('form', TRUE);
+
+
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('description', 'admin_test_entity', 'admin_test', $storage_definition);
+
+}
+
+
+/**
+ * Update 8004 - Create field description to admin_tests entity.
+ */
+function admin_test_update_8004() {
+  //check if the table exists first.  If not, then create the entity.
+   //drupal_set_installed_schema_version('admin_test', 8000);
+
+      $storage_definition = BaseFieldDefinition::create('entity_reference')
+          ->setLabel('Tipo')
+          ->setDescription('Tipo Test')
+          ->setSetting('target_type', 'taxonomy_term')
+          ->setSetting('handler', 'default:taxonomy_term')
+          ->setSetting('handler_settings',
+              array(
+                  'target_bundles' => array(
+                      'vocabulary_name' => 'tipo_tests'
+                  )))
+          ->setDisplayOptions('view', array(
+              'label' => 'hidden',
+              'type' => 'author',
+              'weight' => 0,
+          ))
+          ->setDisplayOptions('form', array(
+              'type' => 'entity_reference_autocomplete',
+              'weight' => 3,
+              'settings' => array(
+                  'match_operator' => 'CONTAINS',
+                  'size' => '10',
+                  'autocomplete_type' => 'tipo_tests',
+                  'placeholder' => '',
+              ),
+          ))
+          ->setDisplayConfigurable('form', TRUE)
+          ->setDisplayConfigurable('view', TRUE);
+
+
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('tipo', 'admin_test_entity', 'admin_test', $storage_definition);
+
+}
+
+
+/**
+ * Update 8005 - Create field description to admin_tests entity.
+ */
+function admin_test_update_8005() {
+  //check if the table exists first.  If not, then create the entity.
+   //drupal_set_installed_schema_version('admin_test', 8000);
+
+    $storage_definition = BaseFieldDefinition::create('entity_reference')
+          ->setLabel('Resultados')
+          ->setDescription('Resultados Test')
+          ->setSetting('target_type', 'taxonomy_term')
+          ->setSetting('handler', 'default:taxonomy_term')
+          ->setSetting('handler_settings',
+              array(
+                  'target_bundles' => array(
+                      'vocabulary_name' => 'resultados'
+                  )))
+          ->setDisplayOptions('view', array(
+              'label' => 'hidden',
+              'type' => 'author',
+              'weight' => 0,
+          ))
+          ->setDisplayOptions('form', array(
+              'type' => 'entity_reference_autocomplete',
+              'weight' => 3,
+              'settings' => array(
+                  'match_operator' => 'CONTAINS',
+                  'size' => '10',
+                  'autocomplete_type' => 'resultados',
+                  'placeholder' => '',
+              ),
+          ))
+          ->setDisplayConfigurable('form', TRUE)
+          ->setDisplayConfigurable('view', TRUE)
+          ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
+
+
+  \Drupal::entityDefinitionUpdateManager()
+    ->installFieldStorageDefinition('resultados', 'admin_test_entity', 'admin_test', $storage_definition);
+
+}
+
+
+

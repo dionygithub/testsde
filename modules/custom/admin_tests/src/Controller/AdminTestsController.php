@@ -33,6 +33,7 @@ class AdminTestsController extends ControllerBase {
 
   public function utilesajax(){
 
+    global $base_url;
 
     if(!empty($_POST['op'])){
       $op = $_POST['op'];
@@ -45,6 +46,7 @@ class AdminTestsController extends ControllerBase {
 
       $answers = \Drupal::request()->request->get('data');
       $testId = \Drupal::request()->request->get('testId');
+      $objTest = $this->getTestbyId($testId);
       $logged_in = \Drupal::currentUser()->isAuthenticated();
       $uid = \Drupal::currentUser()->id();
 
@@ -74,11 +76,12 @@ class AdminTestsController extends ControllerBase {
         $cantNoLike = (!empty($result['nolike'])) ? count($result['nolike']) : 0;
 
         $aliasManager = \Drupal::service('path.alias_manager');
-        $alias = $aliasManager->getAliasByPath('/test/'.$testId);
+        $alias = $base_url.$aliasManager->getAliasByPath('/test/'.$testId);
+        $titleTest = $objTest->name;
 
         $renderable = [
             '#theme' => 'test_completado_anonimo',
-            '#info' => array('urlTest'=>$alias,'tests_relacionados'=>$htmlTestRelacionados,'totalcorrectquestions' => $totalcorrectquestions, 'totalquestions'=>$totalquestions,'cantLike'=>$cantLike,'cantNoLike'=>$cantNoLike),
+            '#info' => array('urlTest'=>$alias,'titleTest'=>$titleTest,'tests_relacionados'=>$htmlTestRelacionados,'totalcorrectquestions' => $totalcorrectquestions, 'totalquestions'=>$totalquestions,'cantLike'=>$cantLike,'cantNoLike'=>$cantNoLike),
         ];
         $rendered = \Drupal::service('renderer')->render($renderable);
 
