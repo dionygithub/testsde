@@ -1,6 +1,15 @@
 <blockquote class="blockquote bq-info mb-4">
     <input name="testId" type="hidden" value="{{ data['testid'] }}">
-    <p class="bq-title"><span class="sub-titulo-black">{{ data['name'] }}</span> Nos importa tu <span class="sub-titulo">Opinion!!!</span></p>
+
+    {#{{ dump(data['anonimo']) }}#}
+
+    {% if data['anonimo'] != true %}
+        <p class="bq-title">Nos importa tu <span class="sub-titulo">Reacción!!!</span></p>
+        <h4>Para reacionar debes de <span class="badge badge-primary"><a href="{{ data['base_url'] }}/user/unete" style="color: #FFF">Iniciar Sesión</a></span></h4>
+    {% else %}
+        <p class="bq-title"><span class="sub-titulo-black">{{ data['name'] }}</span> Nos importa tu <span class="sub-titulo">Reacción!!!</span></p>
+    {% endif %}
+
     <a type="button" class="btn btn-outline-dark-green btn-sm px-2 waves-effect vote-button upvote-button {{ data['class'] }}" data-action="upvote">
         <span class="value">{{ data['cantLike'] }}</span>
         <i class="far fa-thumbs-up ml-1"></i>

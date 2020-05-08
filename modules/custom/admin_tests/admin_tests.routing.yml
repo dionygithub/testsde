@@ -119,6 +119,17 @@ admin_tests.registrarReferido:
   requirements:
      _permission: 'access content'
 
+
+admin_tests.saveTestRango:
+  path: '/testr-completado'
+  defaults:
+    _title: ''
+    _controller: '\Drupal\admin_tests\Controller\AdminTestsController::saveTestRango'
+  methods: [POST]
+  requirements:
+     _permission: 'access content'
+
+
 admin_tests.test_fallado:
   path: '/test-fallado/{test}'
   defaults:

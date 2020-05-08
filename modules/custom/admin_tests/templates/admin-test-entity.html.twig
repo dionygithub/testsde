@@ -16,9 +16,17 @@
  */
 #}
 {#<div{{ attributes.addClass('test_entity') }}>#}
+
+{#{{ dump(tipoTest) }}#}
+
   {% if mode == "teaser" %}
-    {% include directory ~ '/templates/test-teaser.html.twig' %}
-  {% else %}
-    {% include directory ~ '/templates/test-full.html.twig' %}
+      {% include directory ~ '/templates/test-teaser.html.twig' %}
+    {% elseif tipoTest == 11  %}
+      {% include directory ~ '/templates/test-full-resultados.html.twig' %}
+    {% elseif tipoTest == 12  %}
+      {% include directory ~ '/templates/test-full-imagenes.html.twig' %}
+    {% else %}
+      {% include directory ~ '/templates/test-full.html.twig' %}
   {% endif %}
 {#</div>#}
+

@@ -5,16 +5,29 @@
         {{ data['viewuser'] }}
 
         <blockquote class="blockquote bq-info mb-4">
-            <p class="bq-title">Quieres gastar... <span class="sub-titulo"> Premios Disponibles!!! </span></p>
-
+            <span class="bq-title">Cómo difrutar tus puntos... <span class="sub-titulo"> Premios Disponibles!!! </span></span>
+            <br>
+            <em>Importante al obtener un premio se le enviará un correo al administrador y tendrá respuesta <strong>INMEDIATA</strong></em>
+            <br>
+            <span>Cuando puedar solicitar el Premio se activará automáticamente </span></sp><strong>1€ => 3000 pts</strong>
         </blockquote>
+
+
+        <div class="container-mensajes" style="display: none">
+            <div class="messages__wrapper">
+                <div class="alert alert-info alert-dismissible" role="alert" aria-label="Mensaje de informacion">
+                    <button type="button" role="button" class="close" data-dismiss="alert" aria-label="Cerrar"><span aria-hidden="true">×</span></button>
+                    <p class="mensajes"></p>
+                </div>
+            </div>
+        </div>
 
         <div class="row col-lg-12 col-md-12 mb-4">
 
             {% if data['viewpremium']|length > 0 %}
                 {% for index, premium in data['viewpremium'] %}
 
-                    <div class="col-lg-3 col-md-6 mb-4">
+                    <div class="col-lg-4 col-md-6 mb-4">
                         {{ premium }}
 
                     </div>
@@ -25,6 +38,9 @@
     {% else %}
         <h2>Debes de estar logueado en nuestra plataforma</h2>
     {% endif %}
+
+
+
 
 </div>
 

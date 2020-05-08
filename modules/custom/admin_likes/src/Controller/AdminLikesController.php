@@ -79,9 +79,9 @@ class AdminLikesController extends ControllerBase {
     if(!empty($objs)){
       foreach($objs as $obj){
         if($obj->like){
-          $resultFinal['like'] = $obj;
+          $resultFinal['like'][] = $obj;
         }else{
-          $resultFinal['nolike'] = $obj;
+          $resultFinal['nolike'][] = $obj;
         }
       }
     }
@@ -98,8 +98,10 @@ class AdminLikesController extends ControllerBase {
     $result = $connection->query($sql,[':idtest' => $testid, ':uid'=>$uid]);
     $objs = $result->fetchObject();
 
-    if($objs->like != null || $objs->like != ""){
-      $resultFinal = true;
+    if($objs != null ) {
+      if ($objs->like != null || $objs->like != "") {
+        $resultFinal = true;
+      }
     }
     //echo'<pre>'; var_dump($resultFinal); die;
     return $resultFinal;

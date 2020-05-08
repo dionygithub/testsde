@@ -1,9 +1,9 @@
-<div class="container-test-completado text-align-center">
+<div class="container-test-completado">
 
-    <div id="grin-stars-fas" class="icon-tile emoji" style="color: #DE1B65;font-size: 48px">
+    <div id="grin-stars-fas" class="icon-tile emoji" style="color: #DE1B65;font-size: 48px;text-align: center">
         <i data-toggle="tooltip" data-placement="top" title="" class="waves-effect mdb-icon-copy far fa-grin-stars"></i>
     </div>
-    <h2>Test Completado</h2>
+    <h2 class="text-align-center">Test Completado</h2>
 
     <div class="row" style="padding: 25px;margin: 10px;background-color: #CCC;">
 
@@ -13,46 +13,34 @@
 
 
     </div>
+    <div class="text-center"><a type="button" href="{{  info['urlTest'] }}" id="btn-one" class="btn btn-primary"><i class="fas fa-sync-alt"></i></a></div>
     <hr class="separador">
 
     <blockquote class="blockquote bq-info mb-4">
         <p class="bq-title">Recomiendalo en tus <span class="sub-titulo" >Redes Sociales!!!</span></p>
-    </blockquote>
 
-    <div class="col-md-12">
-        <div class="col-lg-12 col-md-12">
+        <div class="col-md-12">
+            <div class="col-lg-12 col-md-12">
 
-            <a target="_blank" href="https://www.facebook.com/sharer.php?u={{ info['urlTest'] }}&t={{ info['titleTest'] }}" type="button" class="btn btn-fb waves-effect waves-light">
-                <i class="fab fa-facebook-f left"></i> Facebook</a>
+                <a target="_blank" href="https://www.facebook.com/sharer.php?u={{ info['urlTest'] }}&t={{ info['titleTest'] }}" type="button" class="btn btn-fb waves-effect waves-light">
+                    <i class="fab fa-facebook-f left"></i> Facebook</a>
 
-            <a target="_blank" href="" type="button" class="btn btn-ins waves-effect waves-light">
-                <i class="fab fa-instagram left"></i> Instagram</a>
+                <a target="_blank" href="" type="button" class="btn btn-ins waves-effect waves-light">
+                    <i class="fab fa-instagram left"></i> Instagram</a>
 
-            <a class="btn btn-whatsapp waves-effect waves-light"  target="_blank" href="https://api.whatsapp.com/send?text=Mira este test: {{ info['urlTest'] }}" type="button" role="button">
-                <i class="fab fa-whatsapp"> Whatsapp</i>
-            </a>
+                <a class="btn btn-whatsapp waves-effect waves-light"  target="_blank" href="https://api.whatsapp.com/send?text=Mira este test: {{ info['urlTest'] }}" type="button" role="button">
+                    <i class="fab fa-whatsapp"> Whatsapp</i>
+                </a>
+            </div>
         </div>
-    </div>
 
+    </blockquote>
     <hr class="separador">
-        <blockquote class="blockquote bq-info mb-4">
 
-            <p class="bq-title">Nos importa tu <span class="sub-titulo">Opinion!!!</span></p>
-
-            <h4>Debes de <span class="badge badge-primary">Iniciar Sesión</span></h4>
-
-            <a type="button" class="btn btn-outline-dark-green btn-sm px-2 waves-effect vote-button upvote-button disabled" data-action="upvote">
-                <span class="value">{{ info['cantLike'] }}</span>
-                <i class="far fa-thumbs-up ml-1"></i>
-            </a>
-            <a type="button" class="btn btn-outline-danger btn-sm px-2 waves-effect vote-button downvote-button disabled" data-action="downvote">
-                <span class="value">{{ info['cantNoLike'] }}</span>
-                <i class="far fa-thumbs-down ml-1"></i>
-            </a>
-        </blockquote>
+    {{ info['block_likes_test_user'] }}
 
     <hr class="separador">
 
 </div>
 
-{{  info['tests_relacionados'] }}
+{{ info['tests_relacionados'] }}

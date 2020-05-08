@@ -50,9 +50,33 @@ class AdminTestsController extends ControllerBase {
       $logged_in = \Drupal::currentUser()->isAuthenticated();
       $uid = \Drupal::currentUser()->id();
 
+
       $success = false;
 
       if($logged_in == false){
+
+        /*** Block Likes ***/
+        $adminLikesController = \Drupal::service('service.admin_likes');
+        $result = $adminLikesController->getCantLikesByTest($testId);
+        //echo'<pre>'; print_r($result); die;
+        $cantLike = ($result != null && isset($result['like']) && !empty($result['like'])) ? count($result['like']) : 0;
+        $cantNoLike = ($result != null && isset($result['nolike']) && !empty($result['nolike'])) ? count($result['nolike']) : 0;
+        $isvote = $adminLikesController->getVoteLike($testId,$uid);
+        if($logged_in == false){
+          $class = 'disabled';
+        }else if($isvote){
+          $class = "disabled";
+        }else{
+          $class = "";
+        }
+        $renderableLikes = [
+            '#theme' => 'block_likes_test_user',
+            '#data' => array('anonimo'=> true, 'base_url' => $base_url,'testid' => $testId,'class'=>$class,'cantLike'=>$cantLike + $objTest->likes,'cantNoLike'=>$cantNoLike + $objTest->nolikes,'name'=> null),
+        ];
+        $renderedLikes = \Drupal::service('renderer')->render($renderableLikes);
+        $block_likes_test_user = $renderedLikes;
+        /*** Fin del Block Likes ***/
+
 
         //Tests Relacionados
         $output = $this->getHtmlTestsRelacionados($testId);
@@ -68,12 +92,8 @@ class AdminTestsController extends ControllerBase {
         $questionList = $this->getListQuestionsByIdTest($testId);
         $totalquestions = !empty($questionList) ? count($questionList) : 0;
         $totalcorrectquestions = count($this->getCorrectQuestions($testId,$answers));
+        //**** Fin de Pregunta ****/
 
-        $adminLikesController = \Drupal::service('service.admin_likes');
-        $result = $adminLikesController->getCantLikesByTest($testId);
-
-        $cantLike = (!empty($result['like'])) ? count($result['like']) : 0;
-        $cantNoLike = (!empty($result['nolike'])) ? count($result['nolike']) : 0;
 
         $aliasManager = \Drupal::service('path.alias_manager');
         $alias = $base_url.$aliasManager->getAliasByPath('/test/'.$testId);
@@ -81,7 +101,7 @@ class AdminTestsController extends ControllerBase {
 
         $renderable = [
             '#theme' => 'test_completado_anonimo',
-            '#info' => array('urlTest'=>$alias,'titleTest'=>$titleTest,'tests_relacionados'=>$htmlTestRelacionados,'totalcorrectquestions' => $totalcorrectquestions, 'totalquestions'=>$totalquestions,'cantLike'=>$cantLike,'cantNoLike'=>$cantNoLike),
+            '#info' => array('block_likes_test_user'=>$block_likes_test_user,'urlTest'=>$alias,'titleTest'=>$titleTest,'tests_relacionados'=>$htmlTestRelacionados,'totalcorrectquestions' => $totalcorrectquestions, 'totalquestions'=>$totalquestions),
         ];
         $rendered = \Drupal::service('renderer')->render($renderable);
 
@@ -147,13 +167,14 @@ class AdminTestsController extends ControllerBase {
         $uid = \Drupal::currentUser()->id();
 
         $success = false;
+        $text = "";
 
         if($logged_in == false) {
 
           \Drupal::messenger()->addMessage(t('No estas logueado'), 'error');
 
           return new Response(
-              json_encode(array("success" => $success)),
+              json_encode(array("success" => $success,"text"=>"No has iniciado sesión")),
               Response::HTTP_OK,
               array('content-type' => 'text/x-json')
           );
@@ -164,13 +185,14 @@ class AdminTestsController extends ControllerBase {
         $user = \Drupal\user\Entity\User::load($uid);
         $isValid = $adminPremiumController->isValidPremiumByidUseridPrem($user,$premium);
 
+        //echo '<pre>'; print_r($isValid); die('aaa');
 
         if($isValid == false) {
 
-          \Drupal::messenger()->addMessage(t('No es valida la comprobacion de su solicitud'), 'error');
+          \Drupal::messenger()->addMessage(t('No es válida su solicitud de PREMIO'), 'error');
 
           return new Response(
-              json_encode(array("success" => false)),
+              json_encode(array("success" => false,'text'=>t('No es válida su solicitud de PREMIO'))),
               Response::HTTP_OK,
               array('content-type' => 'text/x-json')
           );
@@ -182,32 +204,35 @@ class AdminTestsController extends ControllerBase {
 
         if ($isSave != false) {
 
-         if($this->subtractPointsUser($user,$premium->points) != false){
+           if($this->subtractPointsUser($user,$premium->points) != false){
 
-           $adminPointsExController = \Drupal::service('service.admin_points_extras');
-           $descuento = "-".$premium->points;
-           $adminPointsExController->savePointsExtra($uid,0,$descuento);
+             $adminPointsExController = \Drupal::service('service.admin_points_extras');
+             $descuento = "-".$premium->points;
+             $adminPointsExController->savePointsExtra($uid,0,$descuento);
 
-           sendMail();
-           \Drupal::messenger()->addMessage(t('En Hora Buena, ya tienes tu premio!! Difrutalo'), 'status');
-           $success = true;
+             //sendMail();
 
-           $cantrequest = count($this->getListSolicitudesByUser($uid));
-           $this->_updateCantSolicitudesUser($user,$cantrequest);
+             \Drupal::messenger()->addMessage(t('En Hora Buena, ya tienes tu premio!! Porfavor rebice su correo, Difrutalo'), 'status');
+             $success = true;
+             $text = "En Hora Buena, ya tienes tu premio!! Porfavor rebice su correo, Difrutalo";
 
-         }else{
-           \Drupal::messenger()->addMessage(t('Error, al descontar los points'), 'error');
-           return new Response(
-               json_encode(array("success" => false)),
-               Response::HTTP_OK,
-               array('content-type' => 'text/x-json')
-           );
-         }
+             $cantrequest = count($this->getListSolicitudesByUser($uid));
+             $this->_updateCantSolicitudesUser($user,$cantrequest);
+
+           }else{
+             \Drupal::messenger()->addMessage(t('Error, al descontar los points'), 'error');
+             return new Response(
+                 json_encode(array("success" => false,'text'=>"Error, al descontar los points")),
+                 Response::HTTP_OK,
+                 array('content-type' => 'text/x-json')
+             );
+           }
+        }else{
+          $text = "Perdona pero tiene una solicitud en PROCESO";
         }
 
-
         $response = new Response(
-            json_encode(array("success" => $success)),
+            json_encode(array("success" => $success,'text'=>$text)),
             Response::HTTP_OK,
             array('content-type' => 'text/x-json')
         );
@@ -262,7 +287,6 @@ class AdminTestsController extends ControllerBase {
 
       //echo'<pre>'; var_dump($info); var_dump($infoMail); var_dump($infoName); var_dump($infoMenssage); die;
       if($info == "" && $infoMail == "" && $infoName == "" && $infoMenssage == ""){
-
 
         $secret_key = KEY_SECRET_RECAPTCHA;
 
@@ -341,8 +365,69 @@ class AdminTestsController extends ControllerBase {
           return $response;
         }
 
-  }
 
+    if($op == 'saveTestImagenes'){
+
+        $answers = \Drupal::request()->request->get('data');
+        $testId = \Drupal::request()->request->get('testId');
+
+
+
+        $correctQuestions = [];
+        $answersInput = [];
+        if(!empty($answers)){
+
+          foreach($answers as $answer){
+            $answersInput[$answer['question']][] = $answer['answer'];
+          }
+
+          foreach($answers as $answer){
+            $answerObj = $this->getAnswerbyId($answer['answer']);
+            if($answerObj->respuesta_valida){
+              $correctQuestions[$answer['question']][] = $answer['answer'];
+            }
+
+          }
+//          echo'<pre>'; print_r($answersInput);
+//          echo'<pre>'; print_r($correctQuestions);
+
+          foreach($correctQuestions as $key => $correctQuestion){
+
+            $countAnswareCorrectInput = count($correctQuestion);
+            $countAnswareInput = count($answersInput[$key]);
+            $countBaseData = count($this->getListAnswerCorrectByIdQuestion($key));
+
+//            echo'<pre>'; print_r('todas '.$countAnswareInput."\n");
+//
+//            echo'<pre>'; print_r($countAnswareCorrectInput."\n");
+//
+//            echo'<pre>'; print_r($countBaseData."\n");
+
+            if($countBaseData != $countAnswareInput || $countBaseData != $countAnswareCorrectInput){
+              unset($correctQuestions[$key]);
+            }
+          }
+        }
+
+        //echo'<pre>'; print_r($correctQuestions); die;
+
+        $countAnswareCorrect = count($correctQuestions);
+
+          $responseSaveTestImagenes = array(
+              "success" => true,
+             "countAnswareCorrect" => $countAnswareCorrect
+          );
+
+        $response = new Response(
+            json_encode($responseSaveTestImagenes),
+            Response::HTTP_OK,
+            array('content-type' => 'text/x-json')
+        );
+        return $response;
+
+    }
+
+  }
 
   public function getAcciones(){
 
@@ -505,9 +590,11 @@ class AdminTestsController extends ControllerBase {
   public function page_test_completado($test){
 
     $info = array();
+    global $base_url;
     $uid = \Drupal::currentUser()->id();
     $logged_in = \Drupal::currentUser()->isAuthenticated();
     $info['anonimo'] = $logged_in;
+    $objTest = $this->getTestbyId($test);
 
     $record = $this->getRecordByIdUserANDIdTest($uid,$test);
 
@@ -534,16 +621,13 @@ class AdminTestsController extends ControllerBase {
     $info['tests_relacionados'] = $rendered;
 
 
-    //Block Likes
+    /*** Block Likes ***/
     $user = \Drupal::entityTypeManager()->getStorage('user')->load($uid);
-
     $adminLikesController = \Drupal::service('service.admin_likes');
     $result = $adminLikesController->getCantLikesByTest($test);
-
-    $cantLike = (!empty($result['like'])) ? count($result['like']) : 0;
-    $cantNoLike = (!empty($result['nolike'])) ? count($result['nolike']) : 0;
+    $cantLike = ($result != null && isset($result['like']) && !empty($result['like'])) ? count($result['like']) : 0;
+    $cantNoLike = ($result != null && isset($result['nolike']) && !empty($result['nolike'])) ? count($result['nolike']) : 0;
     $isvote = $adminLikesController->getVoteLike($test,$uid);
-    //echo'<pre>'; print_r($isvote); die;
     if($logged_in == false){
       $class = 'disabled';
     }else if($isvote){
@@ -553,12 +637,19 @@ class AdminTestsController extends ControllerBase {
     }
     $renderableLikes = [
         '#theme' => 'block_likes_test_user',
-        '#data' => array('testid' => $test,'class'=>$class,'cantLike'=>$cantLike,'cantNoLike'=>$cantNoLike,'name'=> $this->getNombreUsuario($user)),
+        '#data' => array('anonimo' => $logged_in,'base_url'=>$base_url,'testid' => $test,'class'=>$class,'cantLike'=>$cantLike + $objTest->likes ,'cantNoLike'=>$cantNoLike + $objTest->nolikes,'name'=> $this->getNombreUsuario($user)),
     ];
     $renderedLikes = \Drupal::service('renderer')->render($renderableLikes);
-
-
     $info['block_likes_test_user'] = $renderedLikes;
+    /*** Fin del Block Likes ***/
+
+
+    $aliasManager = \Drupal::service('path.alias_manager');
+    $alias = $base_url.$aliasManager->getAliasByPath('/test/'.$test);
+    $info['urlTest'] = $alias;
+    $objTest = $this->getTestbyId($test);
+    $info['titleTest'] = $objTest->name;
+    $info['base_url'] = $base_url;
 
 
     $build['test-completado'] = array(
@@ -809,6 +900,96 @@ class AdminTestsController extends ControllerBase {
     return $build;
 
   }
+
+  public function saveTestRango(){
+
+    global $base_url;
+    $datos = \Drupal::request()->request->all();
+
+    $idTest = $datos['idTest'];
+    $objTest = $this->getTestbyId($idTest);
+    //echo'<pre>'; print_r($objTest); die;
+    $puntuacionUser = 0;
+
+    $info['resultado'] = "";
+
+    $info = array();
+    $uid = \Drupal::currentUser()->id();
+    $user = \Drupal::entityTypeManager()->getStorage('user')->load($uid);
+    $logged_in = \Drupal::currentUser()->isAuthenticated();
+    $info['anonimo'] = $logged_in;
+
+    if(!empty($datos)){
+
+      //suma todos los puntos de las respuestas
+      foreach($datos as $key => $answer){
+        $ObjKey = explode('-',$key);
+        if($ObjKey[0] == "question"){
+          $objAnswer = $this->getAnswerbyId($answer);
+          $puntuacionUser += !empty($objAnswer->puntuacion) ? $objAnswer->puntuacion : 0;
+        }
+      }
+
+      //Obtengo todos los resultados del TEST
+      $resultados = $this->getResultadosByIdTest($idTest);
+      $textResultado = $this->getTextResultadoByPuntuacion($resultados,$puntuacionUser);
+      $info['resultado'] =  $textResultado;
+
+    }
+
+    /*** Block Likes ***/
+    $adminLikesController = \Drupal::service('service.admin_likes');
+    $result = $adminLikesController->getCantLikesByTest($idTest);
+
+    //echo'<pre>'; print_r($result); die;
+
+    $cantLike = ($result != null && isset($result['like']) && !empty($result['like'])) ? count($result['like']) : 0;
+    $cantNoLike = ($result != null && isset($result['nolike']) && !empty($result['nolike'])) ? count($result['nolike']) : 0;
+    $isvote = ($logged_in == true) ?  $adminLikesController->getVoteLike($idTest,$uid) : true;
+    if($logged_in == false){
+      $class = 'disabled';
+    }else if($isvote){
+      $class = "disabled";
+    }else{
+      $class = "";
+    }
+    $renderableLikes = [
+        '#theme' => 'block_likes_test_user',
+        '#data' => array('anonimo' =>$logged_in,'base_url'=>$base_url,'testid' => $idTest,'class'=>$class,'cantLike'=>$cantLike +  $objTest->likes ,'cantNoLike'=>$cantNoLike +  $objTest->nolikes,'name'=> $this->getNombreUsuario($user)),
+    ];
+    $renderedLikes = \Drupal::service('renderer')->render($renderableLikes);
+    $info['block_likes_test_user'] = $renderedLikes;
+    /*** Fin del Block Likes ***/
+
+    $aliasManager = \Drupal::service('path.alias_manager');
+    $alias = $base_url.$aliasManager->getAliasByPath('/test/'.$idTest);
+    $info['urlTest'] = $alias;
+
+    $info['titleTest'] = $objTest->name;
+
+
+    //Tests Relacionados
+    $output = $this->getHtmlTestsRelacionados($idTest);
+    $renderable = [
+        '#theme' => 'block_tests_relacionados',
+        '#data' => array('testsRelacionados'=>$output),
+    ];
+    $rendered = \Drupal::service('renderer')->render($renderable);
+
+    $info['tests_relacionados'] = $rendered;
+
+
+    $build['test-completado-resultados'] = array(
+        '#theme' => 'page_test_completado_resultados',
+        '#idTest' => $idTest,
+        '#info' => $info,
+    );
+
+    return $build;
+
+
+  }
+
 
   public function registrarReferido(){
 
@@ -1129,7 +1310,7 @@ class AdminTestsController extends ControllerBase {
 
 
   public function getNombreUsuario($user){
-    return  !empty($user->get('field_nombre_completo')->value) ? $user->get('field_nombre_completo')->value : $user->label();
+    return ($user->id() != 0 && !empty($user->get('field_nombre_completo')->value)) ? $user->get('field_nombre_completo')->value : $user->get('name')->value;
   }
 
 
@@ -1176,7 +1357,7 @@ class AdminTestsController extends ControllerBase {
   private function getListDesgloseByUser($uid){
 
     $connection = \Drupal::database();
-    $sql = "SELECT * FROM points_extras_entity WHERE user_id = :uid";
+    $sql = "SELECT * FROM points_extras_entity WHERE user_id = :uid ORDER BY changed DESC";
     $result = $connection->query($sql, [':uid' => $uid]);
     $objs = $result->fetchAll();
 
@@ -1320,6 +1501,12 @@ class AdminTestsController extends ControllerBase {
     $test = $this->getTestbyId($idTest);
     return ($test->entity_reference_tax != null && !empty($test->entity_reference_tax)) ? $test->entity_reference_tax : null;
 
+  }
+
+  public function getTipoByIdTest($idTest){
+
+    $test = $this->getTestbyId($idTest);
+    return ($test->tipo != null && !empty($test->tipo)) ? $test->tipo : null;
   }
 
   public function preConditionsSaveTest($testId){
@@ -1515,8 +1702,51 @@ class AdminTestsController extends ControllerBase {
     $result = $connection->query($sql, [':id' => $id]);
     $objs = $result->fetchObject();
 
+    if(isset($objs->imagen__target_id) && !empty($objs->imagen__target_id)){
+      $objs->imagen = getUrlImagen($objs->imagen__target_id);
+    }
+    //echo'<pre>'; print_r($objs); die;
     return $objs;
   }
+
+  public function getResultadosByIdTest($idTest){
+
+    $list = array();
+    $connection = \Drupal::database();
+    $sql = "SELECT resultados_target_id FROM admin_test_entity__resultados WHERE entity_id = :id";
+    $result = $connection->query($sql, [':id' => $idTest]);
+    $objs = $result->fetchAll();
+
+    foreach ($objs as $obj) {
+      $list[] = $obj->resultados_target_id;
+    }
+
+    return $list;
+  }
+
+
+  public function getTextResultadoByPuntuacion($resultados,$puntuacion){
+
+    $textResult = "";
+
+    if(!empty($resultados)){
+      foreach($resultados as $resultado){
+
+        $objTaxResult = $this->getInfoCatgoria($resultado);
+        $desde = $objTaxResult->get('field_rango')->from;
+        $hasta = $objTaxResult->get('field_rango')->to;
+        $description = $objTaxResult->get('description')->value;
+
+        if($puntuacion >= $desde && $puntuacion <= $hasta){
+          $textResult = $description;
+          return $textResult;
+        }
+      }
+    }
+
+    return $textResult;
+  }
+
 
   public function findQuestionByIdTestAndIdQuestion($idTest,$idQuestion){
 
@@ -1573,6 +1803,26 @@ class AdminTestsController extends ControllerBase {
 
     foreach ($objs as $obj) {
       $list[] = $this->getAnswerbyId($obj->answer_reference_entity_target_id);
+    }
+
+    return $list;
+
+  }
+
+  public function getListAnswerCorrectByIdQuestion($idQuestion){
+
+    $list = array();
+    $connection = \Drupal::database();
+    $sql = "SELECT answer_reference_entity_target_id FROM admin_question_entity__answer_reference_entity WHERE entity_id = :id";
+    $result = $connection->query($sql, [':id' => $idQuestion]);
+    $objs = $result->fetchAll();
+
+    foreach ($objs as $obj) {
+      $objAnswer = $this->getAnswerbyId($obj->answer_reference_entity_target_id);
+      if($objAnswer->respuesta_valida){
+        $list[] = $objAnswer;
+      }
+
     }
 
     return $list;

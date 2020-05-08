@@ -1,6 +1,6 @@
-<div class="container-test-completado text-align-center">
+<div class="container-test-completado">
 
-    <div id="grin-stars-fas" class="icon-tile emoji" style="color: #DE1B65;font-size: 48px">
+    <div id="grin-stars-fas" class="icon-tile emoji" style="color: #DE1B65;font-size: 48px;text-align: center">
         <i data-toggle="tooltip" data-placement="top" title="" class="waves-effect mdb-icon-copy far fa-grin-stars"></i>
     </div>
 
@@ -10,9 +10,9 @@
 
     {% else %}
 
-        <h2>Test Completado</h2>
+        <h2 class="text-align-center">Test Completado</h2>
 
-        <div class="row" style="padding: 25px;background-color: #CCC;">
+        <div class="row" style="padding: 25px;background-color: #CCC; text-align: center">
             <div class="col-lg-6 col-md-6" style="margin-bottom: 25px;">
                 Preguntas correctas <span class="badge badge-light ml-2">{{ info['totalcorrectquestions'] }} / {{ info['totalquestions'] }}</span>
             </div>
@@ -25,34 +25,32 @@
 
             {% endif %}
         </div>
+        <div class="text-center"><a type="button" href="{{  info['urlTest'] }}" id="btn-one" class="btn btn-primary"><i class="fas fa-sync-alt"></i></a></div>
         <hr class="separador">
 
         <blockquote class="blockquote bq-info mb-4">
             <p class="bq-title">Recomiendalo en tus <span class="sub-titulo" >Redes Sociales!!!</span></p>
+
+            <div class="col-md-12">
+                <div class="col-lg-12 col-md-12">
+
+                    <a target="_blank" href="https://www.facebook.com/sharer.php?u={{ info['urlTest'] }}&t={{ info['titleTest'] }}" type="button" class="btn btn-fb waves-effect waves-light">
+                        <i class="fab fa-facebook-f left"></i> Facebook</a>
+
+                    <a target="_blank" href="" type="button" class="btn btn-ins waves-effect waves-light">
+                        <i class="fab fa-instagram left"></i> Instagram</a>
+
+                    <a class="btn btn-whatsapp waves-effect waves-light"  target="_blank" href="https://api.whatsapp.com/send?text=Mira este test: {{ info['urlTest'] }}" type="button" role="button">
+                        <i class="fab fa-whatsapp"> Whatsapp</i>
+                    </a>
+                </div>
+            </div>
         </blockquote>
 
-        <div class="col-md-12">
-            <div class="col-lg-12 col-md-12">
-                <button type="button" class="btn btn-fb waves-effect waves-light">
-                    <i class="fab fa-facebook-f left"></i> Facebook</button>
-
-                <button type="button" class="btn btn-tw waves-effect waves-light">
-                    <i class="fab fa-twitter left"></i> Twitter</button>
-
-                <button type="button" class="btn btn-ins waves-effect waves-light">
-                    <i class="fab fa-instagram left"></i> Instagram</button>
-
-                <button type="button" class="btn btn-email waves-effect waves-light">
-                    <i class="fas fa-at left"></i> Email</button>
-
-
-            </div>
-        </div>
         <hr class="separador">
-        {% if info['anonimo'] != false %}
-            {{ info['block_likes_test_user'] }}
-            <hr class="separador">
-        {% endif %}
+        {{ info['block_likes_test_user'] }}
+        <hr class="separador">
+
 
     {% endif %}
 

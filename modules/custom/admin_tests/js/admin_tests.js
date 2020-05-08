@@ -38,9 +38,21 @@ function CopyToClipboard(containerid) {
                     dataType: "json",
                     data: {op:"buyPremium",premiumId:idPremium},
                     success: function(msg){
-                       window.location.href = Drupal.url('user/premios');
+
+                        console.log(msg);
+
+                        $('.container-mensajes').show();
+                        $('.mensajes').html(msg.text);
+
+                        if(msg.success == true){
+                            window.location.href = Drupal.url('user/premios');
+                        }
+
                     },
                     error: function(msg){
+
+                        $('.container-mensajes').show();
+                        $('.mensajes').html(msg.text);
                         console.log(msg);
 
                     }
@@ -149,16 +161,6 @@ function CopyToClipboard(containerid) {
 
             });
 
-            //$("a#generarUrlReferido").click( function(){
-            //
-            //    var $temp = $("<input>");
-            //    $("body").append($temp);
-            //    $temp.val($(element).text()).select();
-            //    document.execCommand("copy");
-            //    $temp.remove();
-            //
-            //
-            //});
 
             $("a.actionprevious").click( function(){
 
@@ -198,6 +200,8 @@ function CopyToClipboard(containerid) {
 
                 console.log(drupalSettings.user.uid);
 
+                $('a.actionfinish').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando').addClass('disabled');
+
                     $.ajax({
                         type: "POST",
                         url: url,
@@ -215,6 +219,10 @@ function CopyToClipboard(containerid) {
                             }else{
                                 $("#block-tests-content").html(msg.htmlAnonimo);
                             }
+
+                            $('html, body').animate({
+                                scrollTop: 0
+                            }, 1000);
                         },
                         error: function(msg){
                             console.log(msg);
@@ -313,12 +321,130 @@ function CopyToClipboard(containerid) {
             //});
 
 
+            /***** Tests Imagenes *****/
+
+            $('#nextTestImagenes').on('click', function () {
+
+                console.log($('input[name=idPActual]').val());
+
+                var idPActual = eval($('input[name=idPActual]').val()) + 1;
+
+                console.log(idPActual);
+
+                $('.container-pregunta').each(function(){
+                    $(this).hide();
+                });
+
+                $("div#" + idPActual).show();
+
+                $('input[name=idPActual]').val(idPActual);
+
+                showhideControles(idPActual);
+            });
+
+            $('#previosTestImagenes').on('click', function () {
+
+                var idPActual = eval($('input[name=idPActual]').val()) - 1;
+                $('input[name=idPActual]').val(idPActual);
+
+                $('.container-pregunta').each(function(){
+                    $(this).hide();
+                });
+
+                $("div#" + idPActual).show();
+
+                showhideControles(idPActual);
+            });
 
 
+            $(".select-mask-img").click( function() {
+
+                var img = $(this).siblings('img.img-fluid');
+                clickImgTest($(img));
+            });
+
+
+            $("button#finalizarTestImagenes").click( function() {
+
+                //console.log(selecctionImagenesTest);
+                var testId = $('input[name=testId]').val();
+
+                $('button#finalizarTestImagenes').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Procesando...').addClass('disabled');
+
+                $.ajax({
+                    type: "POST",
+                    url: url,
+                    dataType: "json",
+                    data: {op:"saveTestImagenes",testId:testId,data:selecctionImagenesTest},
+                    success: function(msg){
+                       console.log(msg);
+                        if(msg.success){
+
+                            $(".container-preguntas").hide();
+                            $("#resultRespuestas").html(msg.countAnswareCorrect);
+                            $(".container-respuestas-tests-imagenes").show();
+
+                            $('html, body').animate({
+                                scrollTop: 0
+                            }, 1000);
+                        }
+                    },
+                    error: function(msg){
+                        console.log(msg);
+
+                    }
+                });
+            });
+
+
+            function showhideControles(idPActual) {
+
+                //$("div.controles").hide();
+                var idPActual = idPActual + 1;
+                var totalAnsware = $('input[name=totalAnsware]').val();
+                if(idPActual < totalAnsware){
+                    $('#nextTestImagenes').show();
+                    $('#finalizarTestImagenes').hide();
+                    $('#previosTestImagenes').hide();
+                }else{
+                    $('#nextTestImagenes').hide();
+                    $('#finalizarTestImagenes').hide();
+                    $('#previosTestImagenes').show();
+                }
+
+                if(idPActual == totalAnsware){
+                    $('#finalizarTestImagenes').show();
+                }
+
+            }
+            /***** FIN Tests Imagenes *****/
 
         });
     });
 
-
-
 })(jQuery);
+
+var selecctionImagenesTest = [];
+
+function clickImgTest(obj) {
+
+
+    if($(obj).siblings('.select-mask-img').is(":visible")){
+        $(obj).siblings('.select-mask-img').hide();
+    }else{
+        $(obj).siblings('.select-mask-img').show();
+    }
+
+    var testId = $('input[name=testId]').val();
+    var existElement = selecctionImagenesTest.find(x => x.answer == $(obj).data("answer"));
+    if(existElement != null){
+        selecctionImagenesTest.splice($.inArray(existElement, selecctionImagenesTest), 1);
+    }else{
+        var obj = {question:$(obj).data("question"),answer:$(obj).data("answer")};
+        selecctionImagenesTest.push(obj);
+    }
+
+   console.log(selecctionImagenesTest);
+
+
+}

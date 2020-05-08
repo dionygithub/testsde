@@ -14,6 +14,7 @@ define('ROL_USUARIO','authenticated');
 define('ACTION_MEGUSTA_ID',1);
 define('ACTION_REFERIDO_ID',2);
 define('ACTION_REGISTRARSE_ID',3);
+define('ACTION_REALIZAR_TEST',4);
 define('EMAIL_ADMIN',"tests@conocerde.com");
 define('PHONE_ADMIN',"+34667034669");
 define('KEY_SECRET_RECAPTCHA',"6LdmS-UUAAAAAKpHyhzwRpD9s-InjI-8iidBNGut");
@@ -165,6 +166,15 @@ function admin_tests_theme() {
           ),
       ],
 
+      'page_test_completado_resultados' => [
+          'template' => 'test-completado-resultados',
+          'path' => drupal_get_path('module', 'admin_tests').'/templates',
+          'variables' => array(
+              'idTest' => NULL,
+              'info' => array(),
+          ),
+      ],
+
 
       'test_completado_anonimo' => [
           'template' => 'test-completado-anonimo',
@@ -283,19 +293,34 @@ function admin_tests_preprocess_admin_test_entity(&$variables) {
 
   \Drupal::entityTypeManager()->getViewBuilder('admin_test_entity')->resetCache();
 
+  global $base_url;
+  $uid = \Drupal::currentUser()->id();
+
+  $user = \Drupal::entityTypeManager()->getStorage('user')->load($uid);
+
+  $logged_in = \Drupal::currentUser()->isAuthenticated();
+
   $variables['content'] = [];
   foreach (\Drupal\Core\Render\Element::children($variables['elements']) as $key) {
     $variables['content'][$key] = $variables['elements'][$key];
   }
 
-  $entity = $variables['elements']['#admin_test_entity'];
-
-  $variables['label'] = $entity->label();
-
   $testsController = new \Drupal\admin_tests\Controller\AdminTestsController();
 
-  $datos = $testsController->getTreeTest($entity->id());
+  $entity = $variables['elements']['#admin_test_entity'];
 
+  $aliasManager = \Drupal::service('path.alias_manager');
+  $alias = $base_url.$aliasManager->getAliasByPath('/test/'.$entity->id());
+  $variables['urlTest'] = $alias;
+  $variables['label'] = $entity->label();
+  $variables['description'] = $entity->get('description')->value;
+
+  $idCategoria = $testsController->getCategoriaByIdTest($entity->id());
+  $termObj = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($idCategoria);
+  $variables['categoria'] = $termObj->label();
+  $variables['subtitlecategoria'] = $termObj->get('field_subtitulo')->value;
+
+  $datos = $testsController->getTreeTest($entity->id());
   $variables['datos'] = $datos;
 
   $primraPregunta = $testsController->getFirstQuestionByIdTest($entity->id());
@@ -303,6 +328,32 @@ function admin_tests_preprocess_admin_test_entity(&$variables) {
 
 
   $variables['mode'] = $variables['elements']['#view_mode'];
+
+
+  $variables['anonimo'] = $logged_in;
+
+  /*** Block Likes ***/
+  $adminLikesController = \Drupal::service('service.admin_likes');
+  $result = $adminLikesController->getCantLikesByTest($entity->id());
+  //echo'<pre>'; print_r($result); die;
+  $cantLike = ($result != null && isset($result['like']) && !empty($result['like'])) ? count($result['like']) : 0;
+  $cantNoLike = ($result != null && isset($result['nolike']) && !empty($result['nolike'])) ? count($result['nolike']) : 0;
+  $isvote = $adminLikesController->getVoteLike($entity->id(),$uid);
+  if($logged_in == false){
+    $class = 'disabled';
+  }else if($isvote){
+    $class = "disabled";
+  }else{
+    $class = "";
+  }
+  $renderableLikes = [
+      '#theme' => 'block_likes_test_user',
+      '#data' => array('anonimo'=>$logged_in,'base_url'=>$base_url,'testid' => $entity->id(),'class'=>$class,'cantLike'=>$cantLike + $entity->get('likes')->value,'cantNoLike'=>$cantNoLike + $entity->get('nolikes')->value,'name'=> $testsController->getNombreUsuario($user)),
+  ];
+  $renderedLikes = \Drupal::service('renderer')->render($renderableLikes);
+  $variables['block_likes_test_user'] = $renderedLikes;
+  /*** Fin del Block Likes ***/
+
 
 
   if (!empty($entity->get('imagen')->target_id)) {
@@ -317,23 +368,23 @@ function admin_tests_preprocess_admin_test_entity(&$variables) {
   $variables['time'] = $entity->get('time')->value;
 
 
-  $adminLikesController = \Drupal::service('service.admin_likes');
-  $result = $adminLikesController->getCantLikesByTest($entity->id());
-
-  $cantLikes = (isset($result['like']) && !empty($result['like'])) ? $result['like'] : 0;
-  $cantNoLikes = (isset($result['nolike']) && !empty($result['nolike'])) ? $result['nolike'] : 0;
-
-  $variables['likes'] = $cantLikes + $entity->get('likes')->value;
-  $variables['nolikes'] = $cantNoLikes + $entity->get('nolikes')->value;
+//  $adminLikesController = \Drupal::service('service.admin_likes');
+//  $result = $adminLikesController->getCantLikesByTest($entity->id());
+//  echo'<pre>'; print_r($result); die;
+//  $cantLikes = (isset($result['like']) && !empty($result['like'])) ? $result['like'] : 0;
+//  $cantNoLikes = (isset($result['nolike']) && !empty($result['nolike'])) ? $result['nolike'] : 0;
+//
+  $variables['likes'] = $cantLike + $entity->get('likes')->value;
+  $variables['nolikes'] = $cantNoLike + $entity->get('nolikes')->value;
 
   $variables['destacado'] = $entity->get('destacado')->value;
-  $variables['puntos'] = $testsController->getCantPointsDisponibleByTest($entity->id());
+
 
   $variables['url'] = $entity->toUrl()->toString();
 
   $newsController = \Drupal::service('service.admin_news');
 
-  $idCategoria = $testsController->getCategoriaByIdTest($entity->id());
+
   $news = $newsController->getNewsbyIdTax($idCategoria);
   $htmlNews = [
       '#theme' => 'list_news',
@@ -341,6 +392,16 @@ function admin_tests_preprocess_admin_test_entity(&$variables) {
   ];
   $newsRender = \Drupal::service('renderer')->render($htmlNews);
   $variables['newsRender'] = $newsRender;
+
+
+  $tipoTest = $testsController->getTipoByIdTest($entity->id());
+  $variables['tipoTest'] = $tipoTest;
+  $variables['existpuntos'] = ($tipoTest == TEST_TIPO_AFIRMATIVO) ? true : false;
+  $variables['puntos'] = $testsController->getCantPointsDisponibleByTest($entity->id());
+
+  $variables['urlResponseTestRango'] = $base_url.'/testr-completado';
+
+
 
 }
 
@@ -370,6 +431,14 @@ function admin_tests_preprocess_premium_entity(&$variables) {
 
   $variables['url'] = $premium->toUrl()->toString();
   $variables['mode'] = $variables['elements']['#view_mode'];
+
+  if (!empty($premium->get('imagen')->target_id)) {
+    $displayImg = getUrlImagen($premium->get('imagen')->target_id);
+  }else{
+    $displayImg = "";
+  }
+
+  $variables['imagen'] = $displayImg;
 }
 
 
@@ -534,3 +603,30 @@ function admin_tests_page_attachments(array &$page) {
   $page['#attached']['drupalSettings']['admin_tests']['base_url'] = \Drupal\Core\Url::fromRoute('<front>', [], ['absolute' => TRUE])->toString();
 }
 
+
+
+/**
+ * Implements hook_form_alter().
+ *
+ * Remove the current password field from the user_profile_form form
+ * (user/%/edit).
+ */
+function admin_tests_form_alter(&$form, &$form_state, $form_id) {
+
+  if ($form_id == 'user_form') {
+
+    //echo'<pre>'; print_r( $form['account']); die;
+    // Hide the new password fields.
+    $form['field_cant_tests']['#access'] = FALSE;
+    $form['field_points']['#access'] = FALSE;
+    $form['field_referred']['#access'] = FALSE;
+    $form['field_requests_premiums']['#access'] = FALSE;
+    $form['field_token_referidos']['#access'] = FALSE;
+    $form['field_referidos']['#access'] = FALSE;
+
+    $form['actions']['submit']['#attributes']['class'][] = 'btn btn-success btn-lg';
+
+    $form['account']['mail']['#description'] = "";
+    $form['account']['current_pass']['#description'] = "ss";
+  }
+}

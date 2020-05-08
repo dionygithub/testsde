@@ -1,0 +1,46 @@
+<div class="container-test-completado ">
+
+    <div id="grin-stars-fas" class="icon-tile emoji text-center" style="color: #DE1B65;font-size: 48px;">
+        <i data-toggle="tooltip" data-placement="top" title="" class="waves-effect mdb-icon-copy far fa-grin-stars"></i>
+    </div>
+    <h2 class="text-center">Test Completado</h2>
+
+        <div class="card blue lighten-2 text-white p-3 mt-2 mb-3">
+            <blockquote class="blockquote mb-0">
+                <div>{{ info['resultado'] | raw }}</div>
+                {#<footer class="blockquote-footer">#}
+                    {#<small>#}
+                        {#Someone famous in <cite title="Source Title">Source Title</cite>#}
+                    {#</small>#}
+                {#</footer>#}
+            </blockquote>
+        </div>
+        <div class="text-center"><a type="button" href="{{  info['urlTest'] }}" id="btn-one" class="btn btn-primary"><i class="fas fa-sync-alt"></i></a></div>
+
+        <blockquote class="blockquote bq-info mb-4">
+            <p class="bq-title">Recomiendalo en tus <span class="sub-titulo" >Redes Sociales!!!</span></p>
+
+                <div class="col-md-12">
+                    <div class="col-lg-12 col-md-12">
+                        <a target="_blank" href="https://www.facebook.com/sharer.php?u={{ info['urlTest'] }}&t={{ info['titleTest'] }}" type="button" class="btn btn-fb waves-effect waves-light">
+                            <i class="fab fa-facebook-f left"></i> Facebook</a>
+
+                        <a target="_blank" href="" type="button" class="btn btn-ins waves-effect waves-light">
+                            <i class="fab fa-instagram left"></i> Instagram</a>
+
+                        <a class="btn btn-whatsapp waves-effect waves-light"  target="_blank" href="https://api.whatsapp.com/send?text=Mira este test: {{ info['urlTest'] }}" type="button" role="button">
+                            <i class="fab fa-whatsapp"> Whatsapp</i>
+                        </a>
+                    </div>
+                </div>
+        </blockquote>
+        <hr class="separador">
+
+        {{ info['block_likes_test_user'] }}
+
+        <hr class="separador">
+
+
+</div>
+
+{{ info['tests_relacionados'] }}
