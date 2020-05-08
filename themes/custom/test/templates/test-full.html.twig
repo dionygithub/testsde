@@ -1,6 +1,40 @@
 
 <div class="row">
     <div class="col-lg-9 col-md-9 col-xs-12">
+
+        <section class="dark-grey-text text-center">
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col-md-12 mb-4">
+
+                    <!-- Card -->
+                    <div class="card card-image" style="background-image: url({{ imagen }});background-position: center;background-size: cover;">
+                        <div class="text-white text-center d-flex align-items-center rgba-black-strong py-2 px-4 px-md-5 rounded">
+                            <div>
+                                <h1>
+                                    <i class="fas fa-plane pink-text"></i>
+                                    <strong> {{ subtitlecategoria | capitalize }}</strong>
+                                </h1>
+                                <h2 class="py-3 font-weight-bold">
+                                    <strong>{{ label }}</strong>
+                                </h2>
+                                <div class="pb-3">{{ description | raw  }}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Card -->
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
+        </section>
+
+
+
         <form>
             <div id="wizard" style="display: none">
                 <!-- SECTION 1 -->

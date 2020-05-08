@@ -25,25 +25,6 @@
                     }
 
                 });
-
-                //alert("entro"); alert(newIndex);
-
-                /*if ( newIndex === 1 ) {
-                    $('.wizard > .steps ul').addClass('step-2');
-                } else {
-                    $('.wizard > .steps ul').removeClass('step-2');
-                }
-                if ( newIndex === 2 ) {
-                    $('.wizard > .steps ul').addClass('step-3');
-                } else {
-                    $('.wizard > .steps ul').removeClass('step-3');
-                }
-                if ( newIndex === 3 ) {
-                    $('.wizard > .steps ul').addClass('step-4');
-                } else {
-                    $('.wizard > .steps ul').removeClass('step-4');
-                }*/
-
                 return true;
             },
             labels: {
@@ -70,7 +51,6 @@
 
 
         /*** Carrusel ****/
-
         $('.carousel.carousel-multi-item.v-2 .carousel-item').each(function(){
             var next = $(this).next();
             if (!next.length) {

@@ -48,27 +48,37 @@
                 <div class="row">
 
                     <div class="col-lg-12 col-md-12 col-xs-12 text-align-right container-info-extra" >
-                        <i class="fab fa-creative-commons-nd icon-puntos"></i> {{ puntos }} pts
+
+                        {% if existpuntos == true %}
+
+                            <i class="fab fa-creative-commons-nd icon-puntos"></i> {{ puntos }} pts
+
+                        {% endif %}
+
                         <i class="far fa-clock icon-reloj"></i> {{ time }} min
                     </div>
                 </div>
 
                 <h2 class="card-title title-test-teaser"> {{primera_pregunta.titulo.name }}</h2>
 
-                <a href="{{ url }}">
+                {% if tipoTest != 12  %}
 
-                    <div class="card-text question-test-teaser">
-                        {% for index, resp in primera_pregunta.respuestas %}
+                    <a href="{{ url }}">
 
-                        <div class="custom-control custom-radio">
-                            <input type="radio" class="custom-control-input" disabled="disabled" id="default" name="questionsRadios1">
-                            <label class="custom-control-label" for="default11">{{ resp.name }}</label>
+                        <div class="card-text question-test-teaser">
+                            {% for index, resp in primera_pregunta.respuestas %}
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" class="custom-control-input" disabled="disabled" id="default" name="questionsRadios1">
+                                <label class="custom-control-label" for="default11">{{ resp.name }}</label>
+                            </div>
+
+                            {% endfor %}
                         </div>
 
-                        {% endfor %}
-                    </div>
+                    </a>
 
-                </a>
+                {% endif %}
 
                 <div class="text-align-center">
                      <a href="{{ url }}" type="button" class="btn btn-light-blue btn-md">Accede</a>

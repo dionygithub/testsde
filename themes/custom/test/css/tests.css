@@ -106,3 +106,29 @@ strong{
         padding-right: 0px !important;
     }
 }
+
+.card-preguntas-test-rango{
+    margin-left: 2%;
+}
+
+.path-user .form-item-preferred-langcode{
+    display: none;
+}
+.path-user #edit-contact, .path-user #edit-timezone, .path-user .js-form-type-managed-file{
+    display: none;
+}
+
+
+
+.path-user #user-form{
+    font-size: 14px;
+}
+.path-user #user-form div{
+    margin-bottom: 2%;
+}
+.path-user #user-form div label{
+    display: flex;
+}
+.path-user #user-form div.description{
+   font-size: 10px;
+}

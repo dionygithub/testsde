@@ -1,36 +1,33 @@
 <!-- Card Dark -->
+
+<!-- Card -->
 <div class="card">
+    {#{{ dump(data) }}#}
+    <!-- Content -->
+    <div class="card-body">
 
-    <!-- Card image -->
-    <div class="view overlay">
-        <img class="card-img-top"
-             src="https://mdbootstrap.com/img/Photos/Horizontal/Work/4-col/img%20%2821%29.jpg"
-             alt="Card image cap">
-    </div>
-
-    <!-- Card content -->
-    <div class="card-body elegant-color white-text rounded-bottom">
-        <h4 class="card-title">{{ title }} <br> {{ points }}</h4>
-        <hr class="hr-light">
-
-        <div class="row">
-            <div class="col-md-6">
-                {% if premium_valid != false %}
-                    <!-- Link -->
-                    <a id="buyPremium" class="white-text d-flex justify-content-end" data-id="{{ id }}">
-                        <h5>Comprar <i class="fas fa-angle-double-right"></i></h5>
-                    </a>
-                {% endif %}
-
-            </div>
-            <div class="col-md-6">
-                <!-- Link -->
-                <a href="{{ url }}" class="white-text d-flex justify-content-end">
-                    <h5>Informate <i class="fas fa-angle-double-right"></i></h5>
-                </a>
+        <!-- Offer -->
+        <h5 class="mb-4">{{ title }}</h5>
+        <div class="d-flex justify-content-center">
+            <div class="card-circle d-flex justify-content-center align-items-center">
+                <img src="{{ imagen }}" width="80%" />
             </div>
         </div>
+
+        <!-- Price -->
+        <h2 class="font-weight-bold my-4 text-center">{{ points }} Pts</h2>
+        <p class="grey-text">{{ description | raw }}</p>
+
+        <div class="text-center">
+            {% if premium_valid != false %}
+                <!-- Link -->
+                <a id="buyPremium" class="white-text btn btn-success" data-id="{{ id }}">
+                    <h5>Solicitar <i class="fas fa-angle-double-right"></i></h5>
+                </a>
+            {% endif %}
+        </div>
     </div>
+    <!-- Content -->
 
 </div>
 
