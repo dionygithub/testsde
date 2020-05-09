@@ -81,6 +81,12 @@ class NewsBlock extends BlockBase {
     /**
      * {@inheritdoc}
      */
+    public function getCacheMaxAge() {
+        return 0;
+    }
+    /**
+     * {@inheritdoc}
+     */
     public function blockSubmit($form, FormStateInterface $form_state) {
         $this->configuration['news_block_settings'] = $form_state->getValue('news_block_settings');
     }
