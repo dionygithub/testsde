@@ -41,7 +41,7 @@ class NewsController extends ControllerBase {
     public function getAllNewsRand(){
 
         $connection = \Drupal::database();
-        $sql = "SELECT * FROM news_entity WHERE status = 1 ORDER BY RAND() LIMIT 8";
+        $sql = "SELECT * FROM news_entity WHERE status = 1 ORDER BY RAND() LIMIT 20";
         $result = $connection->query($sql);
         $objs = $result->fetchAll();
 
