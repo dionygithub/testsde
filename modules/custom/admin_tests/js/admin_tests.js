@@ -444,7 +444,13 @@ function clickImgTest(obj) {
         selecctionImagenesTest.push(obj);
     }
 
-   console.log(selecctionImagenesTest);
+    $('html, body').animate({
+        scrollTop: $(".namepregunta").offset().top - 100
+    }, 1000);
+
+
+
+   //console.log(selecctionImagenesTest);
 
 
 }
