@@ -86,17 +86,19 @@
                     <div class="row card-respuestas-test-rango">
                         {% for indexA, answer in question.answers %}
 
-                                <div class="col-lg-3 col-md-12 mb-3">
+                                <div class="col-lg-4 col-md-12 mb-4">
 
                                     <div class="view overlay zoom">
-                                        <img src="{{ answer.imagen }}" onclick="clickImgTest(this)" data-question="{{ question.id }}" data-answer="{{ answer.id }}" style="height: 200px;width: auto" class="img-fluid" alt="zoom" />
+                                        <img src="{{ answer.imagenLarge }}" onclick="clickImgTest(this)" data-question="{{ question.id }}" data-answer="{{ answer.id }}" style="height: 200px;width: auto" class="img-fluid" alt="zoom" />
                                         <input type="hidden" class="custom-control-input" data-question="{{ question.id }}" value="{{ answer.id }}" id="default{{ question.id }}{{ answer.id }}" name="question-{{ question.id }}{{ answer.id }}">
 
                                         <div class="mask flex-center select-mask-img" style="display: none">
                                             <p class="success-text" style="font-size: 79px;color: #00c851 !important;"><i class="fas fa-check"></i></p>
                                         </div>
 
+                                        <a style="margin-top: 20px;float: left" target="_blank" href="{{ answer.imagen }}"><i class="fas fa-search-plus"></i></a>
                                     </div>
+
                                 </div>
                         {% endfor %}
                     </div>
