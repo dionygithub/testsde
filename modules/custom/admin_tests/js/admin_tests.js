@@ -340,6 +340,10 @@ function CopyToClipboard(containerid) {
                 $('input[name=idPActual]').val(idPActual);
 
                 showhideControles(idPActual);
+
+                $('html, body').animate({
+                    scrollTop: $(".namepregunta").offset().top + 200
+                }, 1000);
             });
 
             $('#previosTestImagenes').on('click', function () {
@@ -354,6 +358,10 @@ function CopyToClipboard(containerid) {
                 $("div#" + idPActual).show();
 
                 showhideControles(idPActual);
+
+                $('html, body').animate({
+                    scrollTop: $(".namepregunta").offset().top + 200
+                }, 1000);
             });
 
 
@@ -443,11 +451,6 @@ function clickImgTest(obj) {
         var obj = {question:$(obj).data("question"),answer:$(obj).data("answer")};
         selecctionImagenesTest.push(obj);
     }
-
-    $('html, body').animate({
-        scrollTop: $(".namepregunta").offset().top - 100
-    }, 1000);
-
 
 
    //console.log(selecctionImagenesTest);
