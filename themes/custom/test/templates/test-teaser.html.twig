@@ -59,9 +59,11 @@
                     </div>
                 </div>
 
-                <h2 class="card-title title-test-teaser"> {{primera_pregunta.titulo.name }}</h2>
+
 
                 {% if tipoTest != 12  %}
+
+                    <h2 class="card-title title-test-teaser"> {{primera_pregunta.titulo.name }}</h2>
 
                     <a href="{{ url }}">
 
@@ -78,6 +80,8 @@
 
                     </a>
 
+                {% else %}
+                    <h2 class="card-title title-test-teaser"> {{label }}</h2>
                 {% endif %}
 
                 <div class="text-align-center">
