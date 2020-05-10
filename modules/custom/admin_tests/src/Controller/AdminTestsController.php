@@ -1704,6 +1704,7 @@ class AdminTestsController extends ControllerBase {
 
     if(isset($objs->imagen__target_id) && !empty($objs->imagen__target_id)){
       $objs->imagen = getUrlImagen($objs->imagen__target_id);
+      $objs->imagenLarge = getUrlLargeImagen($objs->imagen__target_id);
     }
     //echo'<pre>'; print_r($objs); die;
     return $objs;

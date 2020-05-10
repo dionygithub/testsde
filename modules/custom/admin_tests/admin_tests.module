@@ -358,11 +358,15 @@ function admin_tests_preprocess_admin_test_entity(&$variables) {
 
   if (!empty($entity->get('imagen')->target_id)) {
     $displayImg = getUrlImagen($entity->get('imagen')->target_id);
+    $displaylargeImg =  getUrlLargeImagen($entity->get('imagen')->target_id);
   }else{
     $displayImg = "";
+    $displaylargeImg = "";
   }
 
   $variables['imagen'] = $displayImg;
+  $variables['minimagen'] = $displaylargeImg;
+
 
 
   $variables['time'] = $entity->get('time')->value;
@@ -484,6 +488,20 @@ function getUrlImagen($target_id){
   $url = null;
   if(!empty($file)){
     $url = file_create_url($file->uri->value);
+  }
+  return $url;
+}
+
+function getUrlLargeImagen($target_id){
+
+  $file = File::load($target_id);
+  $url = null;
+  if(!empty($file)){
+
+    $style = \Drupal::entityTypeManager()->getStorage('image_style')->load('large');
+
+    $url = $style->buildUrl($file->uri->value);
+
   }
   return $url;
 }
