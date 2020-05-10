@@ -341,9 +341,6 @@ function CopyToClipboard(containerid) {
 
                 showhideControles(idPActual);
 
-                $('html, body').animate({
-                    scrollTop: $(".namepregunta").offset().top + 200
-                }, 1000);
             });
 
             $('#previosTestImagenes').on('click', function () {
@@ -359,9 +356,6 @@ function CopyToClipboard(containerid) {
 
                 showhideControles(idPActual);
 
-                $('html, body').animate({
-                    scrollTop: $(".namepregunta").offset().top + 200
-                }, 1000);
             });
 
 
@@ -423,6 +417,10 @@ function CopyToClipboard(containerid) {
                 if(idPActual == totalAnsware){
                     $('#finalizarTestImagenes').show();
                 }
+
+                $('html, body').animate({
+                    scrollTop: $(".namepregunta").offset().top + 200
+                }, 1000);
 
             }
             /***** FIN Tests Imagenes *****/
