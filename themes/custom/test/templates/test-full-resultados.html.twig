@@ -9,16 +9,18 @@
                     <div class="col-md-12 mb-4">
 
                         <!-- Card -->
-                        <div class="card card-image" style="background-image: url({{ imagen }});background-position: center;background-size: cover;">
+                        <div class="card card-image" style="background-image: url({{ imagen | image_style('large') }});background-position: center;background-size: cover;">
                             <div class="text-white text-center d-flex align-items-center rgba-black-strong py-2 px-4 px-md-5 rounded">
                                 <div>
                                     <h1>
-                                        <i class="fas fa-plane pink-text"></i>
-                                        <strong> {{ subtitlecategoria | capitalize }}</strong>
+                                        {#<i class="fas fa-plane pink-text"></i>#}
+                                        <span class="emoji">😃</span>
+                                        {#<strong> {{ subtitlecategoria | capitalize }}</strong>#}
+                                        <strong> {{ label }}</strong>
                                     </h1>
-                                    <h2 class="py-3 font-weight-bold">
-                                        <strong>{{ label }}</strong>
-                                    </h2>
+                                    {#<h2 class="py-3 font-weight-bold">#}
+                                        {#<strong>{{ label }}</strong>#}
+                                    {#</h2>#}
                                     <div class="pb-3">{{ description | raw  }}</div>
                                 </div>
                             </div>
