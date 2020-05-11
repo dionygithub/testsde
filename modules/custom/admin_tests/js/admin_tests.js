@@ -414,7 +414,7 @@ function CopyToClipboard(containerid) {
                     $('#previosTestImagenes').show();
                 }
 
-                if(idPActual != 2){
+                if(idPActual != 1){
                     $('#previosTestImagenes').show();
                 }
 
