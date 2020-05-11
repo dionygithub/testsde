@@ -414,8 +414,11 @@ function CopyToClipboard(containerid) {
                     $('#previosTestImagenes').show();
                 }
 
-                $('#previosTestImagenes').show();
-                
+                if(idPActual != 2){
+                    $('#previosTestImagenes').show();
+                }
+
+
                 if(idPActual == totalAnsware){
                     $('#finalizarTestImagenes').show();
                 }
