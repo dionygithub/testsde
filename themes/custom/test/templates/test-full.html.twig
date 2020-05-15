@@ -19,7 +19,7 @@
                                     <strong> {{ label }}</strong>
                                 </h1>
                                 <h2 class="py-3" style="font-size: 1.6rem;line-height:1.5">
-                                    {{ description | raw  }}
+                                    {{ description | replace(' ', '-') }}
                                 </h2>
 
                             </div>
