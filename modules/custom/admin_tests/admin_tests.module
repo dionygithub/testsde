@@ -645,6 +645,6 @@ function admin_tests_form_alter(&$form, &$form_state, $form_id) {
     $form['actions']['submit']['#attributes']['class'][] = 'btn btn-success btn-lg';
 
     $form['account']['mail']['#description'] = "";
-    $form['account']['current_pass']['#description'] = "ss";
+    //$form['account']['current_pass']['#description'] = "ss";
   }
 }
