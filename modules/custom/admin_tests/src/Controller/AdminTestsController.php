@@ -710,7 +710,7 @@ class AdminTestsController extends ControllerBase {
 
   public function getHtmlTestsValorados(){
 
-    $arrayTests = $this->getTestsDestacados();
+    $arrayTests = $this->getTestsValoradosbyIdTaxonomy();
 
     $output = array();
     if(!empty($arrayTests)) {
@@ -1680,8 +1680,19 @@ class AdminTestsController extends ControllerBase {
   public function getTestsDestacados(){
 
     $connection = \Drupal::database();
-    $sql = "SELECT * FROM admin_test_entity_field_data WHERE status = :id AND destacado = :destacado LIMIT 4";
+    $sql = "SELECT * FROM admin_test_entity_field_data WHERE status = :id AND destacado = :destacado ORDER BY admin_test_entity_field_data.id DESC LIMIT 4";
     $result = $connection->query($sql, [':id' => 1,':destacado' => 1]);
+    $objs = $result->fetchAll();
+
+    return $objs;
+  }
+
+  public function getTestsValoradosbyIdTaxonomy(){
+
+    $idTax = 3;
+    $connection = \Drupal::database();
+    $sql = "SELECT * FROM admin_test_entity_field_data WHERE entity_reference_tax = :id LIMIT 4";
+    $result = $connection->query($sql, [':id' => $idTax]);
     $objs = $result->fetchAll();
 
     return $objs;
