@@ -31,7 +31,7 @@ class CategoriasDestacadasBlock extends BlockBase {
 
         global $base_url;
         $output = array();
-        $tree = array(1,4,5);
+        $tree = array(1,4,5,6,3);
         foreach ($tree as $term) {
 
             $termObj = \Drupal::entityTypeManager()->getStorage('taxonomy_term')->load($term);
