@@ -354,11 +354,13 @@ class AdminTestsController extends ControllerBase {
 
 
           $result = $adminLikesController->getCantLikesByTest($testId);
-          $cantLike = (!empty($result['like'])) ? count($result['like']) : 0;
-          $cantNoLike = (!empty($result['nolike'])) ? count($result['nolike']) : 0;
+          $cantLike = ($result != null && isset($result['like']) && !empty($result['like'])) ? count($result['like']) : 0;
+          $cantNoLike = ($result != null && isset($result['nolike']) && !empty($result['nolike'])) ? count($result['nolike']) : 0;
+
+          $objTest = $this->getTestbyId($testId);
 
           $response = new Response(
-              json_encode(array("success" => $success,'cantLike' => $cantLike, 'cantNolike' => $cantNoLike)),
+              json_encode(array("success" => $success,'cantLike' => $cantLike + $objTest->get('likes')->value, 'cantNolike' => $cantNoLike + $objTest->get('nolikes')->value)),
               Response::HTTP_OK,
               array('content-type' => 'text/x-json')
           );
