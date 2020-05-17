@@ -68,9 +68,14 @@
         });
 
 
-        $('.quitarCookies').on('click', function () {
+        if($('#politicacookies').length > 0 || $('#privacidad').length > 0){
+            $('button.eu-cookie-withdraw-tab').show();
+        }else{
+            $('button.eu-cookie-withdraw-tab').hide();
+        }
+        /*$('.quitarCookies').on('click', function () {
             Drupal.eu_cookie_compliance.changeStatus(0);
-        });
+        });*/
 
 
     });
