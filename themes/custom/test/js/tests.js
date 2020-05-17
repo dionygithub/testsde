@@ -68,6 +68,11 @@
         });
 
 
+        $('.quitarCookies').on('click', function () {
+            Drupal.eu_cookie_compliance.changeStatus(0);
+        });
+
+
     });
 
 })(jQuery);
