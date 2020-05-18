@@ -36,7 +36,7 @@
 <html{{ html_attributes }}>
   <head>
     <head-placeholder token="{{ placeholder_token|raw }}">
-    <title>{{ title|raw }}</title>
+    <title>{{ head_title|safe_join(' | ') }}</title>
     <css-placeholder token="{{ placeholder_token|raw }}">
     <js-placeholder token="{{ placeholder_token|raw }}">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
@@ -73,6 +73,15 @@
 
         gtag('config', 'UA-166801301-1');
       </script>
+
+      <meta property="og:url" content="http://www.lostiemposcambian.com/blog/posts/share-fb/share-fb.html" />
+      <meta property="og:title" content="Los Tiempos Cambian" />
+      <meta property="og:type" content="website" />
+      <meta property="og:description" content="Blog de desarrollo web, en especial esta vez podr&aacute;s aprender sobre la creaci&oacute;n de aplicaciones para Facebook. Los tiempos cambian pero no nuestra suerte daimiel ;)" />
+      <meta property="og:image" content="http://www.lostiemposcambian.com/blog/posts/share-fb/img/100x100_lostiemposcambian_ejemplo_facebook_foto1.jpg" />
+      <meta property="og:image" content="http://www.lostiemposcambian.com/blog/posts/share-fb/img/100x100_lostiemposcambian_ejemplo_facebook_foto2.jpg" />
+      <meta property="og:image" content="http://www.lostiemposcambian.com/blog/posts/share-fb/img/100x100_lostiemposcambian_ejemplo_facebook_foto3.jpg" />
+      <meta property="og:image" content="http://www.lostiemposcambian.com/blog/posts/share-fb/img/100x100_lostiemposcambian_ejemplo_facebook_foto4.jpg" />
 
       </head>
 
