@@ -768,11 +768,11 @@ $settings['entity_update_backup'] = TRUE;
 $settings['config_sync_directory'] = 'sites/default/files/config_1R5EpykbIWn59lX1LVQomPQ9CDX48y7uSsl1KifqeLN8nTon-tZLqMdHVLNsygzhvLJhBbVo5w/sync';
 
 $databases['default']['default'] = array (
-  'database' => 'dbs341806',
-  'username' => 'dbu112826',
-  'password' => 'Testsde1*',
+  'database' => 'drupal8_tests',
+  'username' => 'root',
+  'password' => '',
   'prefix' => '',
-  'host' => 'db5000351674.hosting-data.io',
+  'host' => 'localhost',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
   'driver' => 'mysql',
