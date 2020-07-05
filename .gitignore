@@ -7,3 +7,4 @@ profiles/**/libraries/**/*
 **/js_test_files/**/*
 **/node_modules/**/*
 .htaccess
+sites/default/settings.php
